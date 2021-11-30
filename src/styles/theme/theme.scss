@@ -1,0 +1,16 @@
+/*---------------------GLOBAL-----------------------------*/ 
+@import '../normalize.css';
+@import '../variables';
+@import '../fonts';
+@import '../mixins';
+@import '../global';
+
+
+/*---------------------COMPONENTS-------------------------*/ 
+
+@import '../theme/components/navbar';
+@import '../theme/components/footer';
+
+/*---------------------PAGES------------------------------*/ 
+
+@import '../theme/pages/home';

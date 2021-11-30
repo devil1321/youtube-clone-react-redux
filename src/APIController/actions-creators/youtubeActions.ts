@@ -22,7 +22,7 @@ export const suggestedVideos = ({relatedToVideoId,part="id,snippet",type="video"
         }
       };
       
-      axios.request<AxiosOptions>(options).then(function (response) {
+      axios.request(options).then(function (response) {
           dispatch({
               type:ActionTypes.SuggestedVideos,
               suggestedVideos:response.data
@@ -86,7 +86,7 @@ export const videoDetails= ({part="contentDetails,snippet,statistics",id}:VideoD
         }
       };
       
-      axios.request<AxiosOptions>(options).then(function (response) {
+      axios.request(options).then(function (response) {
           dispatch({
               type:ActionTypes.VideoDetails,
               videoDetails:response.data
@@ -175,7 +175,7 @@ export const playlistDetails = ({id,part="snippet"}:PlaylistDetails) => (dispatc
       axios.request<AxiosOptions>(options).then(function (response) {
           dispatch({
               type:ActionTypes.PlaylistDetails,
-              pleylistDetails:response.data
+              playlistDetails:response.data
           })
       }).catch(function (error) {
           console.error(error);

@@ -18,35 +18,43 @@ export default (state = initData ,action:Action) =>{
     switch(action.type){
         case ActionTypes.SuggestedVideos:
             return {
-                ...state
+                ...state,
+                suggestedVideos:action.suggestedVideos
             }
         case ActionTypes.Search:
             return {
-                ...state
+                ...state,
+                search:action.search
             }
         case ActionTypes.VideoComments:
             return {
-                ...state
+                ...state,
+                videoComments:action.videoComments
             }
         case ActionTypes.VideoDetails:
             return {
-                ...state
+                ...state,
+                videoDetails:action.videoDetails
             }
         case ActionTypes.ChannelDetails:
             return {
-                ...state
+                ...state,
+                channelDetails:action.channelDetails
             }
         case ActionTypes.ChannelVideos:
             return {
-                ...state
+                ...state,
+                channelVideos:action.channelVideos
             }
         case ActionTypes.PlaylistVideos:
             return {
-                ...state
+                ...state,
+                playlistVideos:action.playlistVideos
             }
         case ActionTypes.PlaylistDetails:
             return {
-                ...state
+                ...state,
+                playlistDetails:action.playlistDetails
             }
     }
 }

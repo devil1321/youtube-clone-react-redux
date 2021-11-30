@@ -1,27 +1,36 @@
 import { ActionTypes } from '../types'
+
 interface SuggestedVideos{
-    type:any
+    type:ActionTypes.SuggestedVideos;
+    suggestedVideos:any;
 }
 interface Search{
-    type:any
+    type:ActionTypes.Search;
+    search:any;
 }
 interface VideoComments{
-    type:any
+    type:ActionTypes.VideoComments;
+    videoComments:any;
 }
 interface VideoDetails{
-    type:any
+    type:ActionTypes.VideoDetails;
+    videoDetails:any;
 }
 interface ChannelDetails{
-    type:any
+    type:ActionTypes.ChannelDetails;
+    channelDetails:any;
 }
 interface ChannelVideos{
-    type:any
+    type:ActionTypes.ChannelVideos;
+    channelVideos:any;
 }
 interface PlaylistVideos{
-    type:any
+    type:ActionTypes.PlaylistVideos;
+    playlistVideos:any;
 }
 interface PlaylistDetails{
-    type:any
+    type:ActionTypes.PlaylistDetails;
+    playlistDetails:any;
 }
 
 
