@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Navbar = () => {
+const Search = () => {
     return (
         <div>
-            navbar
+            search
         </div>
     )
 }
 
-export default Navbar
+export default Search
