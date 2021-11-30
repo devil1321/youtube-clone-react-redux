@@ -21,4 +21,8 @@
 
 npm-debug.log*
 yarn-debug.log*
+<<<<<<< HEAD
 yarn-error.log*/.project
+=======
+yarn-error.log*
+>>>>>>> branch 'dev' of https://github.com/devil1321/youtube-clone-react-redux.git
