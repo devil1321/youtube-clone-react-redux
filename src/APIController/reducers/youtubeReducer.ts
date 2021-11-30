@@ -1,6 +1,7 @@
-import { ActionTypes } from '../types/actionTypes'
+import { ActionTypes } from '../types'
 import { InitState } from '../interfaces'
 import { Action } from '../actions'
+
 const initData:InitState = {
     suggestedVideos:[],
     search:[],
