@@ -1,5 +1,5 @@
 import React,{ useState } from 'react'
-import { BsSearch } from 'react-icons/bs'
+import { BsSearch, BsPerson } from 'react-icons/bs'
 import { FaMicrophone } from 'react-icons/fa'
 import { GrApps } from 'react-icons/gr'
 import { VscSettings } from 'react-icons/vsc'
@@ -46,11 +46,11 @@ const Search = () => {
                         </div>
                     </div>
                 </form>
-                <FaMicrophone />
+                <FaMicrophone className="search__microphone" />
                 <div className="search__menu">
                     <GrApps />
                     <VscSettings />
-                    <button>Sign In</button>
+                    <button><BsPerson />Sign In</button>
                 </div>
             </div>
         </div>

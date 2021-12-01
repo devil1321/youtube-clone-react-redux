@@ -38,6 +38,55 @@
         }
     }
     &__main{
-        border-bottom:1px solid black;
+        padding:10px;
+        width: 80%;
+        border-bottom:1px solid lightgray;
+        @include createFlex(row,flex-start,center,null);
+    }
+    &__form{
+        margin-left: 100px;
+    }
+    &__field{
+        padding:0px 0px 0px 20px;
+        border:1px solid lightgray;
+        @include createFlex(row,flex-start,center,null);
+        input{
+            font-size: pxToRem(16);
+            width: 500px;
+            height:40px;
+            border:0px;
+            &:active,&:focus{
+                border:0px;
+                outline:none;
+            }
+        }
+    }
+    &__magnifer-wrapper{
+        cursor: pointer;
+        padding:0px 20px;
+        border-left:1px solid lightgray;
+        height:40px;
+        @include createFlex(row,center,center,null);
+    }
+    &__microphone{
+        margin-left:20px;
+        width: 20px;
+        height:20px;
+    }
+    &__menu{
+        margin-left: auto;
+        margin-right:10px;
+        @include createFlex(row,flex-start,center,null);
+        svg{
+            margin:0px 20px;
+            width: 20px;
+            height:20px;
+        }
+        button{
+            svg{
+                margin-left: -10px;
+            }
+        }
+        @include signIn-btn();
     }
 }
