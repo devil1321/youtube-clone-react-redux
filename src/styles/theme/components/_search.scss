@@ -1,0 +1,43 @@
+.search{
+    @include createFlex(row,flex-start,center,null);
+    &__header{
+        position: relative;
+        top:30px;
+        left:30px;
+        width: 200px;
+        padding-right: 70px;
+        margin:0px 0px 30px;
+        @include createFlex(row,center,center,null);
+        button{
+            position: relative;
+            top:-8px;
+            left:-3px;
+            padding:5px;
+            border-radius: 100%;
+            outline:none;
+            border:none;
+            background:transparent;
+            @include createFlex(row,center,center,null);
+            &:active{
+                background-color: #f1f1f1;
+            }
+        }
+        &-logo{
+            position: relative;
+            top:-6px;
+            left:0px;
+            margin-left: 20px;
+            img{
+                width: 80%;
+            }
+        }
+        svg{
+            margin-right: auto;
+            min-width: 30px;
+            min-height:30px;
+        }
+    }
+    &__main{
+        border-bottom:1px solid black;
+    }
+}

@@ -7,12 +7,14 @@ import '../styles/theme/theme.scss'
 
 const RouteWithLayout:React.FC = ({children}) => {
     return (
-        <div className="container">
-            <Sidebar />
-            <div className="container-inner">
-                <Search />
-                {children}
-                <Footer />
+        <div className="page-wrapper">
+            <Search />
+            <div className="container">
+                <Sidebar />
+                <div className="container-inner">
+                    {children}
+                    <Footer />
+                </div>
             </div>
         </div>
     )

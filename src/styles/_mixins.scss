@@ -47,3 +47,19 @@ $breakpoints-down:("small":"39.9375em", "sm-med":"33.75em", "medium-sm":"63em", 
     }
 }
 
+@mixin signIn-btn{
+    button{
+        font-weight: bold;
+        padding:5px 20px;
+        color:$light-blue;
+        border:1px solid $light-blue;
+        border-radius: 2px;
+        @include createFlex(row,center,center,null);
+        svg{
+            margin-right:10px;
+            width: 30px;
+            height:30px;
+        }
+    }
+}
+
