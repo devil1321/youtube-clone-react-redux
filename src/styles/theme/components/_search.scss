@@ -1,5 +1,5 @@
 .search{
-    @include createFlex(row,flex-start,center,null);
+    @include createFlex(row,flex-start,center,wrap);
     &__header{
         position: relative;
         top:30px;
@@ -38,9 +38,9 @@
         }
     }
     &__main{
+    
         padding:10px;
-        width: 80%;
-        border-bottom:1px solid lightgray;
+        width: 78%;
         @include createFlex(row,flex-start,center,null);
     }
     &__form{
@@ -74,6 +74,9 @@
         height:20px;
     }
     &__menu{
+        position: relative;
+        top:0px;
+        left:0px;
         margin-left: auto;
         margin-right:10px;
         @include createFlex(row,flex-start,center,null);
@@ -88,5 +91,63 @@
             }
         }
         @include signIn-btn();
+    }
+    &__tags{
+        padding:20px 0px;
+        margin-left: auto;
+        margin-right: 10px;
+        width: 79.5%;
+        border-bottom:1px solid lightgray;
+        border-top:1px solid lightgray;
+    }
+    &__apps-menu{
+        padding:10px 20px;
+        position: absolute;
+        z-index: 2;
+        top:55px;
+        left:0px;
+        width: 200px;
+        border-left:1px solid lightgray;
+        border-right:1px solid lightgray;
+        border-bottom:1px solid lightgray;
+        background-color: white;
+        svg{
+            margin:0px;
+            margin-right: 10px;
+            fill:red;
+            width: 25px;
+            height:25px;
+        }
+        a{
+            box-sizing: border-box;
+            padding:15px 20px;
+            display: block;
+            width:calc(100% + 40px);
+            position:relative;
+            top:0px;
+            left:50%;
+            transform:translateX(-50%);
+            @include createFlex(row,flex-start,center,null);
+            &:hover{
+                background-color: $active-link;
+            }
+            &:first-of-type{
+               svg{
+                   position: relative;
+                   left:-3px;
+                   top:0px; 
+                    width: 30px;
+                    height:30px;
+                }
+            }
+        }
+    }
+    &__line{
+        width: calc(100% + 35px);
+        position: relative;
+        top:0px;
+        left:50%;
+        transform: translateX(-50%);
+        border-bottom:1px solid lightgray;
     }
 }
