@@ -1,3 +1,105 @@
-.sidebar-expand{
-    width: 30%;
+.sidebar{
+    overflow-y: scroll;
+    width:18%;
+    padding:30px;
+    height: 100vh;
+    a{
+        display: block;
+        margin:20px 0px;
+        @include createFlex(row,flex-start,center,null);
+        svg{
+            width: 25px;
+            height:25px;
+            margin-right: 20px;
+        }
+    }
+    &__header{
+        padding-right: 70px;
+        margin:0px 0px 30px;
+        @include createFlex(row,center,flex-start,null);
+        button{
+            position: relative;
+            top:-8px;
+            left:-3px;
+            padding:5px;
+            border-radius: 100%;
+            outline:none;
+            border:none;
+            background:transparent;
+            @include createFlex(row,center,center,null);
+            &:active{
+                background-color: #f1f1f1;
+            }
+        }
+        &-logo{
+            margin-left: 20px;
+            img{
+                width: 100%;
+            }
+        }
+        svg{
+            margin-right: auto;
+            min-width: 30px;
+            min-height:30px;
+        }
+    }
+    &-expand{
+        p{
+            word-spacing: 3px;
+        }
+        button{
+            font-weight: bold;
+            padding:5px 20px;
+            color:$light-blue;
+            border:1px solid $light-blue;
+            border-radius: 2px;
+            @include createFlex(row,center,center,null);
+            svg{
+                margin-right:10px;
+                width: 30px;
+                height:30px;
+            }
+        }
+    }
+    &-expand__icon-circle{
+        margin-right:20px;
+        width: 30px;
+        height:30px;
+        background-color: black;
+        border-radius: 100%;
+        @include createFlex(row,center,center,null);
+        svg{
+            margin:0px;
+            margin-left:19px;
+            margin-top: 1px;
+            fill:white;
+            min-width: 20px !important;
+            min-height: 20px !important;
+        }
+      
+    }
+    &-expand__links{
+        margin: 30px 0px;
+        @include createFlex(row,flex-start,flex-start,wrap);
+        a{
+            display: inline;
+            margin:5px 0px;
+            margin-right:10px;
+        }
+    }
+    &-thin{
+        position: relative;
+        left:-5px;
+        top:0px;
+        width: 20%;
+        a{
+            @include createFlex(column,center,center,null);
+            font-size:pxToRem(14);
+            svg{
+                width: 30px;
+                height:30px;
+                margin-left: 15px;
+            }
+        }
+    }
 }
