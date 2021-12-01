@@ -56,5 +56,10 @@ export default (state = initData ,action:Action) =>{
                 ...state,
                 playlistDetails:action.playlistDetails
             }
+        default:
+            return{
+                ...state
+            }
+
     }
 }

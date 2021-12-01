@@ -40,7 +40,7 @@ export interface SuggestedVideosParams{
 
 export interface SearchParams{
     q:string;
-    part:string;
+    part?:string;
     regionCode?:string;
     maxResults?:number;
     order?:string;

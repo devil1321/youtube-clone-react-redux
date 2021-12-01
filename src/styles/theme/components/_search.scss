@@ -92,13 +92,67 @@
         }
         @include signIn-btn();
     }
-    &__tags{
+    &__tags-wrapper{
+        position: relative;
+        top:0px;
+        left:0px;
+        overflow-x: hidden;
         padding:20px 0px;
         margin-left: auto;
         margin-right: 10px;
         width: 79.5%;
         border-bottom:1px solid lightgray;
         border-top:1px solid lightgray;
+       
+    }
+    &__tags{
+        position: relative;
+        top:0px;
+        left:0px;
+        z-index: 1;
+        width: 100%;
+        @include createFlex(row,flex-start,center,null);
+       
+    }
+ 
+    &__tag-btn{
+        position: absolute;
+        top:20px;
+        z-index: 10;
+        svg{
+            fill:black;
+            width: 30px;
+            height:30px;
+        }
+        &.prev{
+            left:0px;
+        }
+        &.next{
+            right:0px;
+        }
+    }
+    &__btn-wrapper{
+        position: relative;
+        top:0px;
+        left:0px;
+        min-width: fit-content ;
+
+    }
+
+    &__tag{
+        cursor: pointer;
+        position: relative;
+        top:0px;
+        left:0px;
+        min-width: fit-content ;
+        padding:5px 10px;
+        margin:0px 5px;
+        border-radius: 25px;
+        background-color: $active-link;
+        &.active{
+            background-color: black;
+            color:white;
+        }
     }
     &__apps-menu{
         padding:10px 20px;

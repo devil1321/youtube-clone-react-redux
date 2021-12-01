@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import youtubeReducer from './youtubeReducer'
 
 const reducers = combineReducers({
-    youtubeAPI:youtubeReducer
+    youtubeAPI:youtubeReducer,
 })
 
 export default reducers

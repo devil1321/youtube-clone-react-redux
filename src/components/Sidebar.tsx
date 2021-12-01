@@ -13,7 +13,7 @@ import { BsFlag, BsPerson } from 'react-icons/bs'
 import { RiSettings4Line } from 'react-icons/ri' 
 
 
-const Sidebar = () => {
+const Sidebar:React.FC = () => {
     
     const handleActiveLink = (e:any):void =>{
         const links = document.querySelectorAll('.sidebar__link')
