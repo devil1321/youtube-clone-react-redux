@@ -1,7 +1,6 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
 import Search from '../components/Search'
-import Footer from '../components/Footer'
 
 import '../styles/theme/theme.scss'
 
@@ -13,7 +12,6 @@ const RouteWithLayout:React.FC = ({children}) => {
                 <Sidebar />
                 <div className="container-inner">
                     {children}
-                    <Footer />
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
-import React,{ useState,useEffect } from 'react'
-import {useSelector,useDispatch} from 'react-redux'
+import React,{ useState } from 'react'
+import { useSelector,useDispatch} from 'react-redux'
 import { State } from '../APIController/reducers'
 import { bindActionCreators } from 'redux'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
@@ -18,9 +18,6 @@ const Search:React.FC = () => {
 
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
-
-
-
 
     const [tagMove,setTagMove] = useState<number>(0)
     const [isThin,setIsThin] = useState<boolean>(true)
@@ -46,6 +43,7 @@ const Search:React.FC = () => {
         'Gaming',
         'Recently Uploaded'
     ])
+
     const handleThin = ():void =>{
         const sidebar = document.querySelector('.sidebar') as HTMLDivElement
         const sidebarExpand = document.querySelector('.sidebar-expand') as HTMLDivElement
@@ -67,11 +65,13 @@ const Search:React.FC = () => {
         }
         setIsThin(!isThin)
     }
+
     const handleActiveTag = (e:any):void =>{
         const tags = document.querySelectorAll('.search__tag')
         tags.forEach(tag => tag.classList.remove('active'))
         e.target.classList.add('active')
     }
+
     const handleNextTag = ():void =>{
         const tag = document.querySelector('.search__tag') as HTMLDivElement
         const tagsWrapper = document.querySelector('.search__tags') as HTMLDivElement
@@ -109,10 +109,6 @@ const Search:React.FC = () => {
             }}  className={`search__tag ${index === 0 ? "active" : null}`}>{tag}</div>
         ))
     }
-
-    useEffect(()=>{
-        youtubeActions.search({q:'All'})
-    },[])
   
     return (
         <div className="search">

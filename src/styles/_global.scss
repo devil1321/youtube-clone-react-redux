@@ -37,8 +37,14 @@ a{
     text-decoration: none;
     color:black;
 }
+.page-wrapper{
+  overflow: hidden;
+  height:100vh;
+}
 .container{
     @include createFlex(row,space-between,flex-start,null);
+ 
+
 }
 .container-inner{
     width: 82%;

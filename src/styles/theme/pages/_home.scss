@@ -1,0 +1,49 @@
+.home{
+    width: 100%;
+    overflow-y: scroll;
+    height:100vh;
+    &__hero{
+        position: relative;
+        top:0px;
+        left:0px;
+        height:300px;
+        &-bg{
+            img{
+                display: block;
+                margin-left: 70px;
+                width: 120%;
+                position: relative;
+                z-index: -1;
+                top:0px;
+                left:0px;
+            }
+        }
+        &-logo{
+            width: 40%;
+            height:200px;
+            position:absolute;
+            top:40px;
+            left:50px;
+            z-index: 2;
+            img{
+                width: 50%;
+            }
+        }
+        &-text{
+            width: 40%;
+            position:absolute;
+            z-index: 2;
+            bottom:60px;
+            left:50px;
+        }
+        @include signIn-btn();
+        button{
+            cursor: pointer;
+            height:40px;
+        }
+    }
+    &__videos{
+        width: 100%;
+        @include createFlex(row,center,center,wrap);
+    }
+}
