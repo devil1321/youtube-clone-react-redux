@@ -11,7 +11,7 @@ import Video from '../components/Video'
 
 const Home:React.FC = () => {
     const disptach = useDispatch()
-    const { search } = useSelector((state:State) => state.youtubeAPI)
+    const { search,channelDetails } = useSelector((state:State) => state.youtubeAPI)
     const youtubeActions = bindActionCreators(YoutubeActions,disptach)
 
 
@@ -19,7 +19,7 @@ const Home:React.FC = () => {
       return search?.items?.map((video:any) => {
           const { publishedAt,channelId,title,channelTitle, thumbnails } = video.snippet
           const { videoId } = video.id
-          return <Video key={videoId} profile={thumbnails?.default?.url} imgUrl ={thumbnails?.high?.url} publishedAt={publishedAt} channelId={channelId} videoId={videoId} title={title} channelTitle={channelTitle} />
+          return <Video key={videoId} profile={thumbnails?.high?.url} imgUrl ={thumbnails?.high?.url} publishedAt={publishedAt} channelId={channelId} videoId={videoId} title={title} channelTitle={channelTitle} />
     })
     }
 

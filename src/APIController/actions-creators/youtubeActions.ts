@@ -70,7 +70,10 @@ export const videoComments = ({part="snippet",videoId,maxResults=100}:VideoComme
       };
       
       axios.request<AxiosOptions>(options).then(function (response) {
-          console.log(response.data);
+         dispatch({
+           type:ActionTypes.VideoComments,
+           videoComments:response.data
+         })
       }).catch(function (error) {
           console.error(error);
       });

@@ -3,7 +3,7 @@ import { useSelector,useDispatch} from 'react-redux'
 import { State } from '../APIController/reducers'
 import { bindActionCreators } from 'redux'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
-import { Link } from 'react-router-dom'
+import { Link , useLocation } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { BsSearch, BsPerson } from 'react-icons/bs'
 import { FaMicrophone, FaYoutube } from 'react-icons/fa'
@@ -18,6 +18,10 @@ const Search:React.FC = () => {
 
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
+
+    const location = useLocation()
+    const path = location.pathname
+
 
     const [tagMove,setTagMove] = useState<number>(0)
     const [isThin,setIsThin] = useState<boolean>(true)
@@ -49,10 +53,10 @@ const Search:React.FC = () => {
         const sidebarExpand = document.querySelector('.sidebar-expand') as HTMLDivElement
         const sidebarThin = document.querySelector('.sidebar-thin') as HTMLDivElement
         const containerInner = document.querySelector('.container-inner') as HTMLDivElement
-        const tags = document.querySelector('.search__tags') as HTMLDivElement
+        const tags = document.querySelector('.search__tags-wrapper') as HTMLDivElement
         if(isThin){
             sidebar.style.width = 'calc(4% + 30px)'
-            containerInner.style.width = 'calc(96%-30px)'
+            containerInner.style.width= '96%'
             sidebarExpand.style.display = 'none'
             sidebarThin.style.display = 'block'
             tags.style.width = '93%'
@@ -110,9 +114,28 @@ const Search:React.FC = () => {
         ))
     }
   
+
+    const handleSidebarFixed = () =>{
+        const sidebar = document.querySelector('.sidebar.fixed') as HTMLDivElement
+        const sidebarFixedWrapper = document.querySelector('.sidebar-fixed-wrapper') as HTMLDivElement
+        if(sidebar.classList.contains('close')){
+            sidebar.classList.add('open')
+            sidebar.classList.remove('close')
+            sidebarFixedWrapper.classList.add('open')
+            sidebarFixedWrapper.classList.remove('close')
+
+        }
+    }
+
     return (
         <div className="search">
-            <div className="search__header" onClick={()=>{handleThin()}}>
+            <div className="search__header" onClick={()=>{
+                   if(path === '/'){
+                        handleThin()
+                   }else{
+                        handleSidebarFixed()
+                   }
+                }}>
                 <button>
                     <GiHamburgerMenu />
                 </button>

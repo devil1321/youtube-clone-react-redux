@@ -1,7 +1,58 @@
+.sidebar-fixed-wrapper{
+    position:fixed;
+    height:100vh;
+    width: 100%;
+    z-index: 2;
+    top:0px;
+    left:0px;
+    background-color: rgba(0,0,0,0.15);
+    transition:all 1s ease-in-out;
+    &.close{
+        visibility: hidden;
+        opacity:0;
+    }
+    &.open{
+        visibility: visible;
+        opacity:1;
+    }
+}
 .active{
     background-color: $active-link;
 }
 .sidebar{
+    &.fixed{
+        position:fixed;
+        z-index: 3;
+        top:0px;
+        background-color:white;
+        // transform: translateY(-70px);
+        transition: all 1s ease-in-out;
+        &.close{
+            left:-100%;
+        }
+        &.open{
+            left:0%
+        }
+    }
+    &__logo{
+        margin:30px 0px;
+        @include createFlex(row,flex-start,center,null);
+        position: relative;
+        top:-6px;
+        left:0px;
+        margin-left: 20px;
+        img{
+            position: relative;
+            left:-70px;
+            top:0px;
+            width: 50%;
+        }
+        svg{
+            margin-right: auto;
+            min-width: 30px;
+            min-height:30px;
+        }
+    }
     position: relative;
     top:-30px;
     left:0px;

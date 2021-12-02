@@ -1,5 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
 
 import { MdHomeFilled, MdSubscriptions, MdOutlineVideoLibrary, MdLocalMovies, MdVideocam, MdOutlineFeedback } from 'react-icons/md'
 import { FaRegCompass, FaSatellite } from 'react-icons/fa'
@@ -14,7 +17,10 @@ import { RiSettings4Line } from 'react-icons/ri'
 
 
 const Sidebar:React.FC = () => {
-    
+    const location = useLocation()
+    const dispatch = useDispatch()
+    const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
+
     const handleActiveLink = (e:any):void =>{
         const links = document.querySelectorAll('.sidebar__link')
         links.forEach(link => link.classList.remove('active'))
@@ -24,6 +30,7 @@ const Sidebar:React.FC = () => {
     return (
         <div className="sidebar">
              <div className="sidebar-expand">
+             
               <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link active" to="#"><MdHomeFilled />Home</Link>
               <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><FaRegCompass />Explore</Link>
               <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdSubscriptions />Subscriptions</Link>
@@ -35,13 +42,34 @@ const Sidebar:React.FC = () => {
               <button><BsPerson />SIGN IN</button>
               <hr />
               <h3>BEST OF YOUTUBE</h3>
-              <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><SiYoutubemusic /></span> Music</Link>
-              <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><ImTrophy /></span> Sports</Link>
-              <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><SiYoutubegaming /></span> Gaming</Link>
-              <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><MdLocalMovies /></span> Movies</Link>
-              <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><BiNews /></span> News</Link>
-              <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><FaSatellite /></span> Live</Link>
-              <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><MdVideocam /></span> 360° Video</Link>
+              <Link data-q="Music" onClick={(e:any)=>{
+                  handleActiveLink(e)
+                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><SiYoutubemusic /></span> Music</Link>
+              <Link data-q="Sports" onClick={(e:any)=>{
+                  handleActiveLink(e)
+                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><ImTrophy /></span> Sports</Link>
+              <Link data-q="Gaming" onClick={(e:any)=>{
+                  handleActiveLink(e)
+                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><SiYoutubegaming /></span> Gaming</Link>
+              <Link  data-q="Movies" onClick={(e:any)=>{
+                  handleActiveLink(e)
+                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><MdLocalMovies /></span> Movies</Link>
+              <Link data-q="News" onClick={(e:any)=>{
+                  handleActiveLink(e)
+                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><BiNews /></span> News</Link>
+              <Link data-q="Live" onClick={(e:any)=>{
+                  handleActiveLink(e)
+                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><FaSatellite /></span> Live</Link>
+              <Link data-q="360° Video" onClick={(e:any)=>{
+                  handleActiveLink(e)
+                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><MdVideocam /></span> 360° Video</Link>
               <hr />
               <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><IoIosAddCircleOutline />Browse channels</Link>
               <hr />
