@@ -8,7 +8,7 @@ import * as YoutubeActions from '../APIController/actions-creators/youtubeAction
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { BsFillPlayFill,BsThreeDots,BsBell } from 'react-icons/bs'
+import { BsFillPlayFill,BsThreeDots } from 'react-icons/bs'
 import { GiNextButton } from 'react-icons/gi'
 import { AiFillSound } from 'react-icons/ai'
 import { FiChevronRight } from 'react-icons/fi'
@@ -61,10 +61,12 @@ const Details = () => {
                         const { id } = video 
                         const { duration } = video.contentDetails
                         const { publishedAt,channelId,title,description,thumbnails, channelTitle ,tags } = video.snippet
-                        const { viewCount, likeCount, dislikeCount, favoruiteCount } = video.statistics
+                        const { viewCount, likeCount, dislikeCount } = video.statistics
                         const months = ['January','Febuary','March','April','May','June','July','August','September','November','December']
                         return(
-                            <div onLoad={()=>{youtubeActions.channelDetails({part:'snippet,statistics',id:channelId})}} key={id} className="details__video">
+                            <div onLoad={()=>{
+                                    youtubeActions.channelDetails({part:'snippet,statistics',id:channelId})
+                                }} key={id} className="details__video">
                                 <div className="details__video-img">
                                     <img src={thumbnails.maxres?.url} alt="video" />
                                     <div className="details__taskbar-imagination">
@@ -125,14 +127,12 @@ const Details = () => {
                                             </div>
                                             <button>Subscribe</button>
                                         </div>
-                                        <p className="details__channel-details-info">
-                                            {description}
-                                        </p>
+                                        <p className="details__channel-details-info" dangerouslySetInnerHTML={{__html:description}}></p>
                                     </React.Fragment>)})}
                             </div>
                             <hr />
                             <p className="details__show-desc" onClick={()=>{setIsDescription(true)}}>Show More</p>
-                            {isDescription && <p className="details__video-main-description">{description}</p>}
+                            {isDescription && <p className="details__video-main-description" dangerouslySetInnerHTML={{__html:description}}></p>}
                             <hr />
                     </div>
                     <div className="details__comments">
@@ -146,7 +146,7 @@ const Details = () => {
                         </div>
                         <form action="" className="details__comments-form">
                             <img src="/assets/profile.png" alt="" />
-                            <input type="text" />
+                            <input type="text" placeholder="Add public comment..."/>
                         </form>  
                         <div className="details__main-comments">
                             {videoComments?.items?.map((comment:any) => {
@@ -160,7 +160,34 @@ const Details = () => {
                     </div>
                 </div>)})}
             </div>               
-            <div className="details__right-content"></div>
+            <div className="details__right-content">
+                {suggestedVideos?.items?.map((video:any)=>{
+                    if(video?.snippet !== undefined){
+                        const { videoId } = video.id
+                        const { publishedAt, channelId, channelTitle, title, thumbnails} = video?.snippet
+                        // high
+                        if(thumbnails?.high?.url !== undefined){
+                            return(
+                                <div className="details__suggested-video" onClick={()=>{
+                                    youtubeActions.videoDetails({id:videoId,part:"contentDetails,snippet,statistics"})
+                                    youtubeActions.videoComments({part:'snippet',videoId:videoId,maxResults:200})
+                                    youtubeActions.suggestedVideos({relatedToVideoId:videoId,part:'id,snippet',type:'video',maxResults:200})
+                                }}>
+                                <div className="details__suggested-video-img">
+                                    <div className="details__suggested-video-overlay"><BsFillPlayFill /></div>
+                                    <img src={thumbnails?.medium?.url} alt="" />
+                                </div>
+                                <div className="details__suggested-video-text">
+                                    <h3>{title}</h3>
+                                    <p>{channelTitle}</p>
+                                    <p>{publishedAt.slice(0,10)}</p>
+                                </div>
+                            </div>
+                        )
+                    }
+                }
+                })}
+            </div>
            </div>
        </Layout>
     )

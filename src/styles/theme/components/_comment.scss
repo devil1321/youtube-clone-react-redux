@@ -1,0 +1,31 @@
+.comment{
+    margin:30px 0px;
+    @include createFlex(row,flex-start,flex-start,null);
+    h4,p,div{
+        margin:5px 0px;
+    }
+    &__img{
+        margin-right: 10px;
+        height:40px;
+        width:40px;
+        overflow: hidden;
+        border-radius: 100%;
+        img{
+            width: 100%;
+        }
+    }
+    &__text{
+       margin-left: 10px !important;
+    }
+    &__icons{
+        @include createFlex(row,flex-start,center,null);
+        svg{
+            margin-right:10px;
+            width: 15px;
+            height: 15px;
+            &:last-of-type{
+                margin-left: 10px;
+            }
+        }
+    }
+}

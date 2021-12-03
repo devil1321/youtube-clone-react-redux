@@ -45,31 +45,31 @@ const Sidebar:React.FC = () => {
               <Link data-q="Music" onClick={(e:any)=>{
                   handleActiveLink(e)
                   youtubeActions.search({q:e.target.dataset.q,maxResults:200})
-                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><SiYoutubemusic /></span> Music</Link>
+                  }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><SiYoutubemusic /></span> Music</Link>
               <Link data-q="Sports" onClick={(e:any)=>{
                   handleActiveLink(e)
                   youtubeActions.search({q:e.target.dataset.q,maxResults:200})
-                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><ImTrophy /></span> Sports</Link>
+                  }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><ImTrophy /></span> Sports</Link>
               <Link data-q="Gaming" onClick={(e:any)=>{
                   handleActiveLink(e)
                   youtubeActions.search({q:e.target.dataset.q,maxResults:200})
-                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><SiYoutubegaming /></span> Gaming</Link>
+                  }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><SiYoutubegaming /></span> Gaming</Link>
               <Link  data-q="Movies" onClick={(e:any)=>{
                   handleActiveLink(e)
                   youtubeActions.search({q:e.target.dataset.q,maxResults:200})
-                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><MdLocalMovies /></span> Movies</Link>
+                  }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><MdLocalMovies /></span> Movies</Link>
               <Link data-q="News" onClick={(e:any)=>{
                   handleActiveLink(e)
                   youtubeActions.search({q:e.target.dataset.q,maxResults:200})
-                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><BiNews /></span> News</Link>
+                  }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><BiNews /></span> News</Link>
               <Link data-q="Live" onClick={(e:any)=>{
                   handleActiveLink(e)
                   youtubeActions.search({q:e.target.dataset.q,maxResults:200})
-                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><FaSatellite /></span> Live</Link>
+                  }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><FaSatellite /></span> Live</Link>
               <Link data-q="360° Video" onClick={(e:any)=>{
                   handleActiveLink(e)
                   youtubeActions.search({q:e.target.dataset.q,maxResults:200})
-                  }} className="sidebar__link" to="#"><span className="sidebar-expand__icon-circle"><MdVideocam /></span> 360° Video</Link>
+                  }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><MdVideocam /></span> 360° Video</Link>
               <hr />
               <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><IoIosAddCircleOutline />Browse channels</Link>
               <hr />

@@ -40,7 +40,7 @@ const Video:React.FC<VideoProps> = ({profile,imgUrl,title,channelTitle,published
            <div className="video__img" onClick={()=>{
                youtubeActions.videoDetails({id:videoId,part:"contentDetails,snippet,statistics"})
                youtubeActions.videoComments({part:'snippet',videoId:videoId,maxResults:200})
-               youtubeActions.suggestedVideos({relatedToVideoId:videoId,part:'id,snippet',type:'video',maxResults:50})
+               youtubeActions.suggestedVideos({relatedToVideoId:videoId,part:'id,snippet',type:'video',maxResults:200})
                }}>
                <Suspense fallback ={<h3>...Loading</h3>}>
                    <Link to={`/details/${videoId}`}>

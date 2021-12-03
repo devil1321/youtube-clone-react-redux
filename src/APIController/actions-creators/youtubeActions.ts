@@ -6,7 +6,7 @@ import { ActionTypes } from '../types'
 
 import { SuggestedVideosParams, SearchParams, VideoCommentsParams, VideoDetailsParams, ChannelDetailsParams, ChannelVideosParams, PlaylistVideosParams,PlaylistDetails} from '../interfaces'
 
-export const suggestedVideos = ({relatedToVideoId,part="id,snippet",type="video",maxResults=50}:SuggestedVideosParams) => (dispatch:Dispatch<Action>) =>{
+export const suggestedVideos = ({relatedToVideoId,part="id,snippet",type="video",maxResults=50}:SuggestedVideosParams) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube-v31.p.rapidapi.com/search',
@@ -22,7 +22,7 @@ export const suggestedVideos = ({relatedToVideoId,part="id,snippet",type="video"
         }
       };
       
-      axios.request(options).then(function (response) {
+      await axios.request(options).then(function (response) {
           dispatch({
               type:ActionTypes.SuggestedVideos,
               suggestedVideos:response.data
@@ -32,7 +32,7 @@ export const suggestedVideos = ({relatedToVideoId,part="id,snippet",type="video"
       });
 }
 
-export const search = ({q,part="snippet,id",regionCode="US",maxResults=50,order="date"}:SearchParams) => (dispatch:Dispatch<Action>) =>{
+export const search = ({q,part="snippet,id",regionCode="US",maxResults=50,order="date"}:SearchParams) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube-v31.p.rapidapi.com/search',
@@ -49,7 +49,7 @@ export const search = ({q,part="snippet,id",regionCode="US",maxResults=50,order=
         }
       };
       
-      axios.request<AxiosOptions>(options).then(function (response) {
+      await axios.request<AxiosOptions>(options).then(function (response) {
             dispatch({
                 type:ActionTypes.Search,
                 search:response.data
@@ -58,7 +58,7 @@ export const search = ({q,part="snippet,id",regionCode="US",maxResults=50,order=
           console.error(error);
       });
 }
-export const videoComments = ({part="snippet",videoId,maxResults=100}:VideoCommentsParams) => (dispatch:Dispatch<Action>) =>{
+export const videoComments = ({part="snippet",videoId,maxResults=100}:VideoCommentsParams) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube-v31.p.rapidapi.com/commentThreads',
@@ -69,7 +69,7 @@ export const videoComments = ({part="snippet",videoId,maxResults=100}:VideoComme
         }
       };
       
-      axios.request<AxiosOptions>(options).then(function (response) {
+      await axios.request<AxiosOptions>(options).then(function (response) {
          dispatch({
            type:ActionTypes.VideoComments,
            videoComments:response.data
@@ -78,7 +78,7 @@ export const videoComments = ({part="snippet",videoId,maxResults=100}:VideoComme
           console.error(error);
       });
 }
-export const videoDetails= ({part="contentDetails,snippet,statistics",id}:VideoDetailsParams) => (dispatch:Dispatch<Action>) =>{
+export const videoDetails= ({part="contentDetails,snippet,statistics",id}:VideoDetailsParams) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube-v31.p.rapidapi.com/videos',
@@ -89,7 +89,7 @@ export const videoDetails= ({part="contentDetails,snippet,statistics",id}:VideoD
         }
       };
       
-      axios.request(options).then(function (response) {
+      await axios.request(options).then(function (response) {
           dispatch({
               type:ActionTypes.VideoDetails,
               videoDetails:response.data
@@ -99,7 +99,7 @@ export const videoDetails= ({part="contentDetails,snippet,statistics",id}:VideoD
       });
 }
 
-export const channelDetails = ({part="snippet,statistics",id}:ChannelDetailsParams) => (dispatch:Dispatch<Action>) =>{
+export const channelDetails = ({part="snippet,statistics",id}:ChannelDetailsParams) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube-v31.p.rapidapi.com/channels',
@@ -110,7 +110,7 @@ export const channelDetails = ({part="snippet,statistics",id}:ChannelDetailsPara
         }
       };
       
-      axios.request<AxiosOptions>(options).then(function (response) {
+      await axios.request<AxiosOptions>(options).then(function (response) {
           dispatch({
               type:ActionTypes.ChannelDetails,
               channelDetails:response.data
@@ -119,7 +119,7 @@ export const channelDetails = ({part="snippet,statistics",id}:ChannelDetailsPara
           console.error(error);
       });
 }
-export const channelVideos = ({channelId,part="snippet,id",order="date",maxResults=50}:ChannelVideosParams) => (dispatch:Dispatch<Action>) =>{
+export const channelVideos = ({channelId,part="snippet,id",order="date",maxResults=50}:ChannelVideosParams) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube-v31.p.rapidapi.com/search',
@@ -135,7 +135,7 @@ export const channelVideos = ({channelId,part="snippet,id",order="date",maxResul
         }
       };
       
-      axios.request<AxiosOptions>(options).then(function (response) {
+      await axios.request<AxiosOptions>(options).then(function (response) {
           dispatch({
               type:ActionTypes.ChannelVideos,
               channelVideos:response.data
@@ -144,7 +144,7 @@ export const channelVideos = ({channelId,part="snippet,id",order="date",maxResul
           console.error(error);
       });
 }
-export const playlistVideos = ({playlistId,part="snippet",maxResults=50}:PlaylistVideosParams) => (dispatch:Dispatch<Action>) =>{
+export const playlistVideos = ({playlistId,part="snippet",maxResults=50}:PlaylistVideosParams) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube-v31.p.rapidapi.com/playlistItems',
@@ -155,7 +155,7 @@ export const playlistVideos = ({playlistId,part="snippet",maxResults=50}:Playlis
         }
       };
       
-      axios.request<AxiosOptions>(options).then(function (response) {
+      await axios.request<AxiosOptions>(options).then(function (response) {
           dispatch({
               type:ActionTypes.PlaylistVideos,
               playlistVideos:response.data
@@ -164,7 +164,7 @@ export const playlistVideos = ({playlistId,part="snippet",maxResults=50}:Playlis
           console.error(error);
       });
 }
-export const playlistDetails = ({id,part="snippet"}:PlaylistDetails) => (dispatch:Dispatch<Action>) =>{
+export const playlistDetails = ({id,part="snippet"}:PlaylistDetails) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube-v31.p.rapidapi.com/playlists',
@@ -175,7 +175,7 @@ export const playlistDetails = ({id,part="snippet"}:PlaylistDetails) => (dispatc
         }
       };
       
-      axios.request<AxiosOptions>(options).then(function (response) {
+      await axios.request<AxiosOptions>(options).then(function (response) {
           dispatch({
               type:ActionTypes.PlaylistDetails,
               playlistDetails:response.data

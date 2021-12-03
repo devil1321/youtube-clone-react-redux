@@ -1,15 +1,17 @@
 .details{
+    box-sizing: border-box;
     padding:0px 30px;
     overflow-y: scroll;
     width: 100%;
     height:85vh;
-    @include createFlex(row,center,center,null);
-    &__left-conent{
-        min-width: 70%;
+    @include createFlex(row,space-between,flex-start,null);
+    &__left-content{
+        min-width: 65%;
+        max-width: 65%;
     }
     &__video{
         position: relative;
-        top:300px;
+        top:30px;
         left:0px;
     }
     &__video-img{
@@ -121,15 +123,17 @@
         }
     }
     &__sort-by{
+        cursor: pointer;
         @include createFlex(row,flex-start,center,null);
         svg{
-            cursor: pointer;
             margin-right:10px;
             width: 30px;
             height:30px;
         }
     }
     &__comments-sort-by-menu{
+        opacity: 0;
+        overflow: hidden;
         position: absolute;
         top:50px;
         left:150px;
@@ -144,10 +148,76 @@
             }
         }
     }
-
-
+    &__comments-form{
+        @include createFlex(row,flex-start,center,null);
+        img{
+            width: 5%;
+        }
+        input{
+            font-size: pxToRem(16);
+            margin-left:20px;
+            width: 100%;
+            border:0px;
+            border-bottom: 1px solid lightgray;
+        }
+    }
 
     &__right-content{
-        min-width: 30%;
+        
+        margin-top: 30px;
+        min-width: 33%;
+        max-width: 33%;
+    }
+    &__suggested-video{
+        cursor: pointer;
+        margin-bottom:10px;
+        max-height:100%;
+        overflow: hidden;
+        @include createFlex(row,flex-start,flex-start,null);
+        &:hover{
+            .details__suggested-video-overlay{
+                opacity:1;
+            }
+        }
+        &-img{
+            position: relative;
+            top:0px;
+            left:0px;
+            min-width: 180px;
+            max-width: 180px;
+            height:100%;
+            overflow:hidden;
+            img{
+                width: 100%;
+            }
+        }
+        &-overlay{
+            position:absolute;
+            top:0px;
+            left:0px;
+            width: 350px;
+            height:100%;
+            background-color: rgba(0,0,0,0.50);
+            transition: all 500ms ease-in-out;
+            opacity:0;
+            svg{
+                position: relative;
+                left:25%;
+                top:50%;
+                transform: translate(-50%,-50%);                
+                fill:white;
+                width:30px;
+                height:30px;
+            }
+        }
+        &-text{
+            margin-left: 10px;
+            h3{
+                font-size: pxToRem(16);
+            }
+            h3,p{
+                margin:5px 0px;
+            }
+        }
     }
 }
