@@ -63,3 +63,19 @@ $breakpoints-down:("small":"39.9375em", "sm-med":"33.75em", "medium-sm":"63em", 
     }
 }
 
+@mixin subscribe-btn{
+    button{
+        padding:12px 30px;
+        font-weight: bold;
+        font-size:pxToRem(16);
+        color:white;
+        border-radius: 3px;
+        background-color: red;
+        border:0px;
+        outline:0px;
+        &:active,&:focus{
+            border:0px;
+            outline:0px;
+        }
+    }
+}

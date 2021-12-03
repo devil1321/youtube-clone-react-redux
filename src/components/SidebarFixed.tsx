@@ -50,9 +50,9 @@ const SidebarFixed:React.FC = () => {
                       <GiHamburgerMenu />
                       <img src="/assets/main-logo.svg" alt="" />
                   </div>
-                  <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link active" to="#"><MdHomeFilled />Home</Link>
-                  <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><FaRegCompass />Explore</Link>
-                  <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdSubscriptions />Subscriptions</Link>
+                  <Link to="/" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link active"><MdHomeFilled />Home</Link>
+                  <Link to="#" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link"><FaRegCompass />Explore</Link>
+                  <Link to="#" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link"><MdSubscriptions />Subscriptions</Link>
                   <hr />
                   <Link to="#"><MdOutlineVideoLibrary />Library</Link>
                   <Link to="#"><VscHistory />History</Link>
