@@ -1,18 +1,18 @@
 export interface InitState {
+    activeSearch:string;
     suggestedVideos:any[];
-    search:any[];
+    globalSearch:any[];
     videoComments:any[];
     videoDetails:any[];
     channelDetails:any[];
     channelVideos:any[];
-    playlistVideos:any[];
-    playlistDetails:any[];
 }
 
 export interface AxiosOptions {
     method:any;
     url:string;
     params:{
+        key?:string;
         q?:string;
         relatedToVideoId?:string;
         part?:string;
@@ -26,8 +26,9 @@ export interface AxiosOptions {
         order?:string;
     }
     headers:{
-        'x-rapidapi-host':string;
-        'x-rapidapi-key':string;
+        'x-rapidapi-host'?:string;
+        'x-rapidapi-key'?:string;
+        'Content-Type'?:string;
     }
 }
 
@@ -36,6 +37,8 @@ export interface SuggestedVideosParams{
     part:string;
     type:string;
     maxResults:number;
+    regionCode?:string;
+    order?:string;
 }
 
 export interface SearchParams{
@@ -44,6 +47,7 @@ export interface SearchParams{
     regionCode?:string;
     maxResults?:number;
     order?:string;
+    type?:string;
 }
 
 export interface VideoCommentsParams{
@@ -71,7 +75,7 @@ export interface ChannelVideosParams{
 
 
 export interface PlaylistVideosParams{
-    playlistId:string;
+    channelId:string;
     part:string;
     maxResults?:number;
 }

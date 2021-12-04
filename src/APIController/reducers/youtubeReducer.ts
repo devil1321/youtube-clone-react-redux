@@ -3,28 +3,32 @@ import { InitState } from '../interfaces'
 import { Action } from '../actions'
 
 const initData:InitState = {
+    activeSearch:'All',
     suggestedVideos:[],
-    search:[],
+    globalSearch:[],
     videoComments:[],
     videoDetails:[],
     channelDetails:[],
     channelVideos:[],
-    playlistVideos:[],
-    playlistDetails:[]
 }
 
 
 export default (state = initData ,action:Action) =>{
     switch(action.type){
+        case ActionTypes.SetActiveSearch:
+            return {
+                ...state,
+                activeSearch:action.activeSearch
+            }
         case ActionTypes.SuggestedVideos:
             return {
                 ...state,
                 suggestedVideos:action.suggestedVideos
             }
-        case ActionTypes.Search:
+        case ActionTypes.GlobalSearch:
             return {
                 ...state,
-                search:action.search
+                globalSearch:action.globalSearch
             }
         case ActionTypes.VideoComments:
             return {
@@ -54,7 +58,7 @@ export default (state = initData ,action:Action) =>{
         case ActionTypes.PlaylistDetails:
             return {
                 ...state,
-                playlistDetails:action.playlistDetails
+                videoDetails:action.videoDetails
             }
         default:
             return{

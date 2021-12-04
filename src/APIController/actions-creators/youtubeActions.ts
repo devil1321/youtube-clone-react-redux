@@ -6,66 +6,80 @@ import { ActionTypes } from '../types'
 
 import { SuggestedVideosParams, SearchParams, VideoCommentsParams, VideoDetailsParams, ChannelDetailsParams, ChannelVideosParams, PlaylistVideosParams,PlaylistDetails} from '../interfaces'
 
-export const suggestedVideos = ({relatedToVideoId,part="id,snippet",type="video",maxResults=50}:SuggestedVideosParams) => async (dispatch:Dispatch<Action>) =>{
-    var options:AxiosOptions = {
-        method: 'GET',
-        url: 'https://youtube-v31.p.rapidapi.com/search',
-        params: {
-          relatedToVideoId: relatedToVideoId,
-          part: part,
-          type: type,
-          maxResults: maxResults
-        },
-        headers: {
-          'x-rapidapi-host': 'youtube-v31.p.rapidapi.com',
-          'x-rapidapi-key': 'ee01db358fmshf866f3732da81eap1aa530jsnb32207469154'
-        }
-      };
-      
-      await axios.request(options).then(function (response) {
+export const setActiveSearch = (e:any) => (dispatch:Dispatch<Action>):void =>{
+  dispatch({
+    type:ActionTypes.SetActiveSearch,
+    activeSearch:e.target.dataset.q
+  })
+}
+
+export const suggestedVideos = ({relatedToVideoId,part="snippet,id",regionCode="US",maxResults=200,order="date",type="video"}:SuggestedVideosParams) => async (dispatch:Dispatch<Action>) =>{
+  var options:AxiosOptions = {
+      method: 'GET',
+      url: 'https://youtube.googleapis.com/youtube/v3/search/',
+      params: {
+        relatedToVideoId:relatedToVideoId,
+        part: part,
+        regionCode: regionCode,
+        maxResults:maxResults,
+        order: order,
+        type:type,
+        key:'AIzaSyB7mPanJc9puF96k7siK03J2fOF47-9CB4',
+      },
+      headers: {
+        'Content-Type':'application/json'
+      }
+    };
+    
+    await axios.request<AxiosOptions>(options).then(function (response) {
           dispatch({
               type:ActionTypes.SuggestedVideos,
               suggestedVideos:response.data
           })
-      }).catch(function (error) {
-          console.error(error);
-      });
+    }).catch(function (error) {
+        console.error(error);
+    });
 }
 
-export const search = ({q,part="snippet,id",regionCode="US",maxResults=50,order="date"}:SearchParams) => async (dispatch:Dispatch<Action>) =>{
+export const globalSearch = ({q,part="snippet,id",regionCode="US",maxResults=200,order="date",type="video"}:SearchParams) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
-        url: 'https://youtube-v31.p.rapidapi.com/search',
+        url: 'https://youtube.googleapis.com/youtube/v3/search/',
         params: {
           q: q,
           part: part,
           regionCode: regionCode,
           maxResults:maxResults,
-          order: order
+          order: order,
+          type:type,
+          key:'AIzaSyB7mPanJc9puF96k7siK03J2fOF47-9CB4',
         },
         headers: {
-          'x-rapidapi-host': 'youtube-v31.p.rapidapi.com',
-          'x-rapidapi-key': 'ee01db358fmshf866f3732da81eap1aa530jsnb32207469154'
+          'Content-Type':'application/json'
         }
       };
       
-      await axios.request<AxiosOptions>(options).then(function (response) {
+      await axios.request<any>(options).then(function (response) {
             dispatch({
-                type:ActionTypes.Search,
-                search:response.data
+                type:ActionTypes.GlobalSearch,
+                globalSearch:response.data
             })
       }).catch(function (error) {
           console.error(error);
       });
 }
-export const videoComments = ({part="snippet",videoId,maxResults=100}:VideoCommentsParams) => async (dispatch:Dispatch<Action>) =>{
+export const videoComments = ({part="id,snippet",videoId,maxResults=200}:VideoCommentsParams) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
-        url: 'https://youtube-v31.p.rapidapi.com/commentThreads',
-        params: {part: part, videoId: videoId, maxResults: maxResults},
+        url: 'https://www.googleapis.com/youtube/v3/comments',
+        params: {
+          part: part, 
+          id: videoId,
+          maxResults: maxResults,
+          key:'AIzaSyB7mPanJc9puF96k7siK03J2fOF47-9CB4',
+        },
         headers: {
-          'x-rapidapi-host': 'youtube-v31.p.rapidapi.com',
-          'x-rapidapi-key': 'ee01db358fmshf866f3732da81eap1aa530jsnb32207469154'
+          'Content-Type':'application/json'
         }
       };
       
@@ -81,11 +95,14 @@ export const videoComments = ({part="snippet",videoId,maxResults=100}:VideoComme
 export const videoDetails= ({part="contentDetails,snippet,statistics",id}:VideoDetailsParams) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
-        url: 'https://youtube-v31.p.rapidapi.com/videos',
-        params: {part: part, id: id},
+        url: 'https://www.googleapis.com/youtube/v3/videos',
+        params: {
+          part: part, 
+          id: id,
+          key:'AIzaSyB7mPanJc9puF96k7siK03J2fOF47-9CB4',
+        },
         headers: {
-          'x-rapidapi-host': 'youtube-v31.p.rapidapi.com',
-          'x-rapidapi-key': 'ee01db358fmshf866f3732da81eap1aa530jsnb32207469154'
+          'Content-Type':'application/json'
         }
       };
       
@@ -144,14 +161,17 @@ export const channelVideos = ({channelId,part="snippet,id",order="date",maxResul
           console.error(error);
       });
 }
-export const playlistVideos = ({playlistId,part="snippet",maxResults=50}:PlaylistVideosParams) => async (dispatch:Dispatch<Action>) =>{
+export const playlistVideos = ({channelId,part="snippet",maxResults=50}:PlaylistVideosParams) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
-        url: 'https://youtube-v31.p.rapidapi.com/playlistItems',
-        params: {playlistId:playlistId, part: part, maxResults:maxResults},
+        url: 'https://youtube.googleapis.com/youtube/v3/playlists',
+        params: {
+          key:'AIzaSyB7mPanJc9puF96k7siK03J2fOF47-9CB4',
+          channelId:channelId,
+          part: part, 
+          maxResults:maxResults},
         headers: {
-          'x-rapidapi-host': 'youtube-v31.p.rapidapi.com',
-          'x-rapidapi-key': 'ee01db358fmshf866f3732da81eap1aa530jsnb32207469154'
+          'Content-Type':'application/json'
         }
       };
       
@@ -178,7 +198,7 @@ export const playlistDetails = ({id,part="snippet"}:PlaylistDetails) => async (d
       await axios.request<AxiosOptions>(options).then(function (response) {
           dispatch({
               type:ActionTypes.PlaylistDetails,
-              playlistDetails:response.data
+              videoDetails:response.data
           })
       }).catch(function (error) {
           console.error(error);

@@ -22,7 +22,7 @@ const Sidebar:React.FC = () => {
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
 
     const handleActiveLink = (e:any):void =>{
-        const links = document.querySelectorAll('.sidebar__link')
+        const links = document.querySelectorAll('.sidebar__link') as NodeListOf<HTMLAnchorElement>
         links.forEach(link => link.classList.remove('active'))
         e.target.classList.add('active')
     }
@@ -44,31 +44,38 @@ const Sidebar:React.FC = () => {
               <h3>BEST OF YOUTUBE</h3>
               <Link data-q="Music" onClick={(e:any)=>{
                   handleActiveLink(e)
-                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
+                  youtubeActions.setActiveSearch(e)
                   }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><SiYoutubemusic /></span> Music</Link>
               <Link data-q="Sports" onClick={(e:any)=>{
                   handleActiveLink(e)
-                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
+                  youtubeActions.setActiveSearch(e)
                   }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><ImTrophy /></span> Sports</Link>
               <Link data-q="Gaming" onClick={(e:any)=>{
                   handleActiveLink(e)
-                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
+                  youtubeActions.setActiveSearch(e)
                   }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><SiYoutubegaming /></span> Gaming</Link>
               <Link  data-q="Movies" onClick={(e:any)=>{
                   handleActiveLink(e)
-                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
+                  youtubeActions.setActiveSearch(e)
                   }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><MdLocalMovies /></span> Movies</Link>
               <Link data-q="News" onClick={(e:any)=>{
                   handleActiveLink(e)
-                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
+                  youtubeActions.setActiveSearch(e)
                   }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><BiNews /></span> News</Link>
               <Link data-q="Live" onClick={(e:any)=>{
                   handleActiveLink(e)
-                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
+                  youtubeActions.setActiveSearch(e)
                   }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><FaSatellite /></span> Live</Link>
               <Link data-q="360° Video" onClick={(e:any)=>{
                   handleActiveLink(e)
-                  youtubeActions.search({q:e.target.dataset.q,maxResults:200})
+                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
+                  youtubeActions.setActiveSearch(e)
                   }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><MdVideocam /></span> 360° Video</Link>
               <hr />
               <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><IoIosAddCircleOutline />Browse channels</Link>

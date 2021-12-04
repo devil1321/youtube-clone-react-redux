@@ -3,8 +3,10 @@ import Layout from '../templates/layout'
 import Comment from '../components/Comment'
 
 import { gsap } from 'gsap'
+import { Link } from 'react-router-dom'
 import { State } from '../APIController/reducers'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
+import * as UIActions from '../APIController/actions-creators/uiActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -23,18 +25,12 @@ const Details = () => {
     const dispatch = useDispatch()
     const { videoDetails,videoComments,suggestedVideos,channelDetails } = useSelector((state:State) => state.youtubeAPI)
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
+    const UI = bindActionCreators(UIActions,dispatch)
 
     const [isDescription,setIsDescription] = useState<boolean>(false)
     const [isSortBy,setIsSortBy] = useState<boolean>(false)
 
-    const handleSetContainersAndHideElements = ():void =>{
-        const container = document.querySelector('.container') as HTMLDivElement
-        const containerInner = document.querySelector('.container-inner') as HTMLDivElement
-        const tagsWrapper = document.querySelector('.search__tags-wrapper') as HTMLDivElement
-        container.style.width = '100%'
-        containerInner.style.width = '100%'
-        tagsWrapper.style.display = 'none'
-    }
+
 
     const handleSortBy = ():void =>{
         const tl = gsap.timeline()
@@ -50,7 +46,7 @@ const Details = () => {
  
 
     useEffect(()=>{
-        handleSetContainersAndHideElements()
+        UI.handleSetContainersAndHideElements()
     },[])
 
     return (
@@ -119,11 +115,12 @@ const Details = () => {
                                                 <div className="details__channel-img">
                                                     <img src={thumbnails?.default?.url} alt="" />
                                                 </div>
-                                
-                                                <div className="details__channel-title">
-                                                    <h3>{title}</h3>
-                                                    <p>{subscriberCount} subscribes</p>
-                                                </div>
+                                                <Link to={`/channel-details/${channelId}`} onClick={()=>{youtubeActions.channelDetails({part:'snippet,statistics',id:channelId})}}>
+                                                    <div className="details__channel-title">
+                                                        <h3>{title}</h3>
+                                                        <p>{subscriberCount} subscribes</p>
+                                                    </div>
+                                                </Link>
                                             </div>
                                             <button>Subscribe</button>
                                         </div>

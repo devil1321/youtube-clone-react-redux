@@ -1,12 +1,16 @@
 import { ActionTypes } from '../types'
 
+interface SetActiveSearch{
+    type:ActionTypes.SetActiveSearch;
+    activeSearch:string;
+}
 interface SuggestedVideos{
     type:ActionTypes.SuggestedVideos;
     suggestedVideos:any;
 }
 interface Search{
-    type:ActionTypes.Search;
-    search:any;
+    type:ActionTypes.GlobalSearch;
+    globalSearch:any;
 }
 interface VideoComments{
     type:ActionTypes.VideoComments;
@@ -30,9 +34,9 @@ interface PlaylistVideos{
 }
 interface PlaylistDetails{
     type:ActionTypes.PlaylistDetails;
-    playlistDetails:any;
+    videoDetails:any;
 }
 
 
 
-export type Action = SuggestedVideos | Search | VideoComments | VideoDetails | ChannelDetails | ChannelVideos | PlaylistVideos | PlaylistDetails
+export type Action = SetActiveSearch | SuggestedVideos | Search | VideoComments | VideoDetails | ChannelDetails | ChannelVideos | PlaylistVideos | PlaylistDetails

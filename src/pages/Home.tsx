@@ -7,16 +7,18 @@ import * as YoutubeActions from '../APIController/actions-creators/youtubeAction
 
 import Layout from '../templates/layout'
 import Video from '../components/Video'
+import { globalSearch } from '../APIController/actions-creators/youtubeActions';
 
 
 const Home:React.FC = () => {
+    const [isSet,setIsSet] = useState<boolean>(false)
     const disptach = useDispatch()
-    const { search,channelDetails } = useSelector((state:State) => state.youtubeAPI)
+    const { globalSearch,channelDetails,activeSearch } = useSelector((state:State) => state.youtubeAPI)
     const youtubeActions = bindActionCreators(YoutubeActions,disptach)
 
 
     const renderVideos = () =>{
-      return search?.items?.map((video:any) => {
+      return globalSearch?.items?.map((video:any) => {
           const { publishedAt,channelId,title,channelTitle, thumbnails } = video.snippet
           const { videoId } = video.id
           return <Video key={videoId} profile={thumbnails?.high?.url} imgUrl ={thumbnails?.high?.url} publishedAt={publishedAt} channelId={channelId} videoId={videoId} title={title} channelTitle={channelTitle} />
@@ -24,7 +26,7 @@ const Home:React.FC = () => {
     }
 
     useEffect(()=>{
-      youtubeActions.search({q:'All',maxResults:200})
+      youtubeActions.globalSearch({q:activeSearch,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
     },[])
 
     return (

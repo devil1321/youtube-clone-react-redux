@@ -108,7 +108,7 @@ const Search:React.FC = () => {
     const renderTags = () =>{
         return tags.map((tag:string,index:number) => (
             <div onClick={(e)=>{ 
-                youtubeActions.search({q:tag})
+                youtubeActions.globalSearch({q:tag})
                 handleActiveTag(e)
             }}  className={`search__tag ${index === 0 ? "active" : null}`}>{tag}</div>
         ))
