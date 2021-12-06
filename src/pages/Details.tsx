@@ -61,7 +61,7 @@ const Details = () => {
                         const months = ['January','Febuary','March','April','May','June','July','August','September','November','December']
                         return(
                             <div onLoad={()=>{
-                                    youtubeActions.channelDetails({part:'snippet,statistics',id:channelId})
+                                    youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:channelId})
                                 }} key={id} className="details__video">
                                 <div className="details__video-img">
                                     <img src={thumbnails.maxres?.url} alt="video" />
@@ -115,10 +115,14 @@ const Details = () => {
                                                 <div className="details__channel-img">
                                                     <img src={thumbnails?.default?.url} alt="" />
                                                 </div>
-                                                <Link to={`/channel-details/${channelId}`} onClick={()=>{youtubeActions.channelDetails({part:'snippet,statistics',id:channelId})}}>
+                                                <Link to={`/channel-details/${channelId}`} onClick={()=>{
+                                                    youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:channelId})
+                                                    youtubeActions.channelVideos({channelId:channelId,part:'snippet,id',order:'date',maxResults:200})
+                                                    youtubeActions.playlistVideos({channelId:channelId,part:'snippet,contentDetails,id',maxResults:200})
+                                                    }}>
                                                     <div className="details__channel-title">
                                                         <h3>{title}</h3>
-                                                        <p>{subscriberCount} subscribes</p>
+                                                        <p>{subscriberCount > 1000 ? <span>{subscriberCount.slice(0,subscriberCount.length - 3)} tys subscribers</span> : <span>{subscriberCount} subscribers</span>}</p>
                                                     </div>
                                                 </Link>
                                             </div>

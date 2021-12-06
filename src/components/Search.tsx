@@ -130,12 +130,16 @@ const Search:React.FC = () => {
     return (
         <div className="search">
             <div className="search__header" onClick={()=>{
-                   if(path === '/'){
-                        handleThin()
-                   }else{
-                        handleSidebarFixed()
-                   }
-                }}>
+                if(path === '/'){
+                    handleThin()
+                }
+                else if(path.slice(0,16)  === "/channel-details"){
+                    handleThin()
+                }
+                else{
+                    handleSidebarFixed()
+                }
+            }}>
                 <button>
                     <GiHamburgerMenu />
                 </button>

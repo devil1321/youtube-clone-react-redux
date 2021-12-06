@@ -11,5 +11,6 @@ export enum ActionTypes {
 }
 
 export enum UIActionTypes {
-    HandleSetContainersAndHideElements = "HandleSetContainersAndHideElements"
+    HandleSetContainersAndHideElements = "HandleSetContainersAndHideElements",
+    HideTags = "HideTags"
 }

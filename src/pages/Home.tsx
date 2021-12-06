@@ -7,7 +7,6 @@ import * as YoutubeActions from '../APIController/actions-creators/youtubeAction
 
 import Layout from '../templates/layout'
 import Video from '../components/Video'
-import { globalSearch } from '../APIController/actions-creators/youtubeActions';
 
 
 const Home:React.FC = () => {

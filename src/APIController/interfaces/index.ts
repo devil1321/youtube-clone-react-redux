@@ -63,7 +63,7 @@ export interface VideoDetailsParams{
 
 export interface ChannelDetailsParams{
     part:string;
-    id:string;
+    channelId:string;
 }
 
 export interface ChannelVideosParams{

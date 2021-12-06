@@ -15,8 +15,11 @@ import { CgMediaLive } from 'react-icons/cg'
 import { BsFlag, BsPerson } from 'react-icons/bs'
 import { RiSettings4Line } from 'react-icons/ri' 
 
+interface SidebarProps{
+    fix?:number;
+}
 
-const Sidebar:React.FC = () => {
+const Sidebar:React.FC<SidebarProps> = ({fix}) => {
     const location = useLocation()
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
@@ -28,7 +31,7 @@ const Sidebar:React.FC = () => {
     }
     
     return (
-        <div className="sidebar">
+        <div className="sidebar" style={{top:fix}}>
              <div className="sidebar-expand">
              
               <Link to="/" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link active"><MdHomeFilled />Home</Link>

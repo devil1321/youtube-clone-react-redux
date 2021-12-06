@@ -12,3 +12,10 @@ export const handleSetContainersAndHideElements = () => (dispatch:Dispatch):void
         type:UIActionTypes.HandleSetContainersAndHideElements
     })
 }
+export const handleHideTags= () => (dispatch:Dispatch):void =>{
+    const tagsWrapper = document.querySelector('.search__tags-wrapper') as HTMLDivElement
+    tagsWrapper.style.display = 'none'
+    dispatch({
+        type:UIActionTypes.HideTags
+    })
+}

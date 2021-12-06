@@ -9,6 +9,10 @@ export default (state = initData ,action:any) =>{
             return {
                 ...state,
             }
+        case UIActionTypes.HideTags:
+            return {
+                ...state,
+            }
         default:
             return{
                 ...state

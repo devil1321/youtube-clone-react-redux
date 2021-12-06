@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 
 import '../styles/theme/theme.scss'
 
-const RouteWithLayout:React.FC = ({children}) => {
+const Layout:React.FC = ({children}) => {
     const [isFixed,setIsFixed] = useState(false)
     const location = useLocation()
     const path = location.pathname
@@ -15,7 +15,11 @@ const RouteWithLayout:React.FC = ({children}) => {
     const handleTypeOfSidebar = (path:any) =>{
         if(path === '/'){
             return <Sidebar />
-        }else{
+        }
+        else if(path.slice(0,16) === '/channel-details'){
+            return <Sidebar fix={41}/>
+        }
+        else{
             return <SidebarFixed />
         }
     }
@@ -33,4 +37,4 @@ const RouteWithLayout:React.FC = ({children}) => {
     )
 }
 
-export default RouteWithLayout
+export default Layout
