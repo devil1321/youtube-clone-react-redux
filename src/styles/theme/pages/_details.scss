@@ -88,6 +88,8 @@
     }
     &__channel-info{
         @include createFlex(row,space-between,center,null);
+    }
+    &__subs-btn{
         @include subscribe-btn()
     }
     &__channel-info-inner{

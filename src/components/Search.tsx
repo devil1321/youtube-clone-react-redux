@@ -129,7 +129,8 @@ const Search:React.FC = () => {
 
     return (
         <div className="search">
-            <div className="search__header" onClick={()=>{
+            <div className="search__header">
+                <button  onClick={()=>{
                 if(path === '/'){
                     handleThin()
                 }
@@ -140,11 +141,12 @@ const Search:React.FC = () => {
                     handleSidebarFixed()
                 }
             }}>
-                <button>
                     <GiHamburgerMenu />
                 </button>
                 <div className="search__header-logo">
-                    <img src="/assets/main-logo.svg" alt="logo" />
+                    <Link to="/">
+                        <img src="/assets/main-logo.svg" alt="logo" />
+                    </Link>
                 </div>
             </div>
             <div className="search__main">

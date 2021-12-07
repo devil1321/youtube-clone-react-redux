@@ -90,7 +90,9 @@
                 margin-left: -10px;
             }
         }
-        @include signIn-btn();
+        button{
+            @include signIn-btn();
+        }
     }
     &__tags-wrapper{
         position: relative;

@@ -46,9 +46,9 @@ const SidebarFixed:React.FC = () => {
         <div className="sidebar-fixed-wrapper close"></div>
             <div className="sidebar fixed close">
                  <div className="sidebar-expand">
-                  <div className="sidebar__logo" onClick={()=>{handleSidebarFixed()}}> 
-                      <GiHamburgerMenu />
-                      <img src="/assets/main-logo.svg" alt="" />
+                  <div className="sidebar__logo" > 
+                      <GiHamburgerMenu  onClick={()=>{handleSidebarFixed()}}/>
+                    <img src="/assets/main-logo.svg" alt="" />
                   </div>
                   <Link to="/" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link active"><MdHomeFilled />Home</Link>
                   <Link to="#" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link"><FaRegCompass />Explore</Link>

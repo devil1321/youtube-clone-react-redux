@@ -21,13 +21,16 @@
 }
 .sidebar{
     position: relative;
-    top:0px;
+    top:-30px;
     left:0px;
-
+    overflow-y: scroll;
+    width:20%;
+    @include setSidebarHeight(relative);
     &.fixed{
         position:fixed;
         z-index: 3;
         top:0px;
+        @include setSidebarHeight(fixed);
         background-color:white;
         // transform: translateY(-70px);
         transition: all 1s ease-in-out;
@@ -57,12 +60,7 @@
             min-height:30px;
         }
     }
-    position: relative;
-    top:-30px;
-    left:0px;
-    overflow-y: scroll;
-    width:20%;
-    height: 100vh;
+    
     h3{
         padding:0px 30px;
         font-size: pxToRem(16);
@@ -94,7 +92,10 @@
         button{
             margin-left: 30px;
         }
-        @include signIn-btn();
+        button{
+            @include signIn-btn();
+        }
+
        
     }
     &-expand__icon-circle{

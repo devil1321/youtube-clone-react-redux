@@ -37,8 +37,8 @@
             bottom:60px;
             left:50px;
         }
-        @include signIn-btn();
         button{
+            @include signIn-btn();
             cursor: pointer;
             height:40px;
         }

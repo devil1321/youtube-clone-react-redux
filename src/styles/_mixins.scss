@@ -47,8 +47,16 @@ $breakpoints-down:("small":"39.9375em", "sm-med":"33.75em", "medium-sm":"63em", 
     }
 }
 
+@mixin setSidebarHeight($position){
+    @if($position == 'fixed'){
+        height:100vh;
+    }
+    @if($position == 'relative'){
+        height:90vh;
+    }
+}
+
 @mixin signIn-btn{
-    button{
         font-weight: bold;
         padding:5px 20px;
         color:$light-blue;
@@ -60,11 +68,9 @@ $breakpoints-down:("small":"39.9375em", "sm-med":"33.75em", "medium-sm":"63em", 
             width: 30px;
             height:30px;
         }
-    }
 }
 
 @mixin subscribe-btn{
-    button{
         padding:12px 30px;
         font-weight: bold;
         font-size:pxToRem(16);
@@ -77,5 +83,4 @@ $breakpoints-down:("small":"39.9375em", "sm-med":"33.75em", "medium-sm":"63em", 
             border:0px;
             outline:0px;
         }
-    }
 }

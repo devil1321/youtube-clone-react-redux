@@ -122,11 +122,11 @@ const Details = () => {
                                                     }}>
                                                     <div className="details__channel-title">
                                                         <h3>{title}</h3>
-                                                        <p>{subscriberCount > 1000 ? <span>{subscriberCount.slice(0,subscriberCount.length - 3)} tys subscribers</span> : <span>{subscriberCount} subscribers</span>}</p>
+                                                        <p>{subscriberCount > 1000 ? <span>{subscriberCount.slice(0,subscriberCount.length - 3)} tys subscribers</span> : <span>{subscriberCount > 0 ? subscriberCount : 0} subscribers</span>}</p>
                                                     </div>
                                                 </Link>
                                             </div>
-                                            <button>Subscribe</button>
+                                            <button className="details__subs-btn">Subscribe</button>
                                         </div>
                                         <p className="details__channel-details-info" dangerouslySetInnerHTML={{__html:description}}></p>
                                     </React.Fragment>)})}

@@ -24,7 +24,7 @@ export const suggestedVideos = ({relatedToVideoId,part="snippet,id",regionCode="
         maxResults:maxResults,
         order: order,
         type:type,
-        key:'AIzaSyB8CWVIzZjerMVbkX9eP7p4GImttRtMxiU',
+        key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
       },
       headers: {
         'Content-Type':'application/json'
@@ -52,7 +52,7 @@ export const globalSearch = ({q,part="snippet,id",regionCode="US",maxResults=200
           maxResults:maxResults,
           order: order,
           type:type,
-          key:'AIzaSyB8CWVIzZjerMVbkX9eP7p4GImttRtMxiU',
+          key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
         },
         headers: {
           'Content-Type':'application/json'
@@ -102,7 +102,7 @@ export const videoDetails= ({part="contentDetails,snippet,statistics",id}:VideoD
         params: {
           part: part, 
           id: id,
-          key:'AIzaSyB8CWVIzZjerMVbkX9eP7p4GImttRtMxiU',
+          key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
         },
         headers: {
           'Content-Type':'application/json'
@@ -126,7 +126,7 @@ export const channelDetails = ({part="snippet,statistics,brandingSettings",chann
         params: {
           part: part, 
           id: channelId,
-          key:'AIzaSyB8CWVIzZjerMVbkX9eP7p4GImttRtMxiU',
+          key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
         },
         headers: {
           'Content-Type':'application/json'
@@ -151,7 +151,7 @@ export const channelVideos = ({channelId,part="snippet,id",order="date",maxResul
           part: part,
           order: order,
           maxResults: maxResults,
-          key:'AIzaSyB8CWVIzZjerMVbkX9eP7p4GImttRtMxiU',
+          key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
 
         },
         headers: {
@@ -176,7 +176,7 @@ export const playlistVideos = ({channelId,part = "snippet,contentDetails",maxRes
           channelId:channelId,
           part: part, 
           maxResults:maxResults,
-          key:'AIzaSyB8CWVIzZjerMVbkX9eP7p4GImttRtMxiU',
+          key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
         },
         headers: {
           'Content-Type':'application/json'
