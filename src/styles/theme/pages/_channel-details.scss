@@ -80,4 +80,10 @@
             display: block;
         }
     }
+    &__sended-videos{
+        @include createFlex(row,flex-start,center,null);
+    }
+    &__playlist-group{
+        @include createFlex(row,flex-start,center,wrap);
+    }
 }

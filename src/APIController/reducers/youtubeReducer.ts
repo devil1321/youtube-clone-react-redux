@@ -10,6 +10,7 @@ const initData:InitState = {
     videoDetails:[],
     channelDetails:[],
     channelVideos:[],
+    playlistVideos:[]
 }
 
 

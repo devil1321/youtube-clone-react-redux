@@ -8,17 +8,18 @@ import * as YoutubeActions from '../APIController/actions-creators/youtubeAction
 const VideoImg = React.lazy(() => import('./VideoImg'));
 
 interface VideoProps {
-    profile:string;
+    profile?:string;
     imgUrl:string;
     title:string;
     channelTitle:string;
     publishedAt:string;
     videoId:string;
     channelId:string;
+    minWidth?:string;
 }
 
 
-const Video:React.FC<VideoProps> = ({profile,imgUrl,title,channelTitle,publishedAt,videoId,channelId}) => {
+const Video:React.FC<VideoProps> = ({profile,imgUrl,title,channelTitle,publishedAt,videoId,channelId,minWidth}) => {
     
     // you can activate comments code if max requsets more than 500/month you can use channel picture
     const dispatch = useDispatch()
@@ -36,7 +37,7 @@ const Video:React.FC<VideoProps> = ({profile,imgUrl,title,channelTitle,published
 
 
     return (
-        <div className="video">
+        <div className="video" style={{minWidth:minWidth}}>
            <div className="video__img" onClick={()=>{
                youtubeActions.videoDetails({id:videoId,part:"contentDetails,snippet,statistics"})
                youtubeActions.videoComments({part:'snippet',videoId:videoId,maxResults:200})
@@ -56,7 +57,7 @@ const Video:React.FC<VideoProps> = ({profile,imgUrl,title,channelTitle,published
                 <div className="video__v-details-text">
                     <h3>{title}</h3>
                     <h5>{channelTitle}</h5>
-                    <p>Published: {publishedAt.slice(0,10)} / {publishedAt.slice(11,19)}</p>
+                    <p>Published: {publishedAt.slice(0,10)}</p>
                 </div>
            </div>
         </div>

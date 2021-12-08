@@ -192,10 +192,11 @@ export const playlistVideos = ({channelId,part = "snippet,contentDetails",maxRes
           console.error(error);
       });
 }
-export const playlistDetails = ({id,part="snippet"}:PlaylistDetails) => async (dispatch:Dispatch<Action>) =>{
+export const playlistDetails = (/*{id,part="snippet"}:PlaylistDetails*/) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube-v31.p.rapidapi.com/playlists',
+        // id need playlistId
         params: {id: 'RDZiQo7nAkQHU', part: 'snippet'},
         headers: {
           'x-rapidapi-host': 'youtube-v31.p.rapidapi.com',

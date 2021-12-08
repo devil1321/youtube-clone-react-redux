@@ -1,17 +1,19 @@
 import React, { useEffect,useState } from 'react'
 import Layout from '../templates/layout'
+import Video from '../components/Video'
+import PlaylistVideo from '../components/PlaylistVideo'
+
 import { Link } from 'react-router-dom'
 import { State } from '../APIController/reducers'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
 import * as UIActions from '../APIController/actions-creators/uiActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { BsSearch } from 'react-icons/bs'
-
+import { BsSearch, BsChevronDoubleRight } from 'react-icons/bs'
 
 const ChannelDetails = () => {
     const dispatch = useDispatch()
-    const { channelDetails, channelVideos } = useSelector((state:State) => state.youtubeAPI)
+    const { channelDetails, channelVideos, playlistVideos } = useSelector((state:State) => state.youtubeAPI)
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
     const UI = bindActionCreators(UIActions,dispatch)
     
@@ -26,6 +28,27 @@ const ChannelDetails = () => {
         
     }
 
+    const renderMain = () =>{
+        return channelVideos?.items?.map((video:any)=>{
+            const { videoId } = video.id
+            const { publishedAt,channelId,title, thumbnails,channelTitle } = video.snippet
+            return(
+                <Video videoId={videoId} publishedAt={publishedAt} channelId={channelId} title={title} imgUrl={thumbnails?.high?.url} channelTitle={channelTitle} minWidth={'calc(25% - 20px)'}/>
+            )
+        })
+    }
+
+    const renderPlaylist = () =>{
+        return playlistVideos?.items?.map((video:any)=>{
+            const { id } = video
+            const { publishedAt,channelId,title, thumbnails,channelTitle } = video.snippet
+            const { itemCount } = video.contentDetails
+            return(
+                <PlaylistVideo id={id} imgUrl={thumbnails?.high?.url} title={title}  itemCount={itemCount} />
+            )
+        })
+    }
+
     useEffect(() => {
         UI.handleHideTags()
     }, [])
@@ -33,6 +56,7 @@ const ChannelDetails = () => {
     return (
         <Layout>
             {channelDetails?.items?.map((channel:any)=>{
+                const { id } = channel
                 const { title, description,customUrl, publishedAt, thumbnails} = channel.snippet
                 const { viewCount, subscriberCount, videoCount} = channel.statistics
                 const { image } = channel.brandingSettings
@@ -69,10 +93,20 @@ const ChannelDetails = () => {
                             </div>
                          </div>
                         <div className="channel-details__tabs-main">
-                            <div id="1" className="channel-details__tab active">main</div>
+                            <div id="1" className="channel-details__tab active">
+                                <div className="channel-details__tab-header">Sended Videos <BsChevronDoubleRight/>  Play All</div>
+                                <div className="channel-details__sended-videos">
+                                    {renderMain()}
+                                </div>
+                            </div>
                             <div id="2" className="channel-details__tab">video</div>
                             <div id="3" className="channel-details__tab">society</div>
-                            <div id="4" className="channel-details__tab">playlist</div>
+                            <div id="4" className="channel-details__tab">
+                                <div className="channel-details__tab-header">Created Playlists</div>
+                                    <div className="channel-details__playlist-group">
+                                        {renderPlaylist()}
+                                    </div>
+                                </div>
                             <div id="5" className="channel-details__tab">channels</div>
                             <div id="6" className="channel-details__tab">info</div>
                         </div>
