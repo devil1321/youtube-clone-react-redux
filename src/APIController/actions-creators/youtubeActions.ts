@@ -13,7 +13,7 @@ export const setActiveSearch = (e:any) => (dispatch:Dispatch<Action>):void =>{
   })
 }
 
-export const suggestedVideos = ({relatedToVideoId,part="snippet,id",regionCode="US",maxResults=200,order="date",type="video"}:SuggestedVideosParams) => async (dispatch:Dispatch<Action>) =>{
+export const suggestedVideos = ({relatedToVideoId,part,regionCode,maxResults,order,type,pageToken}:SuggestedVideosParams = {relatedToVideoId:'',part:'snippet,id',regionCode:'US',maxResults:50,order:'date',type:'video'}) => async (dispatch:Dispatch<Action>) =>{
   var options:AxiosOptions = {
       method: 'GET',
       url: 'https://youtube.googleapis.com/youtube/v3/search/',
@@ -24,6 +24,7 @@ export const suggestedVideos = ({relatedToVideoId,part="snippet,id",regionCode="
         maxResults:maxResults,
         order: order,
         type:type,
+        pageToken:pageToken,
         key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
       },
       headers: {
@@ -41,7 +42,7 @@ export const suggestedVideos = ({relatedToVideoId,part="snippet,id",regionCode="
     });
 }
 
-export const globalSearch = ({q,part="snippet,id",regionCode="US",maxResults=200,order="date",type="video"}:SearchParams) => async (dispatch:Dispatch<Action>) =>{
+export const globalSearch = ({q,part,regionCode,maxResults,order,type,pageToken}:SearchParams = {q:'All',part:'snippet,id',regionCode:'US',maxResults:50,order:'date',type:'video'}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube.googleapis.com/youtube/v3/search/',
@@ -52,6 +53,7 @@ export const globalSearch = ({q,part="snippet,id",regionCode="US",maxResults=200
           maxResults:maxResults,
           order: order,
           type:type,
+          pageToken:pageToken,
           key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
         },
         headers: {
@@ -68,7 +70,7 @@ export const globalSearch = ({q,part="snippet,id",regionCode="US",maxResults=200
           console.error(error);
       });
 }
-export const videoComments = ({part="id,snippet",videoId,maxResults=200}:VideoCommentsParams) => async (dispatch:Dispatch<Action>) =>{
+export const videoComments = ({part,videoId,maxResults,pageToken}:VideoCommentsParams = {part:'id,snippet',videoId:'',maxResults:50}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         // url: 'https://www.googleapis.com/youtube/v3/comments',
@@ -78,6 +80,7 @@ export const videoComments = ({part="id,snippet",videoId,maxResults=200}:VideoCo
           // id:videoId,
           videoId: videoId,
           maxResults: maxResults,
+          pageToken:pageToken
           // key:'AIzaSyB7mPanJc9puF96k7siK03J2fOF47-9CB4',
         },
         headers: {
@@ -95,7 +98,7 @@ export const videoComments = ({part="id,snippet",videoId,maxResults=200}:VideoCo
           console.error(error);
       });
 }
-export const videoDetails= ({part="contentDetails,snippet,statistics",id}:VideoDetailsParams) => async (dispatch:Dispatch<Action>) =>{
+export const videoDetails= ({part,id}:VideoDetailsParams = {part:'contentDetails,snippet,statistics',id:''}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://www.googleapis.com/youtube/v3/videos',
@@ -119,7 +122,7 @@ export const videoDetails= ({part="contentDetails,snippet,statistics",id}:VideoD
       });
 }
 
-export const channelDetails = ({part="snippet,statistics,brandingSettings",channelId}:ChannelDetailsParams) => async (dispatch:Dispatch<Action>) =>{
+export const channelDetails = ({part,channelId}:ChannelDetailsParams = {part:'snippet,statistics,brandingSettings',channelId:''}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube.googleapis.com/youtube/v3/channels',
@@ -142,7 +145,7 @@ export const channelDetails = ({part="snippet,statistics,brandingSettings",chann
           console.error(error);
       });
 }
-export const channelVideos = ({channelId,part="snippet,id",order="date",maxResults=200}:ChannelVideosParams) => async (dispatch:Dispatch<Action>) =>{
+export const channelVideos = ({channelId,part,order,maxResults,pageToken}:ChannelVideosParams = {channelId:'',part:'snippet,id',order:'date',maxResults:50}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube.googleapis.com/youtube/v3/search',
@@ -151,6 +154,7 @@ export const channelVideos = ({channelId,part="snippet,id",order="date",maxResul
           part: part,
           order: order,
           maxResults: maxResults,
+          pageToken:pageToken,
           key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
 
         },
@@ -168,7 +172,7 @@ export const channelVideos = ({channelId,part="snippet,id",order="date",maxResul
           console.error(error);
       });
 }
-export const playlistVideos = ({channelId,part = "snippet,contentDetails",maxResults = 200}:PlaylistVideosParams) => async (dispatch:Dispatch<Action>) =>{
+export const playlistVideos = ({channelId,part,maxResults,pageToken }:PlaylistVideosParams = {channelId:'',part:"snippet,contentDetails",maxResults:50}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube.googleapis.com/youtube/v3/playlists',
@@ -176,6 +180,7 @@ export const playlistVideos = ({channelId,part = "snippet,contentDetails",maxRes
           channelId:channelId,
           part: part, 
           maxResults:maxResults,
+          pageToken:pageToken,
           key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
         },
         headers: {
@@ -192,15 +197,19 @@ export const playlistVideos = ({channelId,part = "snippet,contentDetails",maxRes
           console.error(error);
       });
 }
-export const playlistDetails = (/*{id,part="snippet"}:PlaylistDetails*/) => async (dispatch:Dispatch<Action>) =>{
+export const playlistDetails = ({playlistId,videoId,part,pageToken}:PlaylistDetails = {playlistId:'',videoId:'',part:'snippet,id,status,contentDetails'}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
-        url: 'https://youtube-v31.p.rapidapi.com/playlists',
+        url: 'https://youtube.googleapis.com/youtube/v3/playlistItems',
         // id need playlistId
-        params: {id: 'RDZiQo7nAkQHU', part: 'snippet'},
+        params: {
+           playlistId: playlistId,
+           part: part,
+           videoId:videoId,
+           pageToken:pageToken
+        },
         headers: {
-          'x-rapidapi-host': 'youtube-v31.p.rapidapi.com',
-          'x-rapidapi-key': 'ee01db358fmshf866f3732da81eap1aa530jsnb32207469154'
+          'Content-Type':'application/json'
         }
       };
       

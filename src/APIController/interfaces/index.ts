@@ -25,6 +25,7 @@ export interface AxiosOptions {
         maxResults?:number;
         regionCode?:string;
         order?:string;
+        pageToken?:string;
     }
     headers:{
         'x-rapidapi-host'?:string;
@@ -40,6 +41,7 @@ export interface SuggestedVideosParams{
     maxResults:number;
     regionCode?:string;
     order?:string;
+    pageToken?:string;
 }
 
 export interface SearchParams{
@@ -49,12 +51,14 @@ export interface SearchParams{
     maxResults?:number;
     order?:string;
     type?:string;
+    pageToken?:string;
 }
 
 export interface VideoCommentsParams{
     part:string;
     videoId:string;
     maxResults:number;
+    pageToken?:string;
 }
 
 export interface VideoDetailsParams{
@@ -72,6 +76,7 @@ export interface ChannelVideosParams{
     part:string;
     order?:string;
     maxResults?:number;
+    pageToken?:string;
 }
 
 
@@ -79,9 +84,12 @@ export interface PlaylistVideosParams{
     channelId:string;
     part:string;
     maxResults?:number;
+    pageToken?:string;
 }
 
 export interface PlaylistDetails{
-    id:string;
+    playlistId:string;
+    videoId?:string;
     part:string;
+    pageToken?:string;
 }

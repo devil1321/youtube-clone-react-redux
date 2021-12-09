@@ -3,6 +3,7 @@ import Layout from '../templates/layout'
 import Video from '../components/Video'
 import PlaylistVideo from '../components/PlaylistVideo'
 
+import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
 import { State } from '../APIController/reducers'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
@@ -18,6 +19,7 @@ const ChannelDetails = () => {
     const UI = bindActionCreators(UIActions,dispatch)
     
     const handleTab = (e:any) =>{
+        const tl = gsap.timeline()
         const links = document.querySelectorAll('.channel-details__tab-link') as NodeListOf<HTMLHeadingElement>
         links.forEach(link => link.classList.remove('active'))
         e.target.classList.add('active')
@@ -25,6 +27,8 @@ const ChannelDetails = () => {
         const tab = document.getElementById(`${e.target.dataset.tab}`) as HTMLDivElement
         tabs.forEach(tab => tab.classList.remove('active'))
         tab.classList.add('active')
+        tl.fromTo(tab,{opacity:0},{opacity:1,duration:0.3})
+
         
     }
 
@@ -73,7 +77,12 @@ const ChannelDetails = () => {
                                  </div>
                                  <div>
                                     <h2>{title}</h2>
-                                    <p>{subscriberCount > 1000 ? <span>{subscriberCount.slice(0,subscriberCount.length - 3)} tys subscribers</span> : <span>{subscriberCount > 0 ? subscriberCount : 0 } subscribers</span>}</p>
+                                    <p>{subscriberCount > 1000 && subscriberCount < 1000000  
+                                        ? <span>{subscriberCount.slice(0,subscriberCount.length - 3)} tys subscribers</span> 
+                                        : subscriberCount > 1000000 
+                                        ? <span>{subscriberCount.slice(0,subscriberCount.length - 6)},{subscriberCount.slice(subscriberCount.length-6,subscriberCount.length-3)} mln subscribers</span>
+                                        : <span>{subscriberCount > 0 && subscriberCount < 1000 ? subscriberCount : 0}</span> 
+                                    }</p>
                                  </div>
                              </div>
                              <div className="channel-details__btn-group">
@@ -94,7 +103,7 @@ const ChannelDetails = () => {
                          </div>
                         <div className="channel-details__tabs-main">
                             <div id="1" className="channel-details__tab active">
-                                <div className="channel-details__tab-header">Sended Videos <BsChevronDoubleRight/>  Play All</div>
+                                <h3 className="channel-details__tab-header">Sended Videos <BsChevronDoubleRight/>  Play All</h3>
                                 <div className="channel-details__sended-videos">
                                     {renderMain()}
                                 </div>

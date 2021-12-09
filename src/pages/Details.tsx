@@ -117,12 +117,17 @@ const Details = () => {
                                                 </div>
                                                 <Link to={`/channel-details/${channelId}`} onClick={()=>{
                                                     youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:channelId})
-                                                    youtubeActions.channelVideos({channelId:channelId,part:'snippet,id',order:'date',maxResults:200})
-                                                    youtubeActions.playlistVideos({channelId:channelId,part:'snippet,contentDetails,id',maxResults:200})
+                                                    youtubeActions.channelVideos({channelId:channelId,part:'snippet,id',order:'date',maxResults:50})
+                                                    youtubeActions.playlistVideos({channelId:channelId,part:'snippet,contentDetails,id',maxResults:50})
                                                     }}>
                                                     <div className="details__channel-title">
                                                         <h3>{title}</h3>
-                                                        <p>{subscriberCount > 1000 ? <span>{subscriberCount.slice(0,subscriberCount.length - 3)} tys subscribers</span> : <span>{subscriberCount > 0 ? subscriberCount : 0} subscribers</span>}</p>
+                                                        <p> {subscriberCount > 1000 && subscriberCount < 1000000  
+                                                           ? <span>{subscriberCount.slice(0,subscriberCount.length - 3)} tys subscribers</span> 
+                                                           : subscriberCount > 1000000 
+                                                           ? <span>{subscriberCount.slice(0,subscriberCount.length - 6)},{subscriberCount.slice(subscriberCount.length-6,subscriberCount.length-3)} mln subscribers</span>
+                                                           : <span>{subscriberCount > 0 && subscriberCount < 1000 ? subscriberCount : 0}</span> 
+                                                        }</p>
                                                     </div>
                                                 </Link>
                                             </div>
@@ -171,8 +176,8 @@ const Details = () => {
                             return(
                                 <div className="details__suggested-video" onClick={()=>{
                                     youtubeActions.videoDetails({id:videoId,part:"contentDetails,snippet,statistics"})
-                                    youtubeActions.videoComments({part:'snippet',videoId:videoId,maxResults:200})
-                                    youtubeActions.suggestedVideos({relatedToVideoId:videoId,part:'id,snippet',type:'video',maxResults:200})
+                                    youtubeActions.videoComments({part:'snippet',videoId:videoId,maxResults:50})
+                                    youtubeActions.suggestedVideos({relatedToVideoId:videoId,part:'id,snippet',type:'video',maxResults:50})
                                 }}>
                                 <div className="details__suggested-video-img">
                                     <div className="details__suggested-video-overlay"><BsFillPlayFill /></div>

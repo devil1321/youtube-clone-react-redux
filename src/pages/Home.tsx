@@ -25,7 +25,7 @@ const Home:React.FC = () => {
     }
 
     useEffect(()=>{
-      youtubeActions.globalSearch({q:activeSearch,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
+      youtubeActions.globalSearch({q:activeSearch,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:50})
     },[])
 
     return (

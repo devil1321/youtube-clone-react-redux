@@ -5,6 +5,7 @@
     &__banner{
         height:250px;
         overflow:hidden;
+        margin-bottom: 30px;
         img{
             display: block;
             width: 100%;
@@ -15,6 +16,7 @@
         height:100%;
     }
     &__header{
+        padding:0px 15px;
         @include createFlex(row,space-between,center,null);
     }
     &__info{
@@ -51,6 +53,7 @@
         left:0px;
     }
     &__tabs-nav{
+        padding:0px 10px;
         @include createFlex(row,flex-start, center,null);
     }
     &__tab-link{
@@ -76,8 +79,16 @@
     }
     &__tab{
         display:none;
+        background-color: white;
         &.active{
             display: block;
+        }
+    }
+    &__tab-header{
+        padding:0px 10px;
+        @include createFlex(row,flex-start,center,null);
+        svg{
+            margin:0px 30px;
         }
     }
     &__sended-videos{
