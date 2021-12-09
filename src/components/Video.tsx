@@ -50,10 +50,11 @@ const Video:React.FC<VideoProps> = ({profile,imgUrl,title,channelTitle,published
                </Suspense>
            </div>
            <div className="video__v-details">
+               {profile && 
                <div className="video__profile">
                    {/* thumbnails.default.url */}
                     <img src={profile} alt="" />
-               </div>
+               </div>}
                 <div className="video__v-details-text">
                     <h3>{title}</h3>
                     <h5>{channelTitle}</h5>
