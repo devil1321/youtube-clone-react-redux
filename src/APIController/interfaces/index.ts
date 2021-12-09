@@ -7,6 +7,7 @@ export interface InitState {
     channelDetails:any[];
     channelVideos:any[];
     playlistVideos:any[];
+    playlistItems:any[];
 }
 
 export interface AxiosOptions {

@@ -26,7 +26,7 @@ const PlaylistVideo:React.FC<PlaylistVideoProps> = ({id,imgUrl,title,itemCount})
             <h3>{title}</h3>
             <Link to={`/details/${id}`} onClick={()=>{
                 // needs playlistId and need to set it in youtubeActions
-                youtubeActions.playlistDetails()
+                youtubeActions.playlistItems()
                 }}>View Full Playlist</Link>
         </div>
     )

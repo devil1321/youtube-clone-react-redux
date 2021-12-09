@@ -25,7 +25,7 @@ export const suggestedVideos = ({relatedToVideoId,part,regionCode,maxResults,ord
         order: order,
         type:type,
         pageToken:pageToken,
-        key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
+        key:'AIzaSyA_4ZTiIz-sqtREcMXR7VHpJZmbS1WQZbk',
       },
       headers: {
         'Content-Type':'application/json'
@@ -54,7 +54,7 @@ export const globalSearch = ({q,part,regionCode,maxResults,order,type,pageToken}
           order: order,
           type:type,
           pageToken:pageToken,
-          key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
+          key:'AIzaSyA_4ZTiIz-sqtREcMXR7VHpJZmbS1WQZbk',
         },
         headers: {
           'Content-Type':'application/json'
@@ -105,7 +105,7 @@ export const videoDetails= ({part,id}:VideoDetailsParams = {part:'contentDetails
         params: {
           part: part, 
           id: id,
-          key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
+          key:'AIzaSyA_4ZTiIz-sqtREcMXR7VHpJZmbS1WQZbk',
         },
         headers: {
           'Content-Type':'application/json'
@@ -129,7 +129,7 @@ export const channelDetails = ({part,channelId}:ChannelDetailsParams = {part:'sn
         params: {
           part: part, 
           id: channelId,
-          key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
+          key:'AIzaSyA_4ZTiIz-sqtREcMXR7VHpJZmbS1WQZbk',
         },
         headers: {
           'Content-Type':'application/json'
@@ -155,7 +155,7 @@ export const channelVideos = ({channelId,part,order,maxResults,pageToken}:Channe
           order: order,
           maxResults: maxResults,
           pageToken:pageToken,
-          key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
+          key:'AIzaSyA_4ZTiIz-sqtREcMXR7VHpJZmbS1WQZbk',
 
         },
         headers: {
@@ -181,7 +181,7 @@ export const playlistVideos = ({channelId,part,maxResults,pageToken }:PlaylistVi
           part: part, 
           maxResults:maxResults,
           pageToken:pageToken,
-          key:'AIzaSyAp8t-GqNWbaZStxww7PUhA1NMrNU0XTko',
+          key:'AIzaSyA_4ZTiIz-sqtREcMXR7VHpJZmbS1WQZbk',
         },
         headers: {
           'Content-Type':'application/json'
@@ -197,7 +197,7 @@ export const playlistVideos = ({channelId,part,maxResults,pageToken }:PlaylistVi
           console.error(error);
       });
 }
-export const playlistDetails = ({playlistId,videoId,part,pageToken}:PlaylistDetails = {playlistId:'',videoId:'',part:'snippet,id,status,contentDetails'}) => async (dispatch:Dispatch<Action>) =>{
+export const playlistItems = ({playlistId,videoId,part,pageToken}:PlaylistDetails = {playlistId:'',videoId:'',part:'snippet,id,status,contentDetails'}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube.googleapis.com/youtube/v3/playlistItems',
@@ -206,8 +206,9 @@ export const playlistDetails = ({playlistId,videoId,part,pageToken}:PlaylistDeta
            playlistId: playlistId,
            part: part,
            videoId:videoId,
-           pageToken:pageToken
-        },
+           pageToken:pageToken,
+           key:'AIzaSyA_4ZTiIz-sqtREcMXR7VHpJZmbS1WQZbk',
+          },
         headers: {
           'Content-Type':'application/json'
         }
@@ -215,8 +216,8 @@ export const playlistDetails = ({playlistId,videoId,part,pageToken}:PlaylistDeta
       
       await axios.request<AxiosOptions>(options).then(function (response) {
           dispatch({
-              type:ActionTypes.PlaylistDetails,
-              videoDetails:response.data
+              type:ActionTypes.PlaylistItems,
+              playlistItems:response.data
           })
       }).catch(function (error) {
           console.error(error);

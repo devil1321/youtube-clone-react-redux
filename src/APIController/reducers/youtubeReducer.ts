@@ -10,7 +10,8 @@ const initData:InitState = {
     videoDetails:[],
     channelDetails:[],
     channelVideos:[],
-    playlistVideos:[]
+    playlistVideos:[],
+    playlistItems:[]
 }
 
 
@@ -56,10 +57,10 @@ export default (state = initData ,action:Action) =>{
                 ...state,
                 playlistVideos:action.playlistVideos
             }
-        case ActionTypes.PlaylistDetails:
+        case ActionTypes.PlaylistItems:
             return {
                 ...state,
-                videoDetails:action.videoDetails
+                playlistItems:action.playlistItems
             }
         default:
             return{

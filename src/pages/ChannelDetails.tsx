@@ -3,6 +3,7 @@ import Layout from '../templates/layout'
 import Video from '../components/Video'
 import PlaylistVideo from '../components/PlaylistVideo'
 
+import axios from 'axios'
 import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
 import { State } from '../APIController/reducers'
@@ -11,10 +12,15 @@ import * as UIActions from '../APIController/actions-creators/uiActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { BsSearch, BsChevronDoubleRight } from 'react-icons/bs'
+import PlaylistAtMain from '../components/PlaylistAtMain'
+import { playlistVideos } from '../APIController/actions-creators/youtubeActions'
 
 const ChannelDetails = () => {
+    const [isLoad,setIsLoad] = useState<boolean>(false)
+    const [items,setItems] = useState<any[]>([])
+    const [itemCount,setItemCount] = useState<number>(0)
     const dispatch = useDispatch()
-    const { channelDetails, channelVideos, playlistVideos } = useSelector((state:State) => state.youtubeAPI)
+    const { channelDetails, channelVideos, playlistVideos, playlistItems } = useSelector((state:State) => state.youtubeAPI)
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
     const UI = bindActionCreators(UIActions,dispatch)
     
@@ -28,9 +34,48 @@ const ChannelDetails = () => {
         tabs.forEach(tab => tab.classList.remove('active'))
         tab.classList.add('active')
         tl.fromTo(tab,{opacity:0},{opacity:1,duration:0.3})
-
-        
     }
+
+    const fetchPlaylistItems = () => {
+        let response:any;
+        let tempItems:any = []
+        let tempItem = {
+            id:'',
+            title:'',
+            item:{}
+        }
+        playlistVideos?.items?.slice(0,6).map((playlist:any) =>{
+            const { id } = playlist 
+            const { title } = playlist.snippet
+
+            var options:any = {
+                method: 'GET',
+                url: 'https://youtube.googleapis.com/youtube/v3/playlistItems',
+                // id need playlistId
+                params: {
+                   playlistId: id,
+                   part: 'snippet,id',
+                   key:'AIzaSyA_4ZTiIz-sqtREcMXR7VHpJZmbS1WQZbk',
+                },
+                headers: {
+                    'Content-Type':'application/json'
+                }
+            };
+            
+            axios.request<any>(options).then(function (response) {
+                    tempItem = {
+                        id:id,
+                        title:title,
+                        item:response.data
+                    }
+                    tempItems.push(tempItem)
+                }).catch(function (error) {
+                  console.error(error);
+              });
+        })
+        setItems(tempItems)           
+    }
+
 
     const renderMain = () =>{
         return channelVideos?.items?.map((video:any)=>{
@@ -42,20 +87,29 @@ const ChannelDetails = () => {
         })
     }
 
+
+    const renderPlaylistItemsInMain = () =>{
+
+        return items.map((playlist:any) =>{
+            const { id, title, item } = playlist
+            return <PlaylistAtMain key={title} title={title} playlistItems={item} />
+        })
+    }
+
     const renderPlaylist = () =>{
         return playlistVideos?.items?.map((video:any)=>{
             const { id } = video
             const { publishedAt,channelId,title, thumbnails,channelTitle } = video.snippet
             const { itemCount } = video.contentDetails
-            return(
-                <PlaylistVideo id={id} imgUrl={thumbnails?.high?.url} title={title}  itemCount={itemCount} />
-            )
+            return <PlaylistVideo id={id} imgUrl={thumbnails?.high?.url} title={title}  itemCount={itemCount} />
+            
         })
     }
 
     useEffect(() => {
         UI.handleHideTags()
-    }, [])
+        fetchPlaylistItems()
+    }, [playlistVideos])
 
     return (
         <Layout>
@@ -106,6 +160,9 @@ const ChannelDetails = () => {
                                 <h3 className="channel-details__tab-header">Sended Videos <BsChevronDoubleRight/>  Play All</h3>
                                 <div className="channel-details__sended-videos">
                                     {renderMain()}
+                                </div>
+                                <div className="channel-details__playlist-videos-main">
+                                    {renderPlaylistItemsInMain()}
                                 </div>
                             </div>
                             <div id="2" className="channel-details__tab">video</div>

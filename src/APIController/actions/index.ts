@@ -32,11 +32,11 @@ interface PlaylistVideos{
     type:ActionTypes.PlaylistVideos;
     playlistVideos:any;
 }
-interface PlaylistDetails{
-    type:ActionTypes.PlaylistDetails;
-    videoDetails:any;
+interface PlaylistItems{
+    type:ActionTypes.PlaylistItems;
+    playlistItems:any;
 }
 
 
 
-export type Action = SetActiveSearch | SuggestedVideos | Search | VideoComments | VideoDetails | ChannelDetails | ChannelVideos | PlaylistVideos | PlaylistDetails
+export type Action = SetActiveSearch | SuggestedVideos | Search | VideoComments | VideoDetails | ChannelDetails | ChannelVideos | PlaylistVideos | PlaylistItems
