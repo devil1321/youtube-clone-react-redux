@@ -4,7 +4,7 @@ import { Dispatch } from 'redux'
 import { Action } from '../actions'
 import { ActionTypes } from '../types'
 
-import { SuggestedVideosParams, SearchParams, VideoCommentsParams, VideoDetailsParams, ChannelDetailsParams, ChannelVideosParams, PlaylistVideosParams,PlaylistDetails} from '../interfaces'
+import { SuggestedVideosParams, SearchParams, VideoCommentsParams, VideoDetailsParams, ChannelDetailsParams, ChannelVideosParams, PlaylistVideosParams, PlaylistDetailsParams, ChannelSubscriptionsParams} from '../interfaces'
 
 export const setActiveSearch = (e:any) => (dispatch:Dispatch<Action>):void =>{
   dispatch({
@@ -197,7 +197,7 @@ export const playlistVideos = ({channelId,part,maxResults,pageToken }:PlaylistVi
           console.error(error);
       });
 }
-export const playlistItems = ({playlistId,videoId,part,pageToken}:PlaylistDetails = {playlistId:'',videoId:'',part:'snippet,id,status,contentDetails'}) => async (dispatch:Dispatch<Action>) =>{
+export const playlistItems = ({playlistId,videoId,part,pageToken}:PlaylistDetailsParams = {playlistId:'',videoId:'',part:'snippet,id,status,contentDetails'}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://youtube.googleapis.com/youtube/v3/playlistItems',
@@ -218,6 +218,31 @@ export const playlistItems = ({playlistId,videoId,part,pageToken}:PlaylistDetail
           dispatch({
               type:ActionTypes.PlaylistItems,
               playlistItems:response.data
+          })
+      }).catch(function (error) {
+          console.error(error);
+      });
+}
+
+export const getChannelSubscriptions = ({part,channelId,pageToken}:ChannelSubscriptionsParams = {part:'id,snippet',channelId:''}) => async (dispatch:Dispatch<Action>) =>{
+      var options:AxiosOptions = {
+        method: 'GET',
+        url: 'https://www.googleapis.com/youtube/v3/subscriptions',
+        params: {
+           channelId: channelId,
+           part: part,
+           pageToken:pageToken,
+           key:'AIzaSyA_4ZTiIz-sqtREcMXR7VHpJZmbS1WQZbk',
+          },
+        headers: {
+          'Content-Type':'application/json'
+        }
+      };
+
+      await axios.request<AxiosOptions>(options).then(function (response) {
+          dispatch({
+              type:ActionTypes.ChannelSubscriptions,
+              channelSubscriptions:response.data
           })
       }).catch(function (error) {
           console.error(error);

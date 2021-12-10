@@ -19,6 +19,7 @@ const ChannelDetails = () => {
     const [isLoad,setIsLoad] = useState<boolean>(false)
     const [items,setItems] = useState<any[]>([])
     const [itemCount,setItemCount] = useState<number>(0)
+    const [channelVideosCopy,setChannelVideosCopy] = useState<any[]>([])
     const dispatch = useDispatch()
     const { channelDetails, channelVideos, playlistVideos, playlistItems } = useSelector((state:State) => state.youtubeAPI)
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
@@ -37,12 +38,11 @@ const ChannelDetails = () => {
     }
 
     const fetchPlaylistItems = () => {
-        let response:any;
         let tempItems:any = []
         let tempItem = {
             id:'',
             title:'',
-            item:{}
+            items:{}
         }
         playlistVideos?.items?.slice(0,6).map((playlist:any) =>{
             const { id } = playlist 
@@ -63,11 +63,11 @@ const ChannelDetails = () => {
             };
             
             axios.request<any>(options).then(function (response) {
-                    tempItem = {
-                        id:id,
-                        title:title,
-                        item:response.data
-                    }
+                tempItem = {
+                    id:id,
+                    title:title,
+                    items:response.data
+                }
                     tempItems.push(tempItem)
                 }).catch(function (error) {
                   console.error(error);
@@ -80,19 +80,34 @@ const ChannelDetails = () => {
     const renderMain = () =>{
         return channelVideos?.items?.map((video:any)=>{
             const { videoId } = video.id
-            const { publishedAt,channelId,title, thumbnails,channelTitle } = video.snippet
+            const { publishedAt,channelId,title, thumbnails } = video.snippet
             return(
-                <Video videoId={videoId} publishedAt={publishedAt} channelId={channelId} title={title} imgUrl={thumbnails?.high?.url} channelTitle={channelTitle} minWidth={'calc(25% - 20px)'}/>
+                <Video videoId={videoId} publishedAt={publishedAt} channelId={channelId} title={title} imgUrl={thumbnails?.high?.url}  minWidth={'calc(25% - 20px)'}/>
             )
         })
     }
 
+    const renderChannelVideos = () =>{
+        return channelVideosCopy?.map((video:any)=>{
+            const { videoId } = video.id
+            const { publishedAt,channelId,title, thumbnails } = video.snippet
+            return(
+                <Video videoId={videoId} publishedAt={publishedAt} channelId={channelId} title={title} imgUrl={thumbnails?.high?.url}  />
+            )
+        }) 
+    }
+
 
     const renderPlaylistItemsInMain = () =>{
-
         return items.map((playlist:any) =>{
-            const { id, title, item } = playlist
-            return <PlaylistAtMain key={title} title={title} playlistItems={item} />
+            const { id, title, items } = playlist
+            return <div key={title} className="channel-details__playlist-main-group">
+                   <h3>{title}</h3>
+                   <div className="channel-details__playlist-main-group-inner">{items?.items?.map((item:any) =>{
+                        const { title,thumbnails,channelTitle,publishedAt,videoId,channelId } = item.snippet
+                            return <Video key={title} title={title} imgUrl={thumbnails?.high?.url} channelId={channelId} publishedAt={publishedAt} videoId={videoId} minWidth={'calc(25% - 20px)'} />
+                    })}</div>
+                  </div>
         })
     }
 
@@ -109,7 +124,8 @@ const ChannelDetails = () => {
     useEffect(() => {
         UI.handleHideTags()
         fetchPlaylistItems()
-    }, [playlistVideos])
+        setChannelVideosCopy(channelVideos.items)
+    }, [playlistVideos,channelVideos])
 
     return (
         <Layout>
@@ -165,7 +181,12 @@ const ChannelDetails = () => {
                                     {renderPlaylistItemsInMain()}
                                 </div>
                             </div>
-                            <div id="2" className="channel-details__tab">video</div>
+                            <div id="2" className="channel-details__tab">
+                                <div className="channel-details__channels-videos-nav"></div>
+                                <div className="channel-details__channel-videos-group">
+                                    {renderChannelVideos()}
+                                </div>
+                            </div>
                             <div id="3" className="channel-details__tab">society</div>
                             <div id="4" className="channel-details__tab">
                                 <div className="channel-details__tab-header">Created Playlists</div>

@@ -36,7 +36,11 @@ interface PlaylistItems{
     type:ActionTypes.PlaylistItems;
     playlistItems:any;
 }
+interface ChannelSubscriptions{
+    type:ActionTypes.ChannelSubscriptions;
+    channelSubscriptions:any;
+}
 
 
 
-export type Action = SetActiveSearch | SuggestedVideos | Search | VideoComments | VideoDetails | ChannelDetails | ChannelVideos | PlaylistVideos | PlaylistItems
+export type Action = SetActiveSearch | SuggestedVideos | Search | VideoComments | VideoDetails | ChannelDetails | ChannelVideos | PlaylistVideos | PlaylistItems | ChannelSubscriptions

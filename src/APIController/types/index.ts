@@ -7,7 +7,8 @@ export enum ActionTypes {
     ChannelDetails = "ChannelDetails",
     ChannelVideos = "ChannelVideos",
     PlaylistVideos = "PlaylistVideos",
-    PlaylistItems = "PlaylistItems"
+    PlaylistItems = "PlaylistItems",
+    ChannelSubscriptions = 'ChannelSubscriptions'
 }
 
 export enum UIActionTypes {

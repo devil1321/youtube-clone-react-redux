@@ -11,7 +11,7 @@ interface VideoProps {
     profile?:string;
     imgUrl:string;
     title:string;
-    channelTitle:string;
+    channelTitle?:string;
     publishedAt:string;
     videoId:string;
     channelId:string;
@@ -57,7 +57,7 @@ const Video:React.FC<VideoProps> = ({profile,imgUrl,title,channelTitle,published
                </div>}
                 <div className="video__v-details-text">
                     <h3>{title}</h3>
-                    <h5>{channelTitle}</h5>
+                    {channelTitle && <h5>{channelTitle}</h5>}
                     <p>Published: {publishedAt.slice(0,10)}</p>
                 </div>
            </div>

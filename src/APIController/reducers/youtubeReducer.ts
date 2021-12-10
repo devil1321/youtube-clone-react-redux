@@ -11,7 +11,8 @@ const initData:InitState = {
     channelDetails:[],
     channelVideos:[],
     playlistVideos:[],
-    playlistItems:[]
+    playlistItems:[],
+    channelSubscriptions:[]
 }
 
 
@@ -61,6 +62,11 @@ export default (state = initData ,action:Action) =>{
             return {
                 ...state,
                 playlistItems:action.playlistItems
+            }
+        case ActionTypes.ChannelSubscriptions:
+            return {
+                ...state,
+                channelSubscriptions:action.channelSubscriptions
             }
         default:
             return{

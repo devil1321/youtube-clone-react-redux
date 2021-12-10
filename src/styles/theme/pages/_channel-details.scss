@@ -94,6 +94,17 @@
     &__sended-videos{
         @include createFlex(row,flex-start,center,null);
     }
+    &__playlist-main-group{
+        &>h3{
+            padding:0px 10px;
+        }
+    }
+    &__playlist-main-group-inner{
+        @include createFlex(row,flex-start,center,null);
+    }
+    &__channel-videos-group{
+        @include createFlex(row,flex-start,center,wrap);
+    }
     &__playlist-group{
         @include createFlex(row,flex-start,center,wrap);
     }

@@ -8,6 +8,7 @@ export interface InitState {
     channelVideos:any[];
     playlistVideos:any[];
     playlistItems:any[];
+    channelSubscriptions:any[];
 }
 
 export interface AxiosOptions {
@@ -88,9 +89,15 @@ export interface PlaylistVideosParams{
     pageToken?:string;
 }
 
-export interface PlaylistDetails{
+export interface PlaylistDetailsParams{
     playlistId:string;
     videoId?:string;
+    part:string;
+    pageToken?:string;
+}
+
+export interface ChannelSubscriptionsParams{
+    channelId:string;
     part:string;
     pageToken?:string;
 }
