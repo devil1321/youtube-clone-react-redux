@@ -13,5 +13,6 @@ export enum ActionTypes {
 
 export enum UIActionTypes {
     HandleSetContainersAndHideElements = "HandleSetContainersAndHideElements",
-    HideTags = "HideTags"
+    HideTags = "HideTags",
+    IsMobile = "IsMobile"
 }

@@ -11,6 +11,10 @@ export interface InitState {
     channelSubscriptions:any[];
 }
 
+export interface UIState {
+    isMobile:boolean;
+}
+
 export interface AxiosOptions {
     method:any;
     url:string;

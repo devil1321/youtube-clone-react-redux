@@ -43,9 +43,14 @@ a{
 }
 .container{
     @include createFlex(row,space-between,flex-start,null);
- 
+    @include breakpoint-down(medium){
+      min-width: 100% !important;
+    }
 
 }
 .container-inner{
     width: 82%;
+    @include breakpoint-down(medium){
+      width: 90% !important;
+    }
 }

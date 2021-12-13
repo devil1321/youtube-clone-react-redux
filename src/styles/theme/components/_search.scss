@@ -8,6 +8,9 @@
         padding-right: 70px;
         margin:0px 0px 30px;
         @include createFlex(row,center,center,null);
+        @include breakpoint-down(medium){
+            padding-right: 20px;
+        }
         button{
             position: relative;
             top:-8px;
@@ -42,12 +45,29 @@
         padding:10px;
         width: 78%;
         @include createFlex(row,flex-start,center,null);
+        @include breakpoint-down(medium){
+            width: 75%;
+            position: relative;
+            left:100px;
+            top:0px;
+        }
+        @include breakpoint-down(medium-sm){
+            width: 65%;
+            position:static;
+        }
     }
     &__form{
         margin-left: 100px;
+        @include breakpoint-down(medium){
+            margin-left: 0px;
+            width: 100%;
+        }
     }
     &__field{
         padding:0px 0px 0px 20px;
+        @include breakpoint-down(medium){
+            max-width: 70%;
+        }
         border:1px solid lightgray;
         @include createFlex(row,flex-start,center,null);
         input{
@@ -59,6 +79,9 @@
                 border:0px;
                 outline:none;
             }
+            @include breakpoint-down(medium){
+                width: 300px;
+            }
         }
     }
     &__magnifer-wrapper{
@@ -67,11 +90,29 @@
         border-left:1px solid lightgray;
         height:40px;
         @include createFlex(row,center,center,null);
+        @include breakpoint-down(medium){
+            min-height: 40px;
+            min-width: 40px;
+         
+        }
     }
     &__microphone{
         margin-left:20px;
-        width: 20px;
-        height:20px;
+        min-width: 20px;
+        min-height:20px;
+        @include breakpoint-down(medium){
+            position: relative;
+            z-index: 3;
+            left:-100px;
+            top:0px;
+            margin-left: 10px;
+            svg{
+              
+                min-width: 20px;
+                min-height: 20px;
+            }
+        }
+    
     }
     &__menu{
         position: relative;
@@ -80,10 +121,17 @@
         margin-left: auto;
         margin-right:10px;
         @include createFlex(row,flex-start,center,null);
+        @include breakpoint-down(medium){
+            margin-left:0px;
+            left:-100px;
+        }
         svg{
             margin:0px 20px;
             width: 20px;
             height:20px;
+            @include breakpoint-down(medium){
+                margin:0px 10px;
+            }
         }
         button{
             svg{
@@ -92,6 +140,14 @@
         }
         button{
             @include signIn-btn();
+            @include breakpoint-down(medium){
+                width: 110px;
+                font-size: pxToRem(12);
+                svg{
+                    width: 20px;
+                    height:20px;
+                }
+            }
         }
     }
     &__tags-wrapper{
@@ -105,6 +161,10 @@
         width: 79.5%;
         border-bottom:1px solid lightgray;
         border-top:1px solid lightgray;
+        @include breakpoint-down(medium){
+            max-width: 88%;
+            width: 88%;
+        }
        
     }
     &__tags{

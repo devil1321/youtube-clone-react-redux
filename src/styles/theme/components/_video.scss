@@ -2,6 +2,9 @@
     width: calc(25% - 20px);
     height:400px;
     margin:0px 10px;
+    @include breakpoint-down(medium){
+        width: calc(33% - 20px);
+    }
     &__img{
         cursor: pointer;
         width: 100%;
@@ -13,11 +16,20 @@
     }
     &__v-details{
         @include createFlex(row,flex-start,flex-start,null);
+        @include breakpoint-down(medium){
+            position: relative;
+            top:-30px;
+            left:0px;
+        }
         h3,h5,p{
             margin:5px 0px;
+            
         }
         h3{
             font-size: pxToRem(16);
+            @include breakpoint-down(medium){
+                font-size: pxToRem(12);
+            }
         }
     }
     &__profile{
@@ -29,6 +41,8 @@
         max-width:40px;
         max-height:40px;
         border-radius: 100%;
-       
+        @include breakpoint-down(medium){
+            display: none;
+        }
     }
 }

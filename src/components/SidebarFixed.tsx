@@ -1,9 +1,9 @@
-import React from 'react'
+import React,{ useEffect} from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { State } from '../APIController/reducers'
+import { useDispatch,useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
-
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { MdHomeFilled, MdSubscriptions, MdOutlineVideoLibrary, MdLocalMovies, MdVideocam, MdOutlineFeedback } from 'react-icons/md'
 import { FaRegCompass, FaSatellite } from 'react-icons/fa'
@@ -18,11 +18,12 @@ import { RiSettings4Line } from 'react-icons/ri'
 
 
 const SidebarFixed:React.FC = () => {
+    const { isMobile } = useSelector((state:State) => state.UI)
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
-
     const location = useLocation()
     const path = location.pathname
+
 
     const handleActiveLink = (e:any):void =>{
         const links = document.querySelectorAll('.sidebar__link')
@@ -43,7 +44,7 @@ const SidebarFixed:React.FC = () => {
 
     return (
         <React.Fragment>
-        <div className="sidebar-fixed-wrapper close"></div>
+        <div className="sidebar-fixed-wrapper close">
             <div className="sidebar fixed close">
                  <div className="sidebar-expand">
                   <div className="sidebar__logo" > 
@@ -127,7 +128,17 @@ const SidebarFixed:React.FC = () => {
                   <p>&copy; 2021 Google LLC</p>
                 </div>
             </div>
-          </React.Fragment>
+        </div>
+        <div className="sidebar">
+            <div className="sidebar-thin">
+                <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdHomeFilled />Home</Link>
+                <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><FaRegCompass />Explore</Link>
+                <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdSubscriptions />Subscriptions</Link>
+                <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdOutlineVideoLibrary />Library</Link>
+                <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><VscHistory />History</Link>
+            </div>
+        </div>
+    </React.Fragment>
     )
 }
 

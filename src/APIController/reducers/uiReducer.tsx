@@ -1,6 +1,9 @@
+import { UIState } from '../interfaces'
 import { UIActionTypes } from '../types'
 
-const initData = {}
+const initData:UIState = {
+    isMobile:false
+}
 
 
 export default (state = initData ,action:any) =>{
@@ -12,6 +15,11 @@ export default (state = initData ,action:any) =>{
         case UIActionTypes.HideTags:
             return {
                 ...state,
+            }
+        case UIActionTypes.IsMobile:
+            return {
+                ...state,
+                isMobile:action.isMobile
             }
         default:
             return{

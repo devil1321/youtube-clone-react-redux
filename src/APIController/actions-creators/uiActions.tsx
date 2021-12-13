@@ -19,3 +19,26 @@ export const handleHideTags= () => (dispatch:Dispatch):void =>{
         type:UIActionTypes.HideTags
     })
 }
+
+export const isMobile = () => (dispatch:Dispatch)=>{
+    function detectMob() {
+        const toMatch = [
+            /Android/i,
+            /webOS/i,
+            /iPhone/i,
+            /iPad/i,
+            /iPod/i,
+            /BlackBerry/i,
+            /Windows Phone/i
+        ];
+        
+        return toMatch.some((toMatchItem) => {
+            return navigator.userAgent.match(toMatchItem);
+        });
+    }
+    const isMobile = detectMob()
+    dispatch({
+        type:UIActionTypes.IsMobile,
+        isMobile:isMobile
+    })
+}

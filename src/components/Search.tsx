@@ -18,6 +18,7 @@ const Search:React.FC = () => {
 
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
+    const { isMobile } = useSelector((state:State) => state.UI)
 
     const location = useLocation()
     const path = location.pathname
@@ -131,10 +132,10 @@ const Search:React.FC = () => {
         <div className="search">
             <div className="search__header">
                 <button  onClick={()=>{
-                if(path === '/'){
+                if(path === '/' && !isMobile){
                     handleThin()
                 }
-                else if(path.slice(0,16)  === "/channel-details"){
+                else if(path.slice(0,16)  === "/channel-details" && !isMobile){
                     handleThin()
                 }
                 else{
