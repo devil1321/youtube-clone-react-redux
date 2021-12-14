@@ -67,6 +67,9 @@
             border-bottom: 3px solid grey;
         }
         input{
+            position: relative;
+            top:10px;
+            left:0px;
             margin-left: 10px;
             height:30px;
             border:0px;
@@ -75,6 +78,13 @@
                 border:0px;
                 outline:none;
             }
+        }
+        svg{
+            position: relative;
+            top:10px;
+            left:0px;
+            min-width: 20px;
+            min-height: 20px;
         }
     }
     &__tab{

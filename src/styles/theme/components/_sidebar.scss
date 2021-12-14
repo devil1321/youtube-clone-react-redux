@@ -27,8 +27,8 @@
     width:20%;
     @include setSidebarHeight(relative);
     @include breakpoint-down(medium){
-        width: 9%;
-        top:-60px;
+        width: 8.5%;
+        top:0px;
         a{
             font-size: pxToRem(11) !important;
         }

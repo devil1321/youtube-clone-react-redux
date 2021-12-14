@@ -15,6 +15,11 @@ import { BsSearch, BsChevronDoubleRight } from 'react-icons/bs'
 import PlaylistAtMain from '../components/PlaylistAtMain'
 import { playlistVideos } from '../APIController/actions-creators/youtubeActions'
 
+import { Scrollbar } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
 const ChannelDetails = () => {
     const [isLoad,setIsLoad] = useState<boolean>(false)
     const [items,setItems] = useState<any[]>([])
@@ -55,7 +60,7 @@ const ChannelDetails = () => {
                 params: {
                    playlistId: id,
                    part: 'snippet,id',
-                   key:'AIzaSyA_4ZTiIz-sqtREcMXR7VHpJZmbS1WQZbk',
+                   key:'AIzaSyAQfdnMsSaLBG09t_d4PHVjQa04TUQL0eY',
                 },
                 headers: {
                     'Content-Type':'application/json'
@@ -99,7 +104,7 @@ const ChannelDetails = () => {
 
 
     const renderPlaylistItemsInMain = () =>{
-        return items.map((playlist:any) =>{
+        return items?.map((playlist:any) =>{
             const { id, title, items } = playlist
             return <div key={title} className="channel-details__playlist-main-group">
                    <h3>{title}</h3>
@@ -162,13 +167,19 @@ const ChannelDetails = () => {
                         </div>
                          <div className="channel-details__tabs-wrapper">
                             <div className="channel-details__tabs-nav">
-                                <h3 onClick={(e)=>{handleTab(e)}} data-tab="1" className="channel-details__tab-link active">Main</h3>
-                                <h3 onClick={(e)=>{handleTab(e)}} data-tab="2" className="channel-details__tab-link">Video</h3>
-                                <h3 onClick={(e)=>{handleTab(e)}} data-tab="3" className="channel-details__tab-link">Society</h3>
-                                <h3 onClick={(e)=>{handleTab(e)}} data-tab="4" className="channel-details__tab-link">Playlist</h3>
-                                <h3 onClick={(e)=>{handleTab(e)}} data-tab="5" className="channel-details__tab-link">Channels</h3>
-                                <h3 onClick={(e)=>{handleTab(e)}} data-tab="6" className="channel-details__tab-link">Info</h3>
-                                <div className="channel-details__tab-link"><BsSearch /> <input type="text" /> </div>
+                            <Swiper
+                                // install Swiper modules
+                                 spaceBetween={0}
+                                 slidesPerView={window.innerWidth < 1024 ?  window.innerWidth < 768 ? 2 : 4 : 7}
+                            >
+                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="1" className="channel-details__tab-link active">Main</h3></SwiperSlide>
+                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="2" className="channel-details__tab-link">Video</h3></SwiperSlide>
+                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="3" className="channel-details__tab-link">Society</h3></SwiperSlide>
+                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="4" className="channel-details__tab-link">Playlist</h3></SwiperSlide>
+                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="5" className="channel-details__tab-link">Channels</h3></SwiperSlide>
+                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="6" className="channel-details__tab-link">Info</h3></SwiperSlide>
+                                <SwiperSlide><div className="channel-details__tab-link"><BsSearch /> <input type="text" /> </div></SwiperSlide>
+                            </Swiper>
                             </div>
                          </div>
                         <div className="channel-details__tabs-main">

@@ -51,6 +51,6 @@ a{
 .container-inner{
     width: 82%;
     @include breakpoint-down(medium){
-      width: 90% !important;
+      width: 100% !important;
     }
 }

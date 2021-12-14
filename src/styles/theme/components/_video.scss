@@ -4,6 +4,7 @@
     margin:0px 10px;
     @include breakpoint-down(medium){
         width: calc(33% - 20px);
+        height:300px;
     }
     &__img{
         cursor: pointer;
@@ -16,11 +17,7 @@
     }
     &__v-details{
         @include createFlex(row,flex-start,flex-start,null);
-        @include breakpoint-down(medium){
-            position: relative;
-            top:-30px;
-            left:0px;
-        }
+       
         h3,h5,p{
             margin:5px 0px;
             

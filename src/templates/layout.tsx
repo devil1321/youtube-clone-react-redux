@@ -10,7 +10,6 @@ import { bindActionCreators } from 'redux'
 import '../styles/theme/theme.scss'
 
 const Layout:React.FC = ({children}) => {
-    const [isFixed,setIsFixed] = useState(false)
     const location = useLocation()
     const path = location.pathname
     const dispatch = useDispatch()
@@ -34,7 +33,7 @@ const Layout:React.FC = ({children}) => {
 
     useEffect(()=>{
         uiActions.isMobile()
-    })
+    },[])
 
     return (
         <div className="page-wrapper">

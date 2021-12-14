@@ -29,9 +29,10 @@ const Comment:React.FC<CommentProps> = ({comment}) => {
     
     return (
         <div className="comment">
-            <div className="comment__img">
-                <img src={authorProfileImageUrl} alt="" />
-            </div>
+            {authorProfileImageUrl && 
+                <div className="comment__img">
+                    <img src={authorProfileImageUrl} alt="" />
+                </div>}
             <div className="comment__text">
                 <h4>{authorDisplayName} <span>{publishedAt.slice(0,10)}</span></h4>
                 <p dangerouslySetInnerHTML={{__html:textDisplay}}></p>

@@ -41,10 +41,10 @@ const SidebarFixed:React.FC = () => {
         sidebarFixedWrapper.classList.remove('open')
 
     }
-
+    
     return (
         <React.Fragment>
-        <div className="sidebar-fixed-wrapper close">
+        <div className="sidebar-fixed-wrapper close" onClick={()=>{handleSidebarFixed()}}>
             <div className="sidebar fixed close">
                  <div className="sidebar-expand">
                   <div className="sidebar__logo" > 
@@ -129,7 +129,8 @@ const SidebarFixed:React.FC = () => {
                 </div>
             </div>
         </div>
-        <div className="sidebar">
+        {isMobile && path === "/" &&
+         <div className="sidebar">
             <div className="sidebar-thin">
                 <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdHomeFilled />Home</Link>
                 <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><FaRegCompass />Explore</Link>
@@ -137,7 +138,7 @@ const SidebarFixed:React.FC = () => {
                 <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdOutlineVideoLibrary />Library</Link>
                 <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><VscHistory />History</Link>
             </div>
-        </div>
+        </div>}
     </React.Fragment>
     )
 }
