@@ -98,6 +98,7 @@ export interface PlaylistDetailsParams{
     videoId?:string;
     part:string;
     pageToken?:string;
+    maxResults?:number;
 }
 
 export interface ChannelSubscriptionsParams{

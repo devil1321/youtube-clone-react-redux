@@ -1,10 +1,9 @@
 .video{
     width: calc(25% - 20px);
-    height:400px;
+    height:350px;
     margin:0px 10px;
     @include breakpoint-down(medium){
         width: calc(33% - 20px);
-        height:300px;
     }
     &__img{
         cursor: pointer;

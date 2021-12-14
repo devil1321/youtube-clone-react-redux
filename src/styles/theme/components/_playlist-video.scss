@@ -1,0 +1,36 @@
+.playlist-video{
+    margin:0px 10px;
+    height:300px;
+    width: calc(100% / 5 - 20px);
+    
+    h3{
+        font-size: pxToRem(16);
+    }
+    h3,p{
+        margin:5px 0px;
+    }
+    &__img{
+        position: relative;
+        top:0px;
+        left:0px;
+        img{
+            width: 100%;
+        }
+        svg{
+            margin-top: 10px;
+            min-width: 20px;
+            min-height:20px;
+        }
+    }
+    &__overlay{
+        position: absolute;
+        right:0px;
+        top:0px;
+        width: 45%;
+        height:98%;
+        color:white;
+        font-weight: bold;
+        background-color: rgba(0,0,0,0.85);
+        @include createFlex(column,center,center,null);
+    }
+}
