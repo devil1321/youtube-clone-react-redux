@@ -19,11 +19,12 @@ import { RiKeyboardBoxFill,RiTerminalWindowFill,RiSettings5Fill, RiShareForwardL
 import { BiWindow } from 'react-icons/bi'
 import { MdDesktopWindows, MdLibraryAdd } from 'react-icons/md'
 import { BiLike,BiDislike,BiMenuAltLeft } from 'react-icons/bi'
+import Playlist from '../components/Playlist'
 
 
 const PlaylistDetails = () => {
     const dispatch = useDispatch()
-    const { videoDetails,videoComments,channelDetails,playlistItems } = useSelector((state:State) => state.youtubeAPI)
+    const { videoDetails,videoComments,channelDetails,suggestedVideos } = useSelector((state:State) => state.youtubeAPI)
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
     const UI = bindActionCreators(UIActions,dispatch)
 
@@ -168,13 +169,15 @@ const PlaylistDetails = () => {
                 </div>)})}
             </div>               
             <div className="details__right-content">
-                {playlistItems?.items?.map((video:any)=>{
+                <Playlist />
+                {suggestedVideos?.items?.map((video:any)=>{
                     if(video?.snippet !== undefined){
-                        const  videoId  = video?.snippet?.resourceId?.videoId
+                        const { videoId } = video.id
                         const { publishedAt, channelId, channelTitle, title, thumbnails} = video?.snippet
                         // high
                         if(thumbnails?.high?.url !== undefined){
                             return(
+                            <Link to={`/details/${videoId}`}>
                                 <div className="details__suggested-video" onClick={()=>{
                                     youtubeActions.videoDetails({id:videoId,part:"contentDetails,snippet,statistics"})
                                     youtubeActions.videoComments({part:'snippet',videoId:videoId,maxResults:50})
@@ -189,7 +192,8 @@ const PlaylistDetails = () => {
                                     <p>{channelTitle}</p>
                                     <p>{publishedAt.slice(0,10)}</p>
                                 </div>
-                            </div>
+                                </div>
+                            </Link>
                         )
                     }
                 }

@@ -86,6 +86,11 @@
             min-width: 20px;
             min-height: 20px;
         }
+        &:last-of-type{
+            position: relative;
+            top:10px;
+            left:-50px;
+        }
     }
     &__tab{
         display:none;

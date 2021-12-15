@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import { State } from '../APIController/reducers'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
@@ -15,27 +15,30 @@ interface PlaylistVideoProps{
 
 const PlaylistVideo:React.FC<PlaylistVideoProps> = ({id,imgUrl,title,itemCount}) => {
     const navigate = useNavigate()
-    const handleVideo = () =>{
-        let load = 0
-        youtubeActions.playlistItems({playlistId:id,part:'snippet,id,status,contentDetails',maxResults:50})
-        while(load < 2){
-            load++
-            youtubeActions.videoDetails({id:videoId,part:"contentDetails,snippet,statistics"})
-            youtubeActions.videoComments({part:'snippet',videoId:videoId,maxResults:200})
-        }
-        if(load === 2){
-            navigate(`/playlist-details/${id}`)
-        }   
-    }
-
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
     const { playlistItems } = useSelector((state:State) => state.youtubeAPI)
-    if(Object.keys(playlistItems).length > 0){
-        var { videoId } = playlistItems.items[0].snippet.resourceId
+    const [videoId,setVideoId] = useState<any>(false)
+   
+       
+    const handleVideo = () =>{
+            youtubeActions.playlistItems({playlistId:id,part:'snippet,id,status,contentDetails',maxResults:50})
+            youtubeActions.videoDetails({id:videoId,part:"contentDetails,snippet,statistics"})
+            youtubeActions.videoComments({part:'snippet',videoId:videoId,maxResults:200})
+            if(videoId){
+                navigate(`/playlist-details/${id}`)
+            }
     }
+ useEffect(()=>{
+     if(Object.keys(playlistItems).length > 0){
+        const id  = playlistItems?.items[0]?.snippet?.resourceId?.videoId
+        setVideoId(id)
+     }
+ },[playlistItems])
     return (
-        <div className="playlist-video" onClick={()=>{handleVideo()}}>
+        <div className="playlist-video" onClick={()=>{
+            handleVideo()
+        }}>
             <div className="playlist-video__img">
                 <div className="playlist-video__overlay">{itemCount} <BsCollectionPlayFill /></div>
                 <img src={imgUrl} alt="" />

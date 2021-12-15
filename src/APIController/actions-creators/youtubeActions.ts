@@ -13,6 +13,7 @@ export const setActiveSearch = (e:any) => (dispatch:Dispatch<Action>):void =>{
   })
 }
 
+
 export const suggestedVideos = ({relatedToVideoId,part,regionCode,maxResults,order,type,pageToken}:SuggestedVideosParams = {relatedToVideoId:'',part:'snippet,id',regionCode:'US',maxResults:50,order:'date',type:'video'}) => async (dispatch:Dispatch<Action>) =>{
   var options:AxiosOptions = {
       method: 'GET',
@@ -25,7 +26,7 @@ export const suggestedVideos = ({relatedToVideoId,part,regionCode,maxResults,ord
         order: order,
         type:type,
         pageToken:pageToken,
-        key:'AIzaSyBPVVwDaZsZaqcRMfSZjJmdw5t9h4g3IiA',
+        key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
       },
       headers: {
         'Content-Type':'application/json'
@@ -54,7 +55,7 @@ export const globalSearch = ({q,part,regionCode,maxResults,order,type,pageToken}
           order: order,
           type:type,
           pageToken:pageToken,
-          key:'AIzaSyBPVVwDaZsZaqcRMfSZjJmdw5t9h4g3IiA',
+          key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
         },
         headers: {
           'Content-Type':'application/json'
@@ -105,7 +106,7 @@ export const videoDetails= ({part,id}:VideoDetailsParams = {part:'contentDetails
         params: {
           part: part, 
           id: id,
-          key:'AIzaSyBPVVwDaZsZaqcRMfSZjJmdw5t9h4g3IiA',
+          key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
         },
         headers: {
           'Content-Type':'application/json'
@@ -129,7 +130,7 @@ export const channelDetails = ({part,channelId}:ChannelDetailsParams = {part:'sn
         params: {
           part: part, 
           id: channelId,
-          key:'AIzaSyBPVVwDaZsZaqcRMfSZjJmdw5t9h4g3IiA',
+          key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
         },
         headers: {
           'Content-Type':'application/json'
@@ -155,7 +156,7 @@ export const channelVideos = ({channelId,part,order,maxResults,pageToken}:Channe
           order: order,
           maxResults: maxResults,
           pageToken:pageToken,
-          key:'AIzaSyBPVVwDaZsZaqcRMfSZjJmdw5t9h4g3IiA',
+          key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
         },
         headers: {
           'Content-Type':'application/json'
@@ -180,7 +181,7 @@ export const playlistVideos = ({channelId,part,maxResults,pageToken }:PlaylistVi
           part: part, 
           maxResults:maxResults,
           pageToken:pageToken,
-          key:'AIzaSyBPVVwDaZsZaqcRMfSZjJmdw5t9h4g3IiA',
+          key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
         },
         headers: {
           'Content-Type':'application/json'
@@ -207,7 +208,7 @@ export const playlistItems = ({playlistId,videoId,part,maxResults,pageToken}:Pla
            videoId:videoId,
            pageToken:pageToken,
            maxResults:maxResults,
-           key:'AIzaSyBPVVwDaZsZaqcRMfSZjJmdw5t9h4g3IiA',
+           key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
           },
         headers: {
           'Content-Type':'application/json'
@@ -232,7 +233,7 @@ export const getChannelSubscriptions = ({part,channelId,pageToken}:ChannelSubscr
            channelId: channelId,
            part: part,
            pageToken:pageToken,
-           key:'AIzaSyBPVVwDaZsZaqcRMfSZjJmdw5t9h4g3IiA',
+           key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
           },
         headers: {
           'Content-Type':'application/json'

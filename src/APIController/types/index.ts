@@ -1,4 +1,5 @@
 export enum ActionTypes {
+    SetPlaylistIndex = "SetPlaylistIndex",
     SetActiveSearch = "SetActiveSearch",
     SuggestedVideos = "SuggestedVideos",
     GlobalSearch = "GlobalSearch",

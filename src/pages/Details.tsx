@@ -61,7 +61,9 @@ const Details = () => {
                         const months = ['January','Febuary','March','April','May','June','July','August','September','November','December']
                         return(
                             <div onLoad={()=>{
-                                    youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:channelId})
+                                    if(Object.keys(channelDetails).length <= 0){
+                                        youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:channelId})
+                                    }
                                 }} key={id} className="details__video">
                                 <div className="details__video-img">
                                     <img src={thumbnails.maxres?.url} alt="video" />

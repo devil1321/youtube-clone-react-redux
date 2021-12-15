@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { BsSearch, BsChevronDoubleRight } from 'react-icons/bs'
 import PlaylistAtMain from '../components/PlaylistAtMain'
-import { playlistVideos } from '../APIController/actions-creators/youtubeActions'
 
 import { Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -23,6 +22,7 @@ import 'swiper/swiper.min.css'
 const ChannelDetails = () => {
     const [isLoad,setIsLoad] = useState<boolean>(false)
     const [items,setItems] = useState<any[]>([])
+    const [pItems,setPItems] = useState<any>([])
     const [itemCount,setItemCount] = useState<number>(0)
     const [channelVideosCopy,setChannelVideosCopy] = useState<any[]>([])
     const dispatch = useDispatch()
@@ -42,43 +42,42 @@ const ChannelDetails = () => {
         tl.fromTo(tab,{opacity:0},{opacity:1,duration:0.3})
     }
 
-    const fetchPlaylistItems = () => {
-        let tempItems:any = []
-        let tempItem = {
-            id:'',
-            title:'',
-            items:{}
-        }
-        playlistVideos?.items?.slice(0,6).map((playlist:any) =>{
-            const { id } = playlist 
-            const { title } = playlist.snippet
+    const fetchPlaylistItems = async () => {
 
-            var options:any = {
-                method: 'GET',
-                url: 'https://youtube.googleapis.com/youtube/v3/playlistItems',
-                // id need playlistId
-                params: {
-                   playlistId: id,
-                   part: 'snippet,id',
-                   key:'AIzaSyBPVVwDaZsZaqcRMfSZjJmdw5t9h4g3IiA',
-                },
-                headers: {
-                    'Content-Type':'application/json'
-                }
-            };
-            
-            axios.request<any>(options).then(function (response) {
-                tempItem = {
-                    id:id,
-                    title:title,
-                    items:response.data
-                }
+        if(pItems?.items && !isLoad){
+            var tempItems:any[] = []
+            await Promise.all(pItems?.items?.slice(0,6).map((playlist:any) =>{
+                const { id } = playlist 
+                const { title } = playlist.snippet
+
+                var options:any = {
+                    method: 'GET',
+                    url: 'https://youtube.googleapis.com/youtube/v3/playlistItems',
+                    // id need playlistId
+                    params: {
+                       playlistId: id,
+                       part: 'snippet,id',
+                       key:'AIzaSyAyi7mG1kw4kFoDaf7E-LlR0NzTT9CApxI',
+                    },
+                    headers: {
+                        'Content-Type':'application/json'
+                    }
+                };
+
+                 axios.request<any>(options).then(function (response) {
+                    let tempItem = {
+                        id:id,
+                        title:title,
+                        items:response.data
+                    }
                     tempItems.push(tempItem)
+                    setItems([...tempItems])           
                 }).catch(function (error) {
-                  console.error(error);
-              });
-        })
-        setItems(tempItems)           
+                    console.error(error);
+                });
+            }))
+        }
+      
     }
 
 
@@ -104,7 +103,7 @@ const ChannelDetails = () => {
 
 
     const renderPlaylistItemsInMain = () =>{
-        return items?.map((playlist:any) =>{
+        return items.map((playlist:any) =>{
             const { id, title, items } = playlist
             return <div key={title} className="channel-details__playlist-main-group">
                    <h3>{title}</h3>
@@ -128,9 +127,14 @@ const ChannelDetails = () => {
 
     useEffect(() => {
         UI.handleHideTags()
-        fetchPlaylistItems()
+        if(!isLoad){
+            fetchPlaylistItems()
+        }
         setChannelVideosCopy(channelVideos.items)
-    }, [playlistVideos,channelVideos])
+        if(playlistVideos?.items?.length > 0){
+            setPItems(playlistVideos)
+        }    
+    }, [playlistVideos,channelVideos,pItems])
 
     return (
         <Layout>
@@ -189,7 +193,7 @@ const ChannelDetails = () => {
                                     {renderMain()}
                                 </div>
                                 <div className="channel-details__playlist-videos-main">
-                                    {renderPlaylistItemsInMain()}
+                                    {items.length > 0 && renderPlaylistItemsInMain()}
                                 </div>
                             </div>
                             <div id="2" className="channel-details__tab">
@@ -200,7 +204,7 @@ const ChannelDetails = () => {
                             </div>
                             <div id="3" className="channel-details__tab">society</div>
                             <div id="4" className="channel-details__tab">
-                                <div className="channel-details__tab-header">Created Playlists</div>
+                                <h3 className="channel-details__tab-header">Created Playlists</h3>
                                     <div className="channel-details__playlist-group">
                                         {renderPlaylist()}
                                     </div>

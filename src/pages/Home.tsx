@@ -43,15 +43,10 @@ const Home:React.FC = () => {
                 <button>GET IT NOW</button>
               </div>
             </div>
-          <InfiniteScroll
-            pageStart={0}
-            // loadMore={loadFunc}
-            hasMore={true}
-          >
+     
             <div className="home__videos">
               {renderVideos()} 
             </div>
-          </InfiniteScroll>
         </div>
         </Layout>
 
