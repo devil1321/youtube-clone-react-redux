@@ -148,12 +148,17 @@
             display: block;
         }
         a{
+           
             @include createFlex(column,center,center,null);
             font-size:pxToRem(14);
             svg{
+                position: relative;
+                left:1px;
+                top:0px;
                 width: 30px;
                 height:30px;
                 margin-left: 15px;
+                margin-bottom: 2px;
             }
         }
     }

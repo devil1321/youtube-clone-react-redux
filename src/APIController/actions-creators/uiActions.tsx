@@ -19,6 +19,12 @@ export const handleHideTags= () => (dispatch:Dispatch):void =>{
         type:UIActionTypes.HideTags
     })
 }
+export const handleActiveLink = (link:number) => (dispatch:Dispatch):void =>{
+    dispatch({
+        type:UIActionTypes.HandleActiveLink,
+        activeLink:link
+    })
+}
 
 export const isMobile = () => (dispatch:Dispatch)=>{
     function detectMob() {

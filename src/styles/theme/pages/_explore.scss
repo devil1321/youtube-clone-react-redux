@@ -1,0 +1,24 @@
+.explore{
+    padding:0px 100px;
+    padding-top:10px;
+    overflow-y: scroll;
+    height:90vh;
+    &__nav{
+        @include createFlex(row,flex-start,center,wrap);
+      
+        &-item{
+            cursor: pointer;
+            box-sizing: border-box;
+            padding:20px 20px 40px 20px;
+            background-color: white;
+            border-radius: 5px;
+            height:120px;
+            margin:5px;
+            width: calc(100% / 5 - 10px);
+            @include createFlex(column,flex-start,flex-start,null);
+            &:hover{
+                background-color: rgb(240, 240, 240);
+            }
+        }
+    }
+}

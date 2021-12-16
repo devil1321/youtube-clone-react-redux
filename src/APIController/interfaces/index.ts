@@ -1,4 +1,5 @@
 export interface InitState {
+    isSearching:boolean;
     activeSearch:string;
     suggestedVideos:any[];
     videoCategories:any[];
@@ -15,6 +16,7 @@ export interface InitState {
 
 export interface UIState {
     isMobile:boolean;
+    activeLink:number;
 }
 
 export interface AxiosOptions {

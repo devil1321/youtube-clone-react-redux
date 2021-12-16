@@ -1,6 +1,9 @@
 import { ActionTypes } from '../types'
 
-
+interface IsSearching{
+    type:ActionTypes.IsSearching;
+    isSearching:boolean;
+}
 interface SetActiveSearch{
     type:ActionTypes.SetActiveSearch;
     activeSearch:string;
@@ -53,4 +56,4 @@ interface ChannelSubscriptions{
 
 
 
-export type Action = SetActiveSearch | SuggestedVideos | Search | VideoComments | VideoDetails | ChannelDetails | ChannelVideos | PlaylistVideos | PlaylistItems | ChannelSubscriptions | GetVideos | GetVideoCategories
+export type Action = IsSearching | SetActiveSearch | SuggestedVideos | Search | VideoComments | VideoDetails | ChannelDetails | ChannelVideos | PlaylistVideos | PlaylistItems | ChannelSubscriptions | GetVideos | GetVideoCategories

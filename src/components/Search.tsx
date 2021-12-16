@@ -40,7 +40,7 @@ const Search:React.FC = () => {
         const tags = document.querySelector('.search__tags-wrapper') as HTMLDivElement
         if(isThin){
             sidebar.style.width = 'calc(4% + 30px)'
-            containerInner.style.width= '96%'
+            containerInner.style.width= '94%'
             sidebarExpand.style.display = 'none'
             sidebarThin.style.display = 'block'
             tags.style.width = '93%'
@@ -67,6 +67,7 @@ const Search:React.FC = () => {
             const { title } = tag.snippet
             return(
                 <SwiperSlide><div onClick={(e)=>{ 
+                    youtubeActions.isSearching(false)
                     youtubeActions.getVideos({part:'id,snippet',chart:'mostPopular',videoCategoryId:id,regionCode:'US',maxResults:50})
                     handleActiveTag(e)
                 }}  className={`search__tag ${index === 0 ? "active" : null}`}>{title}</div></SwiperSlide>
@@ -141,7 +142,7 @@ const Search:React.FC = () => {
                 <Swiper
                                 // install Swiper modules
                     spaceBetween={0}
-                    slidesPerView={window.innerWidth < 1024 ?  window.innerWidth < 768 ? 2 : 4 : 8}
+                    slidesPerView={window.innerWidth < 1024 ?  window.innerWidth < 768 ? 3 : 6 : 9}
                 >
                     {renderTags()}
                 </Swiper>

@@ -12,20 +12,28 @@ import Video from '../components/Video'
 const Home:React.FC = () => {
     const [isSet,setIsSet] = useState<boolean>(false)
     const disptach = useDispatch()
-    const { getVideos,channelDetails,activeSearch } = useSelector((state:State) => state.youtubeAPI)
+    const { getVideos,globalSearch,isSearching } = useSelector((state:State) => state.youtubeAPI)
     const youtubeActions = bindActionCreators(YoutubeActions,disptach)
 
 
-    const renderVideos = () =>{
+    const renderVideosPopular = () =>{
       return getVideos?.items?.map((video:any) => {
           const { publishedAt,channelId,title,channelTitle, thumbnails } = video.snippet
           const { id } = video
           return <Video key={id} profile={thumbnails?.high?.url} imgUrl ={thumbnails?.high?.url} publishedAt={publishedAt} channelId={channelId} videoId={id} title={title} channelTitle={channelTitle} />
     })
     }
+    const renderVideosSeach = () =>{
+      return globalSearch?.items?.map((video:any) => {
+          const { publishedAt,channelId,title,channelTitle, thumbnails } = video.snippet
+          const { videoId } = video.id
+          return <Video key={videoId} profile={thumbnails?.high?.url} imgUrl ={thumbnails?.high?.url} publishedAt={publishedAt} channelId={channelId} videoId={videoId} title={title} channelTitle={channelTitle} />
+    })
+    }
 
     useEffect(()=>{
       youtubeActions.getVideos({part:'snippet,id',chart:'mostPopular',regionCode:'US',maxResults:50})
+      youtubeActions.globalSearch({q:'All',part:'snippet,id'})
     },[])
 
     return (
@@ -45,7 +53,9 @@ const Home:React.FC = () => {
             </div>
      
             <div className="home__videos">
-              {renderVideos()} 
+              {!isSearching 
+                ? renderVideosPopular() 
+                : renderVideosSeach()}
             </div>
         </div>
         </Layout>

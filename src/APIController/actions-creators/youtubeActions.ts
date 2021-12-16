@@ -13,6 +13,13 @@ export const setActiveSearch = (e:any) => (dispatch:Dispatch<Action>):void =>{
   })
 }
 
+export const isSearching = (state:boolean) => (dispatch:Dispatch<Action>):void =>{
+  dispatch({
+    type:ActionTypes.IsSearching,
+    isSearching:state
+  })
+}
+
 
 export const suggestedVideos = ({relatedToVideoId,part,regionCode,maxResults,order,type,pageToken}:SuggestedVideosParams = {relatedToVideoId:'',part:'snippet,id',regionCode:'US',maxResults:50,order:'date',type:'video'}) => async (dispatch:Dispatch<Action>) =>{
   var options:AxiosOptions = {

@@ -1,4 +1,5 @@
 export enum ActionTypes {
+    IsSearching = "IsSearching",
     SetPlaylistIndex = "SetPlaylistIndex",
     SetActiveSearch = "SetActiveSearch",
     SuggestedVideos = "SuggestedVideos",
@@ -16,6 +17,7 @@ export enum ActionTypes {
 
 export enum UIActionTypes {
     HandleSetContainersAndHideElements = "HandleSetContainersAndHideElements",
+    HandleActiveLink = "HandleActiveLink",
     HideTags = "HideTags",
     IsMobile = "IsMobile"
 }

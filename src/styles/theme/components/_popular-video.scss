@@ -1,0 +1,19 @@
+.popular-video{
+    @include createFlex(row,flex-start,flex-start,null);
+    &__img{
+        min-width: 250px;
+        min-height:200px;
+        max-width: 250px;
+        max-height:200px;
+        overflow:hidden;
+        img{
+            width: 100% !important;
+        }
+    }
+    &__v-details-text{
+        margin-left: 10px;
+        h3,h5,p{
+            margin:5px 0px;
+        }
+    }
+}

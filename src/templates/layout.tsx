@@ -27,15 +27,23 @@ const Layout:React.FC = ({children}) => {
                     return <SidebarFixed />
                 }else if(path.slice(0,16) === '/channel-details'){
                     return <Sidebar fix={41}/>
+                }else if(path === '/explore'){
+                    return <Sidebar fix={0} paddingTop={41}/>
                 }
             }
         
             for(let route in routes.withSidebarFixed){
                 if(path === routes.withSidebarFixed[route] && !isMobile){
                     return <SidebarFixed />
+                }else if(path === routes.withSidebarFixed[route] && isMobile){
+                    return <SidebarFixed />
+                }else if(path.slice(0,8) === '/details'){
+                    return <SidebarFixed />
+                }else if(path.slice(0,17) === '/playlist-details'){
+                    return <SidebarFixed />
                 }
             }
-    }
+        }
 
     useEffect(()=>{
         uiActions.isMobile()

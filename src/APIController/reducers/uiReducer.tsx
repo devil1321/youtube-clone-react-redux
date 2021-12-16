@@ -2,7 +2,8 @@ import { UIState } from '../interfaces'
 import { UIActionTypes } from '../types'
 
 const initData:UIState = {
-    isMobile:false
+    isMobile:false,
+    activeLink:0
 }
 
 
@@ -15,6 +16,11 @@ export default (state = initData ,action:any) =>{
         case UIActionTypes.HideTags:
             return {
                 ...state,
+            }
+        case UIActionTypes.HandleActiveLink:
+            return {
+                ...state,
+                activeLink:action.activeLink
             }
         case UIActionTypes.IsMobile:
             return {

@@ -3,6 +3,7 @@ import { InitState } from '../interfaces'
 import { Action } from '../actions'
 
 const initData:InitState = {
+    isSearching:false,
     activeSearch:'All',
     suggestedVideos:[],
     videoCategories:[],
@@ -20,10 +21,10 @@ const initData:InitState = {
 
 export default (state = initData ,action:Action) =>{
     switch(action.type){
-        case ActionTypes.SetActiveSearch:
+        case ActionTypes.IsSearching:
             return {
                 ...state,
-                activeSearch:action.activeSearch
+                isSearching:action.isSearching
             }
         case ActionTypes.SuggestedVideos:
             return {
