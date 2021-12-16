@@ -4,7 +4,7 @@ import { Dispatch } from 'redux'
 import { Action } from '../actions'
 import { ActionTypes } from '../types'
 
-import { SuggestedVideosParams, SearchParams, VideoCommentsParams, VideoDetailsParams, ChannelDetailsParams, ChannelVideosParams, PlaylistVideosParams, PlaylistDetailsParams, ChannelSubscriptionsParams} from '../interfaces'
+import { SuggestedVideosParams, SearchParams, VideoCommentsParams, VideoDetailsParams, ChannelDetailsParams, ChannelVideosParams, PlaylistVideosParams, PlaylistDetailsParams, ChannelSubscriptionsParams ,VideoCategoriesParams,GetVideosParams } from '../interfaces'
 
 export const setActiveSearch = (e:any) => (dispatch:Dispatch<Action>):void =>{
   dispatch({
@@ -26,7 +26,7 @@ export const suggestedVideos = ({relatedToVideoId,part,regionCode,maxResults,ord
         order: order,
         type:type,
         pageToken:pageToken,
-        key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
+        key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
       },
       headers: {
         'Content-Type':'application/json'
@@ -43,6 +43,31 @@ export const suggestedVideos = ({relatedToVideoId,part,regionCode,maxResults,ord
     });
 }
 
+export const videoCategories = ({part,id,regionCode}:VideoCategoriesParams = {part:'snippet',id:'',regionCode:'US'}) => async (dispatch:Dispatch) =>{
+  var options:AxiosOptions = {
+    method: 'GET',
+    url: 'https://www.googleapis.com/youtube/v3/videoCategories',
+    params: {
+      id:id,
+      part: part,
+      regionCode: regionCode,
+      key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
+    },
+    headers: {
+      'Content-Type':'application/json'
+    }
+  };
+  
+  await axios.request<AxiosOptions>(options).then(function (response) {
+        dispatch({
+            type:ActionTypes.GetVideoCategories,
+            videoCategories:response.data
+        })
+  }).catch(function (error) {
+      console.error(error);
+  });
+}
+
 export const globalSearch = ({q,part,regionCode,maxResults,order,type,pageToken}:SearchParams = {q:'All',part:'snippet,id',regionCode:'US',maxResults:50,order:'date',type:'video'}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
@@ -55,7 +80,7 @@ export const globalSearch = ({q,part,regionCode,maxResults,order,type,pageToken}
           order: order,
           type:type,
           pageToken:pageToken,
-          key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
+          key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
         },
         headers: {
           'Content-Type':'application/json'
@@ -71,6 +96,35 @@ export const globalSearch = ({q,part,regionCode,maxResults,order,type,pageToken}
           console.error(error);
       });
 }
+
+export const getVideos = ({part,chart,regionCode,videoCategoryId,maxResults,pageToken}:GetVideosParams = {part:"id,snippet",chart:"mostPopular",regionCode:'US',maxResults:50}) => async (dispatch:Dispatch) =>{
+  var options:AxiosOptions = {
+    method: 'GET',
+    url: 'https://www.googleapis.com/youtube/v3/videos',
+    params: {
+      part: part,
+      chart:chart,
+      videoCategoryId:videoCategoryId,
+      regionCode: regionCode,
+      maxResults:maxResults,
+      pageToken:pageToken,
+      key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
+    },
+    headers: {
+      'Content-Type':'application/json'
+    }
+  };
+  
+  await axios.request<any>(options).then(function (response) {
+        dispatch({
+            type:ActionTypes.GetVideos,
+            getVideos:response.data
+        })
+  }).catch(function (error) {
+      console.error(error);
+  });
+}
+
 export const videoComments = ({part,videoId,maxResults,pageToken}:VideoCommentsParams = {part:'id,snippet',videoId:'',maxResults:50}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
@@ -99,14 +153,14 @@ export const videoComments = ({part,videoId,maxResults,pageToken}:VideoCommentsP
           console.error(error);
       });
 }
-export const videoDetails= ({part,id}:VideoDetailsParams = {part:'contentDetails,snippet,statistics',id:''}) => async (dispatch:Dispatch<Action>) =>{
+export const videoDetails = ({part,id}:VideoDetailsParams = {part:'contentDetails,snippet,statistics',id:''}) => async (dispatch:Dispatch<Action>) =>{
     var options:AxiosOptions = {
         method: 'GET',
         url: 'https://www.googleapis.com/youtube/v3/videos',
         params: {
           part: part, 
           id: id,
-          key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
+          key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
         },
         headers: {
           'Content-Type':'application/json'
@@ -130,7 +184,7 @@ export const channelDetails = ({part,channelId}:ChannelDetailsParams = {part:'sn
         params: {
           part: part, 
           id: channelId,
-          key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
+          key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
         },
         headers: {
           'Content-Type':'application/json'
@@ -156,7 +210,7 @@ export const channelVideos = ({channelId,part,order,maxResults,pageToken}:Channe
           order: order,
           maxResults: maxResults,
           pageToken:pageToken,
-          key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
+          key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
         },
         headers: {
           'Content-Type':'application/json'
@@ -181,7 +235,7 @@ export const playlistVideos = ({channelId,part,maxResults,pageToken }:PlaylistVi
           part: part, 
           maxResults:maxResults,
           pageToken:pageToken,
-          key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
+          key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
         },
         headers: {
           'Content-Type':'application/json'
@@ -208,7 +262,7 @@ export const playlistItems = ({playlistId,videoId,part,maxResults,pageToken}:Pla
            videoId:videoId,
            pageToken:pageToken,
            maxResults:maxResults,
-           key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
+           key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
           },
         headers: {
           'Content-Type':'application/json'
@@ -233,7 +287,7 @@ export const getChannelSubscriptions = ({part,channelId,pageToken}:ChannelSubscr
            channelId: channelId,
            part: part,
            pageToken:pageToken,
-           key:'AIzaSyC1lvsWKN7FXjV9eh2kFseCFMy-wcky6kY',
+           key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
           },
         headers: {
           'Content-Type':'application/json'

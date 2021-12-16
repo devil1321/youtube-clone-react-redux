@@ -35,7 +35,7 @@ const Sidebar:React.FC<SidebarProps> = ({fix}) => {
              <div className="sidebar-expand">
              
               <Link to="/" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link active"><MdHomeFilled />Home</Link>
-              <Link to="#" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link"><FaRegCompass />Explore</Link>
+              <Link to="/explore" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link"><FaRegCompass />Explore</Link>
               <Link to="#" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link"><MdSubscriptions />Subscriptions</Link>
               <hr />
               <Link to="#"><MdOutlineVideoLibrary />Library</Link>

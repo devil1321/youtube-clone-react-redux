@@ -5,7 +5,9 @@ import { Action } from '../actions'
 const initData:InitState = {
     activeSearch:'All',
     suggestedVideos:[],
+    videoCategories:[],
     globalSearch:[],
+    getVideos:[],
     videoComments:[],
     videoDetails:[],
     channelDetails:[],
@@ -28,10 +30,20 @@ export default (state = initData ,action:Action) =>{
                 ...state,
                 suggestedVideos:action.suggestedVideos
             }
+        case ActionTypes.GetVideoCategories:
+            return {
+                ...state,
+                videoCategories:action.videoCategories
+            }
         case ActionTypes.GlobalSearch:
             return {
                 ...state,
                 globalSearch:action.globalSearch
+            }
+        case ActionTypes.GetVideos:
+            return {
+                ...state,
+                getVideos:action.getVideos
             }
         case ActionTypes.VideoComments:
             return {

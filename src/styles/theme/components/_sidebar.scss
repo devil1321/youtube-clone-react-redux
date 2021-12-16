@@ -25,6 +25,7 @@
     left:0px;
     overflow-y: scroll;
     width:20%;
+    background-color: white;
     @include setSidebarHeight(relative);
     @include breakpoint-down(medium){
         width: 8.5%;

@@ -57,7 +57,7 @@ const ChannelDetails = () => {
                     params: {
                        playlistId: id,
                        part: 'snippet,id',
-                       key:'AIzaSyAyi7mG1kw4kFoDaf7E-LlR0NzTT9CApxI',
+                       key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
                     },
                     headers: {
                         'Content-Type':'application/json'

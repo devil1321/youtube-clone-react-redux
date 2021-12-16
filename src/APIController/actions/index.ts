@@ -13,6 +13,15 @@ interface Search{
     type:ActionTypes.GlobalSearch;
     globalSearch:any;
 }
+interface GetVideos{
+    type:ActionTypes.GetVideos,
+    getVideos:any;
+}
+
+interface GetVideoCategories{
+    type:ActionTypes.GetVideoCategories,
+    videoCategories:any;
+}
 interface VideoComments{
     type:ActionTypes.VideoComments;
     videoComments:any;
@@ -44,4 +53,4 @@ interface ChannelSubscriptions{
 
 
 
-export type Action = SetActiveSearch | SuggestedVideos | Search | VideoComments | VideoDetails | ChannelDetails | ChannelVideos | PlaylistVideos | PlaylistItems | ChannelSubscriptions
+export type Action = SetActiveSearch | SuggestedVideos | Search | VideoComments | VideoDetails | ChannelDetails | ChannelVideos | PlaylistVideos | PlaylistItems | ChannelSubscriptions | GetVideos | GetVideoCategories

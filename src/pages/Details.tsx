@@ -47,7 +47,11 @@ const Details = () => {
 
     useEffect(()=>{
         UI.handleSetContainersAndHideElements()
-    },[])
+        if(videoDetails?.items){
+            var channelId = videoDetails?.items[0]?.snippet.channelId
+        }
+        youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:channelId})
+    },[videoDetails])
 
     return (
        <Layout>
@@ -60,11 +64,7 @@ const Details = () => {
                         const { viewCount, likeCount, dislikeCount } = video.statistics
                         const months = ['January','Febuary','March','April','May','June','July','August','September','November','December']
                         return(
-                            <div onLoad={()=>{
-                                    if(Object.keys(channelDetails).length <= 0){
-                                        youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:channelId})
-                                    }
-                                }} key={id} className="details__video">
+                            <div key={id} className="details__video">
                                 <div className="details__video-img">
                                     <img src={thumbnails.maxres?.url} alt="video" />
                                     <div className="details__taskbar-imagination">

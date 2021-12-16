@@ -1,7 +1,9 @@
 export interface InitState {
     activeSearch:string;
     suggestedVideos:any[];
+    videoCategories:any[];
     globalSearch:any[];
+    getVideos:any[];
     videoComments:any[];
     videoDetails:any[];
     channelDetails:any[];
@@ -26,6 +28,8 @@ export interface AxiosOptions {
         type?:string;
         id?:string;
         videoId?:string;
+        chart?:string;
+        videoCategoryId?:number;
         channelId?:string;
         playlistId?:string;
         maxResults?:number;
@@ -59,6 +63,21 @@ export interface SearchParams{
     type?:string;
     pageToken?:string;
 }
+export interface GetVideosParams {
+    part:string;
+    chart:string;
+    regionCode:string;
+    videoCategoryId?:number;
+    maxResults?:number;
+    pageToken?:string;
+}
+
+export interface VideoCategoriesParams {
+    part:string;
+    id?:string;
+    regionCode:string
+}
+
 
 export interface VideoCommentsParams{
     part:string;

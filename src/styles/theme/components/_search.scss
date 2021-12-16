@@ -1,5 +1,6 @@
 .search{
     @include createFlex(row,flex-start,center,wrap);
+    background-color: white;
     &__header{
         position: relative;
         top:30px;
@@ -176,11 +177,14 @@
         @include createFlex(row,flex-start,center,null);
        
     }
- 
+    .swiper-slide{
+        min-width: fit-content;
+    }
     &__tag-btn{
         position: absolute;
         top:20px;
         z-index: 10;
+        min-width: fit-content;
         svg{
             fill:black;
             width: 30px;

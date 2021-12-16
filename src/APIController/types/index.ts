@@ -2,6 +2,8 @@ export enum ActionTypes {
     SetPlaylistIndex = "SetPlaylistIndex",
     SetActiveSearch = "SetActiveSearch",
     SuggestedVideos = "SuggestedVideos",
+    GetVideos = "GetVideos",
+    GetVideoCategories = "GetVideoCategories",
     GlobalSearch = "GlobalSearch",
     VideoComments = "VideoComments",
     VideoDetails = "VideoDetails",

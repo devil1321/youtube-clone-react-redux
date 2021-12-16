@@ -29,6 +29,7 @@ const SidebarFixed:React.FC = () => {
         const links = document.querySelectorAll('.sidebar__link')
         links.forEach(link => link.classList.remove('active'))
         e.target.classList.add('active')
+        console.log(e.target.getAttribute('to'))
     }
     
 
@@ -52,7 +53,7 @@ const SidebarFixed:React.FC = () => {
                     <img src="/assets/main-logo.svg" alt="" />
                   </div>
                   <Link to="/" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link active"><MdHomeFilled />Home</Link>
-                  <Link to="#" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link"><FaRegCompass />Explore</Link>
+                  <Link to="/explore" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link"><FaRegCompass />Explore</Link>
                   <Link to="#" onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link"><MdSubscriptions />Subscriptions</Link>
                   <hr />
                   <Link to="#"><MdOutlineVideoLibrary />Library</Link>

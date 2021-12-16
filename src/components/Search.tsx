@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState,useEffect } from 'react'
 import { useSelector,useDispatch} from 'react-redux'
 import { State } from '../APIController/reducers'
 import { bindActionCreators } from 'redux'
@@ -13,12 +13,16 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { SiYoutubemusic } from 'react-icons/si'
 import { FiYoutube,FiChevronLeft,FiChevronRight } from 'react-icons/fi'
 import { TiSocialYoutubeCircular } from 'react-icons/ti'
-// step tag 6
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
 const Search:React.FC = () => {
 
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
     const { isMobile } = useSelector((state:State) => state.UI)
+    const { videoCategories } = useSelector((state:State) => state.youtubeAPI)
 
     const location = useLocation()
     const path = location.pathname
@@ -27,27 +31,6 @@ const Search:React.FC = () => {
     const [tagMove,setTagMove] = useState<number>(0)
     const [isThin,setIsThin] = useState<boolean>(true)
     const [isAppsOpen,setIsAppsOpen] = useState<boolean>(false)
-    const [tags,setTags] = useState<string[]>([
-        'All',
-        'Kygo',
-        'Live',
-        'Woodworking',
-        'Comedies',
-        'Balls',
-        'History',
-        'Deep House',
-        'Playlists',
-        'Chill-out music',
-        'Comedy',
-        'Driving',
-        'Music',
-        'Fireplaces',
-        'Bossa Nova',
-        'Christmas Music',
-        'Dance music',
-        'Gaming',
-        'Recently Uploaded'
-    ])
 
     const handleThin = ():void =>{
         const sidebar = document.querySelector('.sidebar') as HTMLDivElement
@@ -77,44 +60,19 @@ const Search:React.FC = () => {
         e.target.classList.add('active')
     }
 
-    const handleNextTag = ():void =>{
-        const tag = document.querySelector('.search__tag') as HTMLDivElement
-        const tagsWrapper = document.querySelector('.search__tags') as HTMLDivElement
-        const width = tag.clientWidth 
-        const tl = gsap.timeline()
-        if(tagMove > tagsWrapper.clientWidth * (-1)){
-            tl.to('.search__tags',{x:`-=${width * 6}`,duration:1})
-            setTagMove(tagMove - (width * 6))
-        }else{
-            tl.to('.search__tags',{transform:`translateX(${-tagsWrapper.clientWidth}px)`,duration:1})
-            setTagMove(tagsWrapper.clientWidth)
-        }
-    }
-
-    const handlePrevTag = ():void =>{
-        const tag = document.querySelector('.search__tag') as HTMLDivElement
-
-        const width = tag.clientWidth + 20
-        const tl = gsap.timeline()
-        if(tagMove < -600){
-            tl.to('.search__tags',{x:`+=${width * 6}`,duration:1})
-            setTagMove(tagMove + (width * 6))
-        }else{
-            tl.to('.search__tags',{transform:`translateX(${0}px)`,duration:1})
-            setTagMove(0)
-        }
-
-    }
-
     const renderTags = () =>{
-        return tags.map((tag:string,index:number) => (
-            <div onClick={(e)=>{ 
-                youtubeActions.globalSearch({q:tag,part:'id,snippet',regionCode:'US',maxResults:50,order:'date',type:'video'})
-                handleActiveTag(e)
-            }}  className={`search__tag ${index === 0 ? "active" : null}`}>{tag}</div>
-        ))
+        
+        return videoCategories?.items?.map((tag:any,index:number) => {
+            const { id } = tag
+            const { title } = tag.snippet
+            return(
+                <SwiperSlide><div onClick={(e)=>{ 
+                    youtubeActions.getVideos({part:'id,snippet',chart:'mostPopular',videoCategoryId:id,regionCode:'US',maxResults:50})
+                    handleActiveTag(e)
+                }}  className={`search__tag ${index === 0 ? "active" : null}`}>{title}</div></SwiperSlide>
+            )
+        })
     }
-  
 
     const handleSidebarFixed = () =>{
         const sidebar = document.querySelector('.sidebar.fixed') as HTMLDivElement
@@ -127,7 +85,9 @@ const Search:React.FC = () => {
 
         }
     }
-
+    useEffect(()=>{
+      youtubeActions.videoCategories({part:'snippet',regionCode:'US'})
+    },[])
     return (
         <div className="search">
             <div className="search__header">
@@ -177,10 +137,14 @@ const Search:React.FC = () => {
                 </div>
             </div>
             <div className="search__tags-wrapper">
-                {tagMove < 0 && <div className="search__tag-btn prev" onClick={()=>{handlePrevTag()}}><FiChevronLeft /></div>}
-                {tagMove > -900 && <div className="search__tag-btn next"onClick={()=>{handleNextTag()}}><FiChevronRight /></div>}
                 <div className="search__tags">
+                <Swiper
+                                // install Swiper modules
+                    spaceBetween={0}
+                    slidesPerView={window.innerWidth < 1024 ?  window.innerWidth < 768 ? 2 : 4 : 8}
+                >
                     {renderTags()}
+                </Swiper>
                 </div>
             </div>
         </div>

@@ -24,7 +24,7 @@ import Playlist from '../components/Playlist'
 
 const PlaylistDetails = () => {
     const dispatch = useDispatch()
-    const { videoDetails,videoComments,channelDetails,suggestedVideos } = useSelector((state:State) => state.youtubeAPI)
+    const { videoDetails,videoComments,channelDetails,suggestedVideos,playlistItems } = useSelector((state:State) => state.youtubeAPI)
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
     const UI = bindActionCreators(UIActions,dispatch)
 
@@ -48,8 +48,12 @@ const PlaylistDetails = () => {
 
     useEffect(()=>{
         UI.handleSetContainersAndHideElements()
-        
-    },[])
+        if(playlistItems?.items){
+            var id  = playlistItems?.items[0]?.snippet?.resourceId?.videoId
+        }
+        youtubeActions.videoDetails({id:id,part:"contentDetails,snippet,statistics"})
+        youtubeActions.videoComments({part:'snippet',videoId:id,maxResults:200})
+    },[playlistItems])
 
     return (
        <Layout>
