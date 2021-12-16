@@ -60,13 +60,13 @@ const SidebarFixed:React.FC = () => {
                         <GiHamburgerMenu  onClick={()=>{handleSidebarFixed()}}/>
                         <img src="/assets/main-logo.svg" alt="" />
                   </div>
-             <Link to="/" onClick={(e)=>{
+             <Link to="/" onClick={(e:any)=>{
                  youtubeActions.isSearching(false)
                  handleActiveLink(e)}} className="sidebar__link active"><MdHomeFilled />Home</Link>
-             <Link to="/explore" onClick={(e)=>{
+             <Link to="/explore" onClick={(e:any)=>{
                  youtubeActions.isSearching(true)
                  handleActiveLink(e)}} className="sidebar__link"><FaRegCompass />Explore</Link>
-             <Link to="#" onClick={(e)=>{
+             <Link to="#" onClick={(e:any)=>{
                  youtubeActions.isSearching(true)
                  handleActiveLink(e)}} className="sidebar__link"><MdSubscriptions />Subscriptions</Link>
              <hr />
@@ -120,16 +120,16 @@ const SidebarFixed:React.FC = () => {
                  youtubeActions.setActiveSearch(e)
                  }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><MdVideocam /></span> 360° Video</Link>
              <hr />
-             <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><IoIosAddCircleOutline />Browse channels</Link>
+             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><IoIosAddCircleOutline />Browse channels</Link>
              <hr />
              <h3>MORE FROM YOUTUBE</h3>
-             <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><SiYoutube />YouTube Promium</Link>
-             <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><CgMediaLive />Live</Link>
+             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><SiYoutube />YouTube Promium</Link>
+             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><CgMediaLive />Live</Link>
              <hr />
-             <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><RiSettings4Line />Settings</Link>
-             <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><BsFlag />Report History</Link>
-             <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><IoIosHelpCircleOutline />Help</Link>
-             <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdOutlineFeedback />Send Feedback</Link>
+             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><RiSettings4Line />Settings</Link>
+             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><BsFlag />Report History</Link>
+             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><IoIosHelpCircleOutline />Help</Link>
+             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdOutlineFeedback />Send Feedback</Link>
              <hr />
              <div className="sidebar-expand__links">
                  <a href="#">About</a>
@@ -154,11 +154,11 @@ const SidebarFixed:React.FC = () => {
         {isMobile && path === "/" &&
          <div className="sidebar">
             <div className="sidebar-thin">
-                <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdHomeFilled />Home</Link>
-                <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><FaRegCompass />Explore</Link>
-                <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdSubscriptions />Subscriptions</Link>
-                <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdOutlineVideoLibrary />Library</Link>
-                <Link onClick={(e)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><VscHistory />History</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdHomeFilled />Home</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><FaRegCompass />Explore</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdSubscriptions />Subscriptions</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdOutlineVideoLibrary />Library</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><VscHistory />History</Link>
             </div>
         </div>}
     </React.Fragment>

@@ -14,12 +14,12 @@ import { bindActionCreators } from 'redux'
 import { BsSearch, BsChevronDoubleRight } from 'react-icons/bs'
 import PlaylistAtMain from '../components/PlaylistAtMain'
 
-import { Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
+import { playlistItems } from '../APIController/actions-creators/youtubeActions'
 
-const ChannelDetails = () => {
+const ChannelDetails = (props:any) => {
     const [isLoad,setIsLoad] = useState<boolean>(false)
     const [items,setItems] = useState<any[]>([])
     const [pItems,setPItems] = useState<any>([])
@@ -43,10 +43,10 @@ const ChannelDetails = () => {
     }
 
     const fetchPlaylistItems = async () => {
-
+        setItems([])
         if(pItems?.items && !isLoad){
             var tempItems:any[] = []
-            await Promise.all(pItems?.items?.slice(0,6).map((playlist:any) =>{
+            pItems?.items?.slice(0,6).map((playlist:any) =>{
                 const { id } = playlist 
                 const { title } = playlist.snippet
 
@@ -57,7 +57,7 @@ const ChannelDetails = () => {
                     params: {
                        playlistId: id,
                        part: 'snippet,id',
-                       key:'AIzaSyAMhkkCNpCVIlWdfYBNK0Uyhxp5fS2TR2U',
+                       key:'AIzaSyAEb50Knm0I06XLnQVdT3vmZZjYo-t5S4I',
                     },
                     headers: {
                         'Content-Type':'application/json'
@@ -75,7 +75,8 @@ const ChannelDetails = () => {
                 }).catch(function (error) {
                     console.error(error);
                 });
-            }))
+
+            })
         }
       
     }
@@ -103,13 +104,13 @@ const ChannelDetails = () => {
 
 
     const renderPlaylistItemsInMain = () =>{
-        return items.map((playlist:any) =>{
+        return items.map((playlist:any,index:number) =>{
             const { id, title, items } = playlist
-            return <div key={title} className="channel-details__playlist-main-group">
+            return <div key={index} className="channel-details__playlist-main-group">
                    <h3>{title}</h3>
-                   <div className="channel-details__playlist-main-group-inner">{items?.items?.map((item:any) =>{
+                   <div className="channel-details__playlist-main-group-inner">{items?.items?.map((item:any,index:number) =>{
                         const { title,thumbnails,channelTitle,publishedAt,videoId,channelId } = item.snippet
-                            return <Video key={title} title={title} imgUrl={thumbnails?.high?.url} channelId={channelId} publishedAt={publishedAt} videoId={videoId} minWidth={'calc(25% - 20px)'} />
+                            return <Video key={index + "#"} title={title} imgUrl={thumbnails?.high?.url} channelId={channelId} publishedAt={publishedAt} videoId={videoId} minWidth={'calc(25% - 20px)'} />
                     })}</div>
                   </div>
         })
@@ -120,20 +121,29 @@ const ChannelDetails = () => {
             const { id } = video
             const { publishedAt,channelId,title, thumbnails,channelTitle } = video.snippet
             const { itemCount } = video.contentDetails
-            return <PlaylistVideo id={id} imgUrl={thumbnails?.high?.url} title={title}  itemCount={itemCount} />
+            return <PlaylistVideo key={id} id={id} imgUrl={thumbnails?.high?.url} title={title}  itemCount={itemCount} />
             
         })
     }
-
+  
     useEffect(() => {
+        const playlistGroup = document.querySelector('.channel-details__playlist-videos-main') as HTMLDivElement
+       
         UI.handleHideTags()
         if(!isLoad){
+           
             fetchPlaylistItems()
+
         }
         setChannelVideosCopy(channelVideos.items)
         if(playlistVideos?.items?.length > 0){
             setPItems(playlistVideos)
         }    
+        return ()=>{
+            setPItems([])
+            setItems([])
+            setIsLoad(false)
+        }
     }, [playlistVideos,channelVideos,pItems])
 
     return (

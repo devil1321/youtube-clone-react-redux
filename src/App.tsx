@@ -15,7 +15,7 @@ const App = () => {
       <Routes>
           <Route  path={routes.withSidebar.home} element={<Home />} />
           <Route  path={routes.withSidebarFixed.details} element={<Details />} />
-          <Route  path={routes.withSidebarFixed.playlistDetails} element={<PlaylistDetails />} /> 
+          <Route  path={routes.withSidebarFixed.playlistDetails} element={<PlaylistDetails />} />
           <Route  path={routes.withSidebar.channelDetails} element={<ChannelDetails />} /> 
           <Route  path={routes.withSidebar.explore} element={<Explore />} /> 
       </Routes>

@@ -51,18 +51,24 @@
         position: relative;
         top:0px;
         left:0px;
+
     }
     &__tabs-nav{
         padding:0px 10px;
         @include createFlex(row,flex-start, center,null);
+        background-color: #f9f9f9;
+    }
+    .swiper-slide{
+        transform:translateX(50px)
     }
     &__tab-link{
         cursor: pointer;
         padding:10px 50px;
         font-weight: bold;
-        background-color: white;
+        background-color: #f9f9f9;
+
         @include createFlex(row,flex-start,center,null);
-        border-bottom: 3px solid white;
+        border-bottom: 3px solid #f9f9f9;
         &.active{
             border-bottom: 3px solid grey;
         }
