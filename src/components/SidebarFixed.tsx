@@ -16,6 +16,7 @@ import { CgMediaLive } from 'react-icons/cg'
 import { BsFlag, BsPerson } from 'react-icons/bs'
 import { RiSettings4Line } from 'react-icons/ri' 
 import { GiHamburgerMenu } from 'react-icons/gi'
+import { Links } from '../routes'
 
 
 const SidebarFixed:React.FC = () => {
@@ -60,10 +61,10 @@ const SidebarFixed:React.FC = () => {
                         <GiHamburgerMenu  onClick={()=>{handleSidebarFixed()}}/>
                         <img src="/assets/main-logo.svg" alt="" />
                   </div>
-             <Link to="/" onClick={(e:any)=>{
+             <Link to={new Links().withSidebar.home} onClick={(e:any)=>{
                  youtubeActions.isSearching(false)
                  handleActiveLink(e)}} className="sidebar__link active"><MdHomeFilled />Home</Link>
-             <Link to="/explore" onClick={(e:any)=>{
+             <Link to={new Links().withSidebar.explore} onClick={(e:any)=>{
                  youtubeActions.isSearching(true)
                  handleActiveLink(e)}} className="sidebar__link"><FaRegCompass />Explore</Link>
              <Link to="#" onClick={(e:any)=>{
@@ -82,43 +83,43 @@ const SidebarFixed:React.FC = () => {
                  youtubeActions.isSearching(true)
                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
                  youtubeActions.setActiveSearch(e)
-                 }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><SiYoutubemusic /></span> Music</Link>
+                 }} className="sidebar__link" to={new Links().withSidebar.home}><span className="sidebar-expand__icon-circle"><SiYoutubemusic /></span> Music</Link>
              <Link data-q="Sports" onClick={(e:any)=>{
                  handleActiveLink(e)
                  youtubeActions.isSearching(true)
                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
                  youtubeActions.setActiveSearch(e)
-                 }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><ImTrophy /></span> Sports</Link>
+                 }} className="sidebar__link" to={new Links().withSidebar.home}><span className="sidebar-expand__icon-circle"><ImTrophy /></span> Sports</Link>
              <Link data-q="Gaming" onClick={(e:any)=>{
                  handleActiveLink(e)
                  youtubeActions.isSearching(true)
                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
                  youtubeActions.setActiveSearch(e)
-                 }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><SiYoutubegaming /></span> Gaming</Link>
+                 }} className="sidebar__link" to={new Links().withSidebar.home}><span className="sidebar-expand__icon-circle"><SiYoutubegaming /></span> Gaming</Link>
              <Link  data-q="Movies" onClick={(e:any)=>{
                  handleActiveLink(e)
                  youtubeActions.isSearching(true)
                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
                  youtubeActions.setActiveSearch(e)
-                 }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><MdLocalMovies /></span> Movies</Link>
+                 }} className="sidebar__link" to={new Links().withSidebar.home}><span className="sidebar-expand__icon-circle"><MdLocalMovies /></span> Movies</Link>
              <Link data-q="News" onClick={(e:any)=>{
                  handleActiveLink(e)
                  youtubeActions.isSearching(true)
                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
                  youtubeActions.setActiveSearch(e)
-                 }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><BiNews /></span> News</Link>
+                 }} className="sidebar__link" to={new Links().withSidebar.home}><span className="sidebar-expand__icon-circle"><BiNews /></span> News</Link>
              <Link data-q="Live" onClick={(e:any)=>{
                  handleActiveLink(e)
                  youtubeActions.isSearching(true)
                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
                  youtubeActions.setActiveSearch(e)
-                 }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><FaSatellite /></span> Live</Link>
+                 }} className="sidebar__link" to={new Links().withSidebar.home}><span className="sidebar-expand__icon-circle"><FaSatellite /></span> Live</Link>
              <Link data-q="360° Video" onClick={(e:any)=>{
                  handleActiveLink(e)
                  youtubeActions.isSearching(true)
                  youtubeActions.globalSearch({q:e.target.dataset.q ,part:"snippet,id",regionCode:'US',order:'date',type:'video',maxResults:200})
                  youtubeActions.setActiveSearch(e)
-                 }} className="sidebar__link" to="/"><span className="sidebar-expand__icon-circle"><MdVideocam /></span> 360° Video</Link>
+                 }} className="sidebar__link" to={new Links().withSidebar.home}><span className="sidebar-expand__icon-circle"><MdVideocam /></span> 360° Video</Link>
              <hr />
              <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><IoIosAddCircleOutline />Browse channels</Link>
              <hr />
@@ -151,7 +152,7 @@ const SidebarFixed:React.FC = () => {
            </div>
             </div>
         </div>
-        {isMobile && path === "/" &&
+        {isMobile && path === new Links().withSidebar.home &&
          <div className="sidebar">
             <div className="sidebar-thin">
                 <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdHomeFilled />Home</Link>

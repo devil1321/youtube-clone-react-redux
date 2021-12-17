@@ -5,7 +5,8 @@ import * as YoutubeActions from '../APIController/actions-creators/youtubeAction
 import { useDispatch,useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { BsCollectionPlayFill } from 'react-icons/bs'
-import { playlistItems } from '../APIController/actions-creators/youtubeActions'
+import { Links } from '../routes'
+
 interface PlaylistVideoProps{
     id:string;
     imgUrl:string;
@@ -17,12 +18,11 @@ const PlaylistVideo:React.FC<PlaylistVideoProps> = ({id,imgUrl,title,itemCount})
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
-    const { playlistItems } = useSelector((state:State) => state.youtubeAPI)
    
        
     const handleVideo = () =>{
             youtubeActions.playlistItems({playlistId:id,part:'snippet,id,status,contentDetails',maxResults:50})
-            navigate(`/playlist-details/${id}`)
+            navigate(new Links(id).withSidebarFixed.playlistDetails)
     }
 
     return (

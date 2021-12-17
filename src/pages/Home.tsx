@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import InfiniteScroll from 'react-infinite-scroller';
+
 import { useSelector,  useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { State } from '../APIController/reducers' 

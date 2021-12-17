@@ -1,4 +1,5 @@
 import React,{ useState,useEffect } from 'react'
+import { Links } from '../routes'
 import Layout from '../templates/layout'
 import { useDispatch, useSelector } from 'react-redux'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
@@ -30,11 +31,11 @@ const Explore = () => {
         <Layout>
             <div className="explore">
                 <div className="explore__nav">
-                    <div className="explore__nav-item">
+                    <Link to={new Links().withSidebar.trending} className="explore__nav-item">
                         <img src={`/assets/icons/trending.png`} alt="" />
                         <h3>Trending</h3>
-                    </div>
-                    <Link to="/channel-details/UC-9-kyTW8ZkZNDHQJ6FgpwQ" className="explore__nav-item"
+                    </Link>
+                    <Link to={new Links('UC-9-kyTW8ZkZNDHQJ6FgpwQ').withSidebar.channelDetails} className="explore__nav-item"
                     onClick={()=>{
                         youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:'UC-9-kyTW8ZkZNDHQJ6FgpwQ'})
                         youtubeActions.channelVideos({channelId:'UC-9-kyTW8ZkZNDHQJ6FgpwQ',part:'snippet,id',order:'date',maxResults:50})
@@ -43,7 +44,7 @@ const Explore = () => {
                         <img src={`/assets/icons/music.png`} alt="" />
                         <h3>Music</h3>
                     </Link>
-                    <Link to="/channel-details/UCwBV-eg1dAkzrdjqJfyEj0w" className="explore__nav-item" 
+                    <Link to={new Links('UCwBV-eg1dAkzrdjqJfyEj0w').withSidebar.channelDetails} className="explore__nav-item" 
                     onClick={()=>{
                         youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:'UCwBV-eg1dAkzrdjqJfyEj0w'})
                         youtubeActions.channelVideos({channelId:'UCwBV-eg1dAkzrdjqJfyEj0w',part:'snippet,id',order:'date',maxResults:50})
@@ -52,7 +53,7 @@ const Explore = () => {
                         <img src={`/assets/icons/movies.png`} alt="" />
                         <h3>Movies</h3>
                     </Link>
-                    <Link to="/channel-details/UC4R8DWoMoI7CAwX8_LjQHig'" className="explore__nav-item"
+                    <Link to={new Links('UC4R8DWoMoI7CAwX8_LjQHig').withSidebar.channelDetails} className="explore__nav-item"
                     onClick={()=>{
                         youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:'UC4R8DWoMoI7CAwX8_LjQHig'})
                         youtubeActions.channelVideos({channelId:'UC4R8DWoMoI7CAwX8_LjQHig',part:'snippet,id',order:'date',maxResults:50})
@@ -61,7 +62,7 @@ const Explore = () => {
                         <img src={`/assets/icons/live.png`} alt="" />
                         <h3>Live</h3>
                     </Link>
-                    <Link to="/channel-details/UCaA8TUWM6TJ5wj-DH60VEFg" className="explore__nav-item"
+                    <Link to={new Links('UCaA8TUWM6TJ5wj-DH60VEFg').withSidebar.channelDetails} className="explore__nav-item"
                     onClick={()=>{
                         youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:'UCaA8TUWM6TJ5wj-DH60VEFg'})
                         youtubeActions.channelVideos({channelId:'UCaA8TUWM6TJ5wj-DH60VEFg',part:'snippet,id',order:'date',maxResults:50})
@@ -70,7 +71,7 @@ const Explore = () => {
                         <img src={`/assets/icons/gaming.png`} alt="" />
                         <h3>Gaming</h3>
                     </Link>
-                    <Link to="/channel-details/UCYfdidRxbB8Qhf0Nx7ioOYw" className="explore__nav-item"
+                    <Link to={new Links('UCYfdidRxbB8Qhf0Nx7ioOYw').withSidebar.channelDetails} className="explore__nav-item"
                     onClick={()=>{
                         youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:'UCYfdidRxbB8Qhf0Nx7ioOYw'})
                         youtubeActions.channelVideos({channelId:'UCYfdidRxbB8Qhf0Nx7ioOYw',part:'snippet,id',order:'date',maxResults:50})
@@ -79,7 +80,7 @@ const Explore = () => {
                         <img src={`/assets/icons/news.png`} alt="" />
                         <h3>News</h3>
                     </Link>
-                    <Link to="/channel-details/UCEgdi0XIXXZ-qJOFPf4JSKw" className="explore__nav-item"
+                    <Link to={new Links('UCEgdi0XIXXZ-qJOFPf4JSKw').withSidebar.channelDetails} className="explore__nav-item"
                     onClick={()=>{
                         youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:'UCEgdi0XIXXZ-qJOFPf4JSKw'})
                         youtubeActions.channelVideos({channelId:'UCEgdi0XIXXZ-qJOFPf4JSKw',part:'snippet,id',order:'date',maxResults:50})

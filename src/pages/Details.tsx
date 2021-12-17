@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Layout from '../templates/layout'
 import Comment from '../components/Comment'
+import { Links } from '../routes'
 
 import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
@@ -117,7 +118,7 @@ const Details = () => {
                                                 <div className="details__channel-img">
                                                     <img src={thumbnails?.default?.url} alt="" />
                                                 </div>
-                                                <Link to={`/channel-details/${channelId}`} onClick={()=>{
+                                                <Link to={new Links(channelId).withSidebar.channelDetails} onClick={()=>{
                                                     youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:channelId})
                                                     youtubeActions.channelVideos({channelId:channelId,part:'snippet,id',order:'date',maxResults:50})
                                                     youtubeActions.playlistVideos({channelId:channelId,part:'snippet,contentDetails,id',maxResults:50})

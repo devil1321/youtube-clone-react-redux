@@ -4,7 +4,7 @@ import { State } from '../APIController/reducers'
 import { useSelector, useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
-
+import { Links } from '../routes'
 const VideoImg = React.lazy(() => import('./VideoImg'));
 
 interface PopularVideoProps {
@@ -42,13 +42,12 @@ const PopularVideo:React.FC<PopularVideoProps> = ({imgUrl,title,channelTitle,pub
                youtubeActions.suggestedVideos({relatedToVideoId:videoId,part:'id,snippet',type:'video',maxResults:200})
                }}>
                <Suspense fallback ={<h3>...Loading</h3>}>
-                   <Link to={`/details/${videoId}`}>
+                   <Link to={`${new Links().withSidebarFixed.details}/${videoId}`}>
                         <VideoImg imgUrl={imgUrl} />
                    </Link>
                </Suspense>
            </div>
            <div className="popular-video__v-details">
-               
                 <div className="popular-video__v-details-text">
                     <h3>{title}</h3>
                     {channelTitle && <h5>{channelTitle}</h5>}

@@ -1,18 +1,19 @@
-interface Routes {
-    [key: string]:{
-        [key: string]:string 
+interface LinksParams {
+    [key: string]:string 
+}
+export class Links {
+    constructor(public id?:string){
+        this.id = id
     }
-  }
-
-export const routes:Routes = {
-    withSidebar:{
+    withSidebar:LinksParams = {
         home:'/',
         explore:'/explore',
-        channelDetails:'/channel-details/:id'
-    },
-    withSidebarFixed:{
-        details:'/details/:id',
-        playlistDetails:'/playlist-details/:id'
+        channelDetails:`/channel-details/${this.id}`,
+        trending:'/trending'
+    }
+    withSidebarFixed:LinksParams = {
+        details:`/details/${this.id}`,
+        playlistDetails:`/playlist-details/${this.id}`
     }
 }
 

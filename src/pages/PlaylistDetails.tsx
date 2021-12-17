@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Layout from '../templates/layout'
 import Comment from '../components/Comment'
-
+import { Links } from '../routes'
 import { gsap } from 'gsap'
 import { Link } from 'react-router-dom'
 import { State } from '../APIController/reducers'
@@ -121,7 +121,7 @@ const PlaylistDetails = () => {
                                                 <div className="details__channel-img">
                                                     <img src={thumbnails?.default?.url} alt="" />
                                                 </div>
-                                                <Link to={`/channel-details/${channelId}`} onClick={()=>{
+                                                <Link to={new Links(channelId).withSidebar.channelDetails} onClick={()=>{
                                                     youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:channelId})
                                                     youtubeActions.channelVideos({channelId:channelId,part:'snippet,id',order:'date',maxResults:50})
                                                     youtubeActions.playlistVideos({channelId:channelId,part:'snippet,contentDetails,id',maxResults:50})
@@ -181,7 +181,7 @@ const PlaylistDetails = () => {
                         // high
                         if(thumbnails?.high?.url !== undefined){
                             return(
-                            <Link to={`/details/${videoId}`}>
+                            <Link to={new Links(videoId).withSidebarFixed.details}>
                                 <div className="details__suggested-video" onClick={()=>{
                                     youtubeActions.videoDetails({id:videoId,part:"contentDetails,snippet,statistics"})
                                     youtubeActions.videoComments({part:'snippet',videoId:videoId,maxResults:50})
