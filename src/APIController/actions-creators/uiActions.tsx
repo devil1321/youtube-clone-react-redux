@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux'
 import { UIActionTypes } from '../types'
+import { gsap } from 'gsap'
 
 export const handleSetContainersAndHideElements = () => (dispatch:Dispatch):void =>{
     const container = document.querySelector('.container') as HTMLDivElement
@@ -25,7 +26,20 @@ export const handleActiveLink = (link:number) => (dispatch:Dispatch):void =>{
         activeLink:link
     })
 }
-
+export const handleTab = (e:any,tabSelector:string) => (dispatch:Dispatch) =>{
+    const tl = gsap.timeline()
+    const links = document.querySelectorAll('.channel-details__tab-link') as NodeListOf<HTMLHeadingElement>
+    links.forEach(link => link.classList.remove('active'))
+    e.target.classList.add('active')
+    const tabs = document.querySelectorAll(`.${tabSelector}`) as NodeListOf<HTMLDivElement>
+    const tab = document.getElementById(`${e.target.dataset.tab}`) as HTMLDivElement
+    tabs.forEach(tab => tab.classList.remove('active'))
+    tab.classList.add('active')
+    tl.fromTo(tab,{opacity:0},{opacity:1,duration:0.3})
+    dispatch({
+        type:UIActionTypes.HanldeTab
+    })
+}
 export const isMobile = () => (dispatch:Dispatch)=>{
     function detectMob() {
         const toMatch = [

@@ -1,4 +1,8 @@
 .search{
+    position: relative;
+    top:0px;
+    left:0px;
+    z-index: 100;
     @include createFlex(row,flex-start,center,wrap);
     background-color: white;
     &__header{

@@ -19,5 +19,6 @@ export enum UIActionTypes {
     HandleSetContainersAndHideElements = "HandleSetContainersAndHideElements",
     HandleActiveLink = "HandleActiveLink",
     HideTags = "HideTags",
-    IsMobile = "IsMobile"
+    IsMobile = "IsMobile",
+    HanldeTab = "HanldeTab"
 }

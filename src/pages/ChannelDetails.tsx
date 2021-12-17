@@ -4,8 +4,6 @@ import Video from '../components/Video'
 import PlaylistVideo from '../components/PlaylistVideo'
 
 import axios from 'axios'
-import { gsap } from 'gsap'
-import { Link } from 'react-router-dom'
 import { State } from '../APIController/reducers'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
 import * as UIActions from '../APIController/actions-creators/uiActions'
@@ -17,7 +15,6 @@ import PlaylistAtMain from '../components/PlaylistAtMain'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
-import { playlistItems } from '../APIController/actions-creators/youtubeActions'
 
 const ChannelDetails = (props:any) => {
     const [isLoad,setIsLoad] = useState<boolean>(false)
@@ -30,17 +27,7 @@ const ChannelDetails = (props:any) => {
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
     const UI = bindActionCreators(UIActions,dispatch)
     
-    const handleTab = (e:any) =>{
-        const tl = gsap.timeline()
-        const links = document.querySelectorAll('.channel-details__tab-link') as NodeListOf<HTMLHeadingElement>
-        links.forEach(link => link.classList.remove('active'))
-        e.target.classList.add('active')
-        const tabs = document.querySelectorAll('.channel-details__tab') as NodeListOf<HTMLDivElement>
-        const tab = document.getElementById(`${e.target.dataset.tab}`) as HTMLDivElement
-        tabs.forEach(tab => tab.classList.remove('active'))
-        tab.classList.add('active')
-        tl.fromTo(tab,{opacity:0},{opacity:1,duration:0.3})
-    }
+
 
     const fetchPlaylistItems = async () => {
         setItems([])
@@ -186,12 +173,12 @@ const ChannelDetails = (props:any) => {
                                  spaceBetween={0}
                                  slidesPerView={window.innerWidth < 1024 ?  window.innerWidth < 768 ? 2 : 4 : 7}
                             >
-                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="1" className="channel-details__tab-link active">Main</h3></SwiperSlide>
-                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="2" className="channel-details__tab-link">Video</h3></SwiperSlide>
-                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="3" className="channel-details__tab-link">Society</h3></SwiperSlide>
-                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="4" className="channel-details__tab-link">Playlist</h3></SwiperSlide>
-                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="5" className="channel-details__tab-link">Channels</h3></SwiperSlide>
-                                <SwiperSlide><h3 onClick={(e)=>{handleTab(e)}} data-tab="6" className="channel-details__tab-link">Info</h3></SwiperSlide>
+                                <SwiperSlide><h3 onClick={(e)=>{UI.handleTab(e,'channel-details__tab')}} data-tab="1" className="channel-details__tab-link active">Main</h3></SwiperSlide>
+                                <SwiperSlide><h3 onClick={(e)=>{UI.handleTab(e,'channel-details__tab')}} data-tab="2" className="channel-details__tab-link">Video</h3></SwiperSlide>
+                                <SwiperSlide><h3 onClick={(e)=>{UI.handleTab(e,'channel-details__tab')}} data-tab="3" className="channel-details__tab-link">Society</h3></SwiperSlide>
+                                <SwiperSlide><h3 onClick={(e)=>{UI.handleTab(e,'channel-details__tab')}} data-tab="4" className="channel-details__tab-link">Playlist</h3></SwiperSlide>
+                                <SwiperSlide><h3 onClick={(e)=>{UI.handleTab(e,'channel-details__tab')}} data-tab="5" className="channel-details__tab-link">Channels</h3></SwiperSlide>
+                                <SwiperSlide><h3 onClick={(e)=>{UI.handleTab(e,'channel-details__tab')}} data-tab="6" className="channel-details__tab-link">Info</h3></SwiperSlide>
                                 <SwiperSlide><div className="channel-details__tab-link"><BsSearch /> <input type="text" /> </div></SwiperSlide>
                             </Swiper>
                             </div>

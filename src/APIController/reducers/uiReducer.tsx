@@ -17,6 +17,10 @@ export default (state = initData ,action:any) =>{
             return {
                 ...state,
             }
+        case UIActionTypes.HanldeTab:
+            return {
+                ...state,
+            }
         case UIActionTypes.HandleActiveLink:
             return {
                 ...state,

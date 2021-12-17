@@ -1,0 +1,50 @@
+.trending{
+    position: relative;
+    top:-10px;
+    left:0px;
+    padding:20px;
+    background-color: white;
+    overflow-y: scroll;
+    height:95vh;
+    &__header{
+        h2{
+            margin-left: 20px;
+            background-color: white;
+        }
+        &.fixed{
+            position:fixed;
+            z-index: 2;
+            top:-80px;
+            left:18.5%;
+            width: 82%;
+        }
+    }
+    &__header-heading{
+        @include createFlex(row,flex-start,center,null);
+
+    }
+    &__tabs-nav{
+        padding:20px;   
+        background-color: white;
+        @include createFlex(row,flex-start,center,null);
+        .swiper-container{
+            position: relative;
+            left:-210px;
+        }
+        .swiper-slide{
+            transform:translateX(50px);
+        }
+    }
+    &__tab-link{
+        background-color: white;
+        border:2px solid white;
+    }
+    &__tab{
+        padding:10px;
+        display:none;
+        background-color: #f9f9f9;
+        &.active{
+            display: block;
+        }
+    }
+}
