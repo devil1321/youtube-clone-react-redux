@@ -1,0 +1,136 @@
+.yt-premium{
+    overflow-y: scroll;
+    height:90vh;
+    width: 100%;
+    background-color: white;
+    a{
+        color:blue;
+    }
+    &__hero{
+        min-width: 100vw;
+        height:90vh;
+        @include createFlex(column,center,center,null);
+        background-image: url('../../../images/youtube-premium-template/hero.jpeg');
+        background-size: cover;
+        h2{
+            width: 40%;
+            text-align: center;
+            font-weight: 400;
+            font-size:pxToRem(30);
+           
+        }
+        button{
+            font-weight: bold;
+            padding:15px 20px;
+            background-color: blue;
+            color:white;
+            border:0px;
+            border-radius: 3px;
+        }
+     
+    }
+    &__p{
+        h2{
+            min-width: fit-content;
+            font-weight: 300;
+        }
+        @include createFlex(row,flex-start,center,null);
+    }
+    &__dot{
+        margin:0px 10px;
+        height:5px;
+        width: 5px;
+        background-color: black;
+        border-radius: 100%;
+    }
+    &__cards{
+        margin:100px 0px;
+        padding:0px 150px;
+        @include createFlex(row,center,center,null);
+    }
+    &__card{
+        text-align: center;
+        height:300px;
+        @include createFlex(column,flex-start,center,null);
+        h2,p{
+            margin:5px 0px;
+        }
+        h2{
+            font-size: pxToRem(30);
+            font-weight:300;
+            width: 80%;
+        }
+        p{
+            width: 80%;
+        }
+    }
+    &__feature-item{
+        height:80vh;
+        width: 100vw;
+        overflow:hidden;
+        @include createFlex(font,flex-start,center,null);
+        h2{
+            font-size: pxToRem(60);
+            font-weight: 300;
+        }
+        p{
+            font-size: pxToRem(26);
+            font-weight: 300;
+        }
+        h2,p{
+            color:white;
+        }
+        &:nth-of-type(2n + 1){
+            div{
+                width: 50%;
+                margin-right: 100px;
+                margin-left: auto;
+            }
+            
+        }
+        &:nth-of-type(2n){
+            div{
+                width: 50%;
+                margin-right:auto;
+                margin-left: 100px;
+            }
+        }
+        &:nth-of-type(1){
+            background-image: url('../../../images/youtube-premium-template/feature-1.jpg');
+            background-size: 100%;
+        }
+        &:nth-of-type(2){
+            background-image: url('../../../images/youtube-premium-template/feature-2.jpg');
+            background-size: 100%;
+        }
+        &:nth-of-type(3){
+            background-image: url('../../../images/youtube-premium-template/feature-3.jpg');
+            background-size: 100%;
+        }
+        &:nth-of-type(4){
+            background-image: url('../../../images/youtube-premium-template/feature-4.jpg');
+            background-size: 100%;
+        }
+        
+    }
+    &__accordion-wrapper{
+        width: 60%;
+        margin:0px auto;
+        p{
+            margin-top: 100px;
+        }
+    }
+    &__accordion{
+        h2{
+            font-weight: 300;
+            cursor: pointer;
+        }
+    }
+    &__accordion-tab{
+        padding-bottom: 0px;
+        height:0px;
+        overflow: hidden;
+        border-bottom: 1px solid lightgray;
+        background-color: white;
+    }
+}
