@@ -10,7 +10,8 @@ import * as UIActions from '../APIController/actions-creators/uiActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { BsSearch, BsChevronDoubleRight } from 'react-icons/bs'
-import PlaylistAtMain from '../components/PlaylistAtMain'
+import { GrChannel } from 'react-icons/gr'
+
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css'
@@ -199,15 +200,30 @@ const ChannelDetails = (props:any) => {
                                     {renderChannelVideos()}
                                 </div>
                             </div>
-                            <div id="3" className="channel-details__tab">society</div>
+                            <div id="3" className="channel-details__tab">
+                                <div className="channel-details__tab-coming-soon">
+                                    <GrChannel />
+                                    <h2>Comming Soon</h2>
+                                </div>
+                            </div>
                             <div id="4" className="channel-details__tab">
                                 <h3 className="channel-details__tab-header">Created Playlists</h3>
                                     <div className="channel-details__playlist-group">
                                         {renderPlaylist()}
                                     </div>
                                 </div>
-                            <div id="5" className="channel-details__tab">channels</div>
-                            <div id="6" className="channel-details__tab">info</div>
+                            <div id="5" className="channel-details__tab">
+                                <div className="channel-details__tab-coming-soon">
+                                    <GrChannel />
+                                    <h2>Comming Soon</h2>
+                                </div>
+                            </div>
+                            <div id="6" className="channel-details__tab">
+                            <div className="channel-details__tab-coming-soon">
+                                    <GrChannel />
+                                    <h2>Comming Soon</h2>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )
