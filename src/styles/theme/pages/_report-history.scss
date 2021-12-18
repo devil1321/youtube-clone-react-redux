@@ -1,0 +1,18 @@
+.report-history{
+    background-color: white;
+    a{
+        color:blue;
+    }
+    @include createFlex(row,space-between,center,wrap);
+    &__main{
+        padding:20px;
+        width: calc(70% - 20px);
+    }
+    img{
+        width: calc(30% - 20px);
+    }
+    &__footer{
+        width: 100%;
+        text-align: center;
+    }
+}

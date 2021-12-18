@@ -56,12 +56,12 @@ const Sidebar:React.FC<SidebarProps> = ({fix,paddingTop}) => {
              <Link to={new Links().withSidebar.explore} onClick={(e:any)=>{
                  youtubeActions.isSearching(true)
                  handleActiveLink(e)}} className="sidebar__link"><FaRegCompass />Explore</Link>
-             <Link to="#" onClick={(e:any)=>{
+             <Link to={new Links().withSidebar.subscriptions} onClick={(e:any)=>{
                  youtubeActions.isSearching(true)
                  handleActiveLink(e)}} className="sidebar__link"><MdSubscriptions />Subscriptions</Link>
              <hr />
-             <Link to="#"><MdOutlineVideoLibrary />Library</Link>
-             <Link to="#"><VscHistory />History</Link>
+             <Link to={new Links().withSidebar.library}><MdOutlineVideoLibrary />Library</Link>
+             <Link to={new Links().withSidebar.history}><VscHistory />History</Link>
              <hr />
              <p>Sign in to like videos, comment, and subscribe.</p>
              <button><BsPerson />SIGN IN</button>
@@ -110,14 +110,19 @@ const Sidebar:React.FC<SidebarProps> = ({fix,paddingTop}) => {
                  youtubeActions.setActiveSearch(e)
                  }} className="sidebar__link" to={new Links().withSidebar.home}><span className="sidebar-expand__icon-circle"><MdVideocam /></span> 360° Video</Link>
              <hr />
-             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><IoIosAddCircleOutline />Browse channels</Link>
+             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.browseChannels}><IoIosAddCircleOutline />Browse channels</Link>
              <hr />
              <h3>MORE FROM YOUTUBE</h3>
-             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><SiYoutube />YouTube Promium</Link>
-             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><CgMediaLive />Live</Link>
+             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebarFixed.ytPremium}><SiYoutube />YouTube Promium</Link>
+             <Link onClick={(e:any)=>{
+                 handleActiveLink(e)
+                 youtubeActions.channelDetails({part:'snippet,statistics,brandingSettings',channelId:'UC4R8DWoMoI7CAwX8_LjQHig'})
+                 youtubeActions.channelVideos({channelId:'UC4R8DWoMoI7CAwX8_LjQHig',part:'snippet,id',order:'date',maxResults:50})
+                 youtubeActions.playlistVideos({channelId:'UC4R8DWoMoI7CAwX8_LjQHig',part:'snippet,contentDetails,id',maxResults:50})
+                 }} className="sidebar__link" to={new Links('UC4R8DWoMoI7CAwX8_LjQHig').withSidebar.channelDetails}><CgMediaLive />Live</Link>
              <hr />
-             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><RiSettings4Line />Settings</Link>
-             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><BsFlag />Report History</Link>
+             <a onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" href="https://accounts.google.com/ServiceLogin/signinchooser?service=youtube&uilel=3&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fwww.youtube.com%252Faccount%253Fpbjreload%253D102%26feature%3Dredirect_login&hl=en&flowName=GlifWebSignIn&flowEntry=ServiceLogin"><RiSettings4Line />Settings</a>
+             <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.reportHistory}><BsFlag />Report History</Link>
              <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><IoIosHelpCircleOutline />Help</Link>
              <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdOutlineFeedback />Send Feedback</Link>
              <hr />
@@ -140,11 +145,11 @@ const Sidebar:React.FC<SidebarProps> = ({fix,paddingTop}) => {
              <p>&copy; 2021 Google LLC</p>
            </div>
             <div className="sidebar-thin">
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdHomeFilled />Home</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><FaRegCompass />Explore</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdSubscriptions />Subs</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdOutlineVideoLibrary />Library</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><VscHistory />History</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.home}><MdHomeFilled />Home</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.explore}><FaRegCompass />Explore</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.subscriptions}><MdSubscriptions />Subs</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.library}><MdOutlineVideoLibrary />Library</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.history}><VscHistory />History</Link>
             </div>
         </div>
     )

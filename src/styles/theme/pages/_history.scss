@@ -1,0 +1,66 @@
+.history{
+    min-height: 90vh;
+    min-width: 100%;
+    a{
+        color:blue;
+        margin:0px 5px;
+    }
+    @include createFlex(row,center,flex-start,null);
+    &__left-content{
+        padding:20px;
+        min-height: 90vh;
+        min-width: 65%;
+        background-color: white;
+        h2{
+            margin-top: 30px;
+        }
+        h2,p{
+            margin:10px 0px;
+        }
+        svg{
+            width: 100px;
+            height:100px;
+        }
+        button{
+            @include signIn-btn();
+            margin-top: 20px;
+            max-height: 50px;
+        }
+    }
+    &__main{
+        position: relative;
+        top:50%;
+        left:0;
+        transform:translate(-50% -50%);
+        margin-top: 25%;
+        @include createFlex(column,center,center,null);
+    }
+    &__right-content{
+        box-sizing: border-box;
+        min-width: 35%;
+        padding:30px;
+        h2{
+            padding:20px 0px;
+            font-weight: 400;
+            border-bottom: 1px solid lightgray;
+        }
+       
+    }
+    &__field{
+        position: relative;
+        top:-10px;
+        left:0px;
+        padding:20px 0px;
+        border-bottom: 1px solid lightgray;
+        @include createFlex(row,space-between,center,null);
+    }
+    &__item{
+        font-weight: 400;
+        margin:30px 0px;
+        svg{
+            margin-right: 20px;
+            width:20px;
+            height:20px;
+        }
+    }
+}

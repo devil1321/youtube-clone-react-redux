@@ -9,11 +9,17 @@ export class Links {
         home:'/',
         explore:'/explore',
         channelDetails:`/channel-details/${this.id}`,
-        trending:'/trending'
+        trending:'/trending',
+        subscriptions:'/subscriptions',
+        history:'/history',
+        library:'/library',
+        browseChannels:'/browse-channels',
+        reportHistory:'/report-history'
     }
     withSidebarFixed:LinksParams = {
         details:`/details/${this.id}`,
-        playlistDetails:`/playlist-details/${this.id}`
+        playlistDetails:`/playlist-details/${this.id}`,
+        ytPremium:'/youtube-premium'
     }
 }
 
