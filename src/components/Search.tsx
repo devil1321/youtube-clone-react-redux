@@ -3,6 +3,7 @@ import { useSelector,useDispatch} from 'react-redux'
 import { State } from '../APIController/reducers'
 import { bindActionCreators } from 'redux'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
+import * as UIActions from '../APIController/actions-creators/uiActions'
 import { Link , useLocation } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { BsSearch, BsPerson } from 'react-icons/bs'
@@ -16,21 +17,69 @@ import { TiSocialYoutubeCircular } from 'react-icons/ti'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
+import { isSidebarThin } from '../APIController/actions-creators/uiActions'
+import { Links } from '../routes'
 
 const Search:React.FC = () => {
 
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
-    const { isMobile } = useSelector((state:State) => state.UI)
+    const UI = bindActionCreators(UIActions,dispatch)
+    const { isMobile,isSidebarThin } = useSelector((state:State) => state.UI)
     const { videoCategories } = useSelector((state:State) => state.youtubeAPI)
 
     const location = useLocation()
     const path = location.pathname
 
-
-    const [tagMove,setTagMove] = useState<number>(0)
-    const [isThin,setIsThin] = useState<boolean>(true)
+    const [isLoad,setIsLoad] = useState<boolean>(false)
     const [isAppsOpen,setIsAppsOpen] = useState<boolean>(false)
+
+   
+    const handleSidebarFixed = () =>{
+        const sidebar = document.querySelector('.sidebar.fixed') as HTMLDivElement
+        const sidebarFixedWrapper = document.querySelector('.sidebar-fixed-wrapper') as HTMLDivElement
+        if(sidebar.classList.contains('close')){
+            sidebar.classList.add('open')
+            sidebar.classList.remove('close')
+            sidebarFixedWrapper.classList.add('open')
+            sidebarFixedWrapper.classList.remove('close')
+            
+        }
+    }
+
+    const handleThinAction = () =>{
+        for(let route in new Links().withSidebar){
+                if(path === '/'){
+                    handleThin()
+                }else if(path === new Links().withSidebar[route] && !isMobile){
+                    handleThin()
+                }else if(path === new Links().withSidebar[route] && isMobile){
+                    handleSidebarFixed()
+                }else if(path.slice(0,16) === '/channel-details'){
+                    handleThin()
+                }
+            }
+        
+           
+    }
+
+    const handleSidebarType = () =>{
+        handleThinAction()
+        for(let route in new Links().withSidebarFixed){
+            if(path === new Links().withSidebarFixed[route] && !isMobile){
+                handleSidebarFixed()
+            }else if(path === new Links().withSidebarFixed[route] && isMobile){
+                handleSidebarFixed()
+
+            }else if(path.slice(0,8) === '/details'){
+                handleSidebarFixed()
+
+            }else if(path.slice(0,17) === '/playlist-details'){
+                handleSidebarFixed()
+
+            }
+        }
+    }
 
     const handleThin = ():void =>{
         const sidebar = document.querySelector('.sidebar') as HTMLDivElement
@@ -38,22 +87,33 @@ const Search:React.FC = () => {
         const sidebarThin = document.querySelector('.sidebar-thin') as HTMLDivElement
         const containerInner = document.querySelector('.container-inner') as HTMLDivElement
         const tags = document.querySelector('.search__tags-wrapper') as HTMLDivElement
-        if(isThin){
+        if(isSidebarThin){
             sidebar.style.width = 'calc(4% + 30px)'
             containerInner.style.width= '94%'
             sidebarExpand.style.display = 'none'
             sidebarThin.style.display = 'block'
             tags.style.width = '93%'
+
         }else{
             sidebar.style.width = '20%'
             containerInner.style.width = '80%'
             sidebarExpand.style.display = 'block'
             sidebarThin.style.display = 'none'
             tags.style.width = '79.5%'
-        }
-        setIsThin(!isThin)
-    }
 
+        }
+    }
+    const handleSidebarActivePaths = () =>{
+        for(let route in new Links().withSidebar){
+            if(path === '/'){
+                UI.isSidebarThin(!isSidebarThin)
+            }else if(path === new Links().withSidebar[route] && !isMobile){
+                UI.isSidebarThin(!isSidebarThin)
+            }else if(path.slice(0,16) === '/channel-details'){
+                UI.isSidebarThin(!isSidebarThin)
+            }
+        }
+    }
     const handleActiveTag = (e:any):void =>{
         const tags = document.querySelectorAll('.search__tag')
         tags.forEach(tag => tag.classList.remove('active'))
@@ -75,34 +135,26 @@ const Search:React.FC = () => {
         })
     }
 
-    const handleSidebarFixed = () =>{
-        const sidebar = document.querySelector('.sidebar.fixed') as HTMLDivElement
-        const sidebarFixedWrapper = document.querySelector('.sidebar-fixed-wrapper') as HTMLDivElement
-        if(sidebar.classList.contains('close')){
-            sidebar.classList.add('open')
-            sidebar.classList.remove('close')
-            sidebarFixedWrapper.classList.add('open')
-            sidebarFixedWrapper.classList.remove('close')
 
-        }
-    }
     useEffect(()=>{
-      youtubeActions.videoCategories({part:'snippet',regionCode:'US'})
-    },[])
+        if(!isMobile){
+            handleThinAction()
+        }
+        if(!isLoad){  
+            if(isMobile){
+                handleSidebarFixed()
+            }  
+            youtubeActions.videoCategories({part:'snippet',regionCode:'US'})
+            setIsLoad(true)
+      }
+    },[isSidebarThin])
     return (
         <div className="search">
             <div className="search__header">
                 <button  onClick={()=>{
-                if(path === '/' && !isMobile){
-                    handleThin()
-                }
-                else if(path.slice(0,16)  === "/channel-details" && !isMobile){
-                    handleThin()
-                }
-                else{
-                    handleSidebarFixed()
-                }
-            }}>
+                    handleSidebarActivePaths()
+                    handleSidebarType()
+                    }}>
                     <GiHamburgerMenu />
                 </button>
                 <div className="search__header-logo">

@@ -3,7 +3,9 @@ import { UIActionTypes } from '../types'
 
 const initData:UIState = {
     isMobile:false,
-    activeLink:0
+    activeLink:0,
+    activeLinkThin:0,
+    isSidebarThin:false
 }
 
 
@@ -26,10 +28,20 @@ export default (state = initData ,action:any) =>{
                 ...state,
                 activeLink:action.activeLink
             }
+        case UIActionTypes.HandleActiveLinkThin:
+            return {
+                ...state,
+                activeLinkThin:action.activeLinkThin
+            }
         case UIActionTypes.IsMobile:
             return {
                 ...state,
                 isMobile:action.isMobile
+            }
+        case UIActionTypes.IsSidebarThin:
+            return {
+                ...state,
+                isSidebarThin:action.isSidebarThin
             }
         default:
             return{

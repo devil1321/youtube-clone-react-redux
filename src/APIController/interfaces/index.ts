@@ -17,6 +17,8 @@ export interface InitState {
 export interface UIState {
     isMobile:boolean;
     activeLink:number;
+    activeLinkThin:number;
+    isSidebarThin:boolean;
 }
 
 export interface AxiosOptions {

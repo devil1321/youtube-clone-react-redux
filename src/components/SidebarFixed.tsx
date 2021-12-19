@@ -57,6 +57,10 @@ const SidebarFixed:React.FC = () => {
         <div className="sidebar-fixed-wrapper close" onClick={()=>{handleSidebarFixed()}}>
             <div className="sidebar fixed close">
             <div className="sidebar-expand">
+            <div className="sidebar__logo" onClick={()=>{handleSidebarFixed()}}> 
+                      <GiHamburgerMenu />
+                      <img src="/assets/main-logo.svg" alt="" />
+                  </div>
              <Link to={new Links().withSidebar.home} onClick={(e:any)=>{
                  youtubeActions.isSearching(false)
                  handleActiveLink(e)}} className="sidebar__link active"><MdHomeFilled />Home</Link>
@@ -156,11 +160,11 @@ const SidebarFixed:React.FC = () => {
         {isMobile && path === new Links().withSidebar.home &&
          <div className="sidebar">
             <div className="sidebar-thin">
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdHomeFilled />Home</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><FaRegCompass />Explore</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdSubscriptions />Subscriptions</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><MdOutlineVideoLibrary />Library</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to="#"><VscHistory />History</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.home}><MdHomeFilled />Home</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.explore}><FaRegCompass />Explore</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.subscriptions}><MdSubscriptions />Subscriptions</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.library}><MdOutlineVideoLibrary />Library</Link>
+                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.history}><VscHistory />History</Link>
             </div>
         </div>}
     </React.Fragment>

@@ -28,7 +28,7 @@ const Sidebar:React.FC<SidebarProps> = ({fix,paddingTop}) => {
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
     const UI = bindActionCreators(UIActions,dispatch)
-    const { activeLink } = useSelector((state:State) => state.UI)
+    const { activeLink,activeLinkThin } = useSelector((state:State) => state.UI)
 
     const handleActiveLink = (e:any):void =>{
         let linksArray:any = []
@@ -44,12 +44,19 @@ const Sidebar:React.FC<SidebarProps> = ({fix,paddingTop}) => {
         links[link].classList.add('active')
     }
 
+    const handleActivateLinkThin = (link:number):void =>{
+        const links = document.querySelectorAll('.sidebar__link-thin') as NodeListOf<HTMLAnchorElement>
+        links.forEach(link => link.classList.remove('active'))
+        links[link].classList.add('active')
+    }
+
     useEffect(()=>{
         handleActivateLink(activeLink)
-    },[activeLink])
+        handleActivateLinkThin(activeLinkThin)
+    },[activeLink,activeLinkThin])
     return (
         <div className="sidebar" style={{top:fix,paddingTop:paddingTop}}>
-            <div className="sidebar-expand">
+           <div className="sidebar-expand">
              <Link to={new Links().withSidebar.home} onClick={(e:any)=>{
                  youtubeActions.isSearching(false)
                  handleActiveLink(e)}} className="sidebar__link active"><MdHomeFilled />Home</Link>
@@ -143,13 +150,13 @@ const Sidebar:React.FC<SidebarProps> = ({fix,paddingTop}) => {
                 <a href="#">Test new features</a>
              </div>
              <p>&copy; 2021 Google LLC</p>
-           </div>
-            <div className="sidebar-thin">
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.home}><MdHomeFilled />Home</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.explore}><FaRegCompass />Explore</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.subscriptions}><MdSubscriptions />Subs</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.library}><MdOutlineVideoLibrary />Library</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.history}><VscHistory />History</Link>
+           </div> 
+           <div className="sidebar-thin">
+                <Link onClick={(e:any)=>{UI.handleActiveLinkThin(0)}} className="sidebar__link-thin" to={new Links().withSidebar.home}><MdHomeFilled />Home</Link>
+                <Link onClick={(e:any)=>{UI.handleActiveLinkThin(1)}} className="sidebar__link-thin" to={new Links().withSidebar.explore}><FaRegCompass />Explore</Link>
+                <Link onClick={(e:any)=>{UI.handleActiveLinkThin(2)}} className="sidebar__link-thin" to={new Links().withSidebar.subscriptions}><MdSubscriptions />Subscriptions</Link>
+                <Link onClick={(e:any)=>{UI.handleActiveLinkThin(3)}} className="sidebar__link-thin" to={new Links().withSidebar.library}><MdOutlineVideoLibrary />Library</Link>
+                <Link onClick={(e:any)=>{UI.handleActiveLinkThin(4)}} className="sidebar__link-thin" to={new Links().withSidebar.history}><VscHistory />History</Link>
             </div>
         </div>
     )

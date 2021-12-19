@@ -2,7 +2,7 @@
     position:fixed;
     height:100vh;
     width: 100%;
-    z-index: 3;
+    z-index: 110;
     top:0px;
     left:0px;
     background-color: rgba(0,0,0,0.15);
@@ -149,7 +149,7 @@
             display: block;
         }
         a{
-           
+            
             @include createFlex(column,center,center,null);
             font-size:pxToRem(14);
             svg{

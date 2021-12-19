@@ -26,6 +26,12 @@ export const handleActiveLink = (link:number) => (dispatch:Dispatch):void =>{
         activeLink:link
     })
 }
+export const handleActiveLinkThin = (link:number) => (dispatch:Dispatch):void =>{
+    dispatch({
+        type:UIActionTypes.HandleActiveLinkThin,
+        activeLinkThin:link
+    })
+}
 export const handleTab = (e:any,tabSelector:string) => (dispatch:Dispatch) =>{
     const tl = gsap.timeline()
     const links = document.querySelectorAll('.channel-details__tab-link') as NodeListOf<HTMLHeadingElement>
@@ -62,3 +68,11 @@ export const isMobile = () => (dispatch:Dispatch)=>{
         isMobile:isMobile
     })
 }
+
+export const isSidebarThin = (state:boolean) => (dispatch:Dispatch):void =>{
+    dispatch({
+        type:UIActionTypes.IsSidebarThin,
+        isSidebarThin:state
+    })
+}
+
