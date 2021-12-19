@@ -110,6 +110,7 @@
         button{
             @include signIn-btn();
         }
+       
 
        
     }
@@ -143,10 +144,13 @@
     &-thin{
         display: none;
         position: relative;
-        left:10px;
+        left:5px;
         top:0px;
         @include breakpoint-down(medium){
             display: block;
+        }
+        @include breakpoint-down(small){
+            display:none !important; 
         }
         a{
             

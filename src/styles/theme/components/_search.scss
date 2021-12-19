@@ -61,6 +61,9 @@
             width: 65%;
             position:static;
         }
+        @include breakpoint-down(small){
+            width: 30%;
+        }
     }
     &__form{
         margin-left: 100px;
@@ -68,14 +71,19 @@
             margin-left: 0px;
             width: 100%;
         }
+       
     }
     &__field{
         padding:0px 0px 0px 20px;
+        border:1px solid lightgray;
+        @include createFlex(row,flex-start,center,null);
         @include breakpoint-down(medium){
             max-width: 70%;
         }
-        border:1px solid lightgray;
-        @include createFlex(row,flex-start,center,null);
+        @include breakpoint-down(small){
+            border:0px;
+        }
+      
         input{
             font-size: pxToRem(16);
             width: 500px;
@@ -87,6 +95,16 @@
             }
             @include breakpoint-down(medium){
                 width: 300px;
+            }
+            @include breakpoint-down(small){
+                width: 150px;
+                height:100%;
+                border:0px;
+                border-bottom: 1px solid lightgray;
+                transform:translateX(-30px);
+                &:focus{
+                    border-bottom: 1px solid red;
+                }
             }
         }
     }
@@ -100,6 +118,13 @@
             min-height: 40px;
             min-width: 40px;
          
+        }
+        @include breakpoint-down(small){
+            border:0px;
+            min-height: 20px;
+            min-width: 20px;
+            transform:translateX(-40px);
+
         }
     }
     &__microphone{
@@ -118,6 +143,9 @@
                 min-height: 20px;
             }
         }
+        @include breakpoint-down(small){
+            display: none;
+        }
     
     }
     &__menu{
@@ -130,6 +158,9 @@
         @include breakpoint-down(medium){
             margin-left:0px;
             left:-100px;
+        }
+        @include breakpoint-down(small){
+            display: none;
         }
         svg{
             margin:0px 20px;
@@ -170,6 +201,11 @@
         @include breakpoint-down(medium){
             max-width: 88%;
             width: 88%;
+        }
+        @include breakpoint-down(small){
+            min-width:110%;
+            width: 100%;
+            margin:0px auto;
         }
        
     }

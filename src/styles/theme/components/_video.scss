@@ -5,6 +5,9 @@
     @include breakpoint-down(medium){
         width: calc(33% - 20px);
     }
+    @include breakpoint-down(small){
+        width: 100%;
+    }
     &__img{
         cursor: pointer;
         width: 100%;

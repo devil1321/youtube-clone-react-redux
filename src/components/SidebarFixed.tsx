@@ -18,13 +18,16 @@ import { RiSettings4Line } from 'react-icons/ri'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { Links } from '../routes'
 
+interface SidebarFixedProps {
+    fix?:number;
+}
 
-const SidebarFixed:React.FC = () => {
+const SidebarFixed:React.FC<SidebarFixedProps> = ({fix}) => {
     const { isMobile } = useSelector((state:State) => state.UI)
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
     const UI = bindActionCreators(UIActions,dispatch)
-    const { activeLink } = useSelector((state:State) => state.UI)
+    const { activeLink,activeLinkThin } = useSelector((state:State) => state.UI)
     const location = useLocation()
     const path = location.pathname
 
@@ -41,6 +44,13 @@ const SidebarFixed:React.FC = () => {
         links.forEach(link => link.classList.remove('active'))
         links[link].classList.add('active')
     }
+
+    const handleActivateLinkThin = (link:number):void =>{
+        const links = document.querySelectorAll('.sidebar__link-thin') as NodeListOf<HTMLAnchorElement>
+        links.forEach(link => link.classList.remove('active'))
+        links[link].classList.add('active')
+    }
+
     const handleSidebarFixed = () =>{
         const sidebar = document.querySelector('.sidebar.fixed') as HTMLDivElement
         const sidebarFixedWrapper = document.querySelector('.sidebar-fixed-wrapper') as HTMLDivElement
@@ -49,8 +59,52 @@ const SidebarFixed:React.FC = () => {
         sidebarFixedWrapper.classList.add('close')
         sidebarFixedWrapper.classList.remove('open')
     }
+
+
+    const renderThin = () =>{
+        let links = new Links().withSidebar
+        const linkskArr = Object.keys(links)
+        return linkskArr.map((key:string) => {
+            console.log(links[key])
+            if(isMobile && path === links[key]){
+                return(
+                    <div className="sidebar" style={{marginTop:fix}}>
+                        <div className="sidebar-thin">
+                            <Link onClick={(e:any)=>{
+                                UI.handleActiveLinkThin(0)
+                                youtubeActions.isSearching(false)
+                            }} className="sidebar__link-thin" to={new Links().withSidebar.home}><MdHomeFilled />Home</Link>
+                            <Link onClick={(e:any)=>{
+                                UI.handleActiveLinkThin(1)
+                                youtubeActions.isSearching(true)
+                            }} className="sidebar__link-thin" to={new Links().withSidebar.explore}><FaRegCompass />Explore</Link>
+                            <Link onClick={(e:any)=>{UI.handleActiveLinkThin(2)}} className="sidebar__link-thin" to={new Links().withSidebar.subscriptions}><MdSubscriptions />Subscriptions</Link>
+                            <Link onClick={(e:any)=>{UI.handleActiveLinkThin(3)}} className="sidebar__link-thin" to={new Links().withSidebar.library}><MdOutlineVideoLibrary />Library</Link>
+                            <Link onClick={(e:any)=>{UI.handleActiveLinkThin(4)}} className="sidebar__link-thin" to={new Links().withSidebar.history}><VscHistory />History</Link>
+                        </div>
+                    </div>
+                )
+            }
+        })
+    }
+
+    const handleActivateLinks = () =>{
+        const links = document.querySelectorAll('.sidebar__link') as NodeListOf<HTMLAnchorElement>
+        const linksThin = document.querySelectorAll('.sidebar__link-thin') as NodeListOf<HTMLAnchorElement>
+        const linksArr:any[] = []
+        links.forEach((link:any)=>linksArr.push(link))
+        const thinLinksArr:any[] = []
+        linksThin.forEach((link:any)=>thinLinksArr.push(link))
+        if(linksArr.length > 0){
+            handleActivateLink(activeLink)
+        }
+        if(thinLinksArr.length > 0){
+            handleActivateLinkThin(activeLinkThin)
+        }
+    }
+
     useEffect(()=>{
-        handleActivateLink(activeLink)
+        handleActivateLinks()
     },[activeLink])
     return (
         <React.Fragment>
@@ -157,16 +211,8 @@ const SidebarFixed:React.FC = () => {
            </div>
             </div>
         </div>
-        {isMobile && path === new Links().withSidebar.home &&
-         <div className="sidebar">
-            <div className="sidebar-thin">
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.home}><MdHomeFilled />Home</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.explore}><FaRegCompass />Explore</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.subscriptions}><MdSubscriptions />Subscriptions</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.library}><MdOutlineVideoLibrary />Library</Link>
-                <Link onClick={(e:any)=>{handleActiveLink(e)}} className="sidebar__link" to={new Links().withSidebar.history}><VscHistory />History</Link>
-            </div>
-        </div>}
+            {renderThin()}
+
     </React.Fragment>
     )
 }

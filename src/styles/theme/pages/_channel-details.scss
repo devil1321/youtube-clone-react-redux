@@ -34,6 +34,10 @@
         img{
             width: 100%;
         }
+        @include breakpoint-down(small){
+            min-width: 80px;
+            min-height: 80px;
+        }
     }
     &__btn-group{
         @include createFlex(row,space-between,center,null);
@@ -41,6 +45,9 @@
             margin-right: 10px;
             height:42px;
             @include signIn-btn();
+            @include breakpoint-down(small){
+                display: none;
+            }
         }
         button:last-of-type{
             @include subscribe-btn()
@@ -126,7 +133,7 @@
         }
     }
     &__sended-videos{
-        @include createFlex(row,flex-start,center,null);
+        @include createFlex(row,flex-start,center,wrap);
     }
     &__playlist-main-group{
         &>h3{

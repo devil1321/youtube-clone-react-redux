@@ -1,4 +1,7 @@
-import React from 'react'
+import React,{ useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as UIActions from './APIController/actions-creators/uiActions'
 import { Routes, Route } from 'react-router-dom'
 import { Links } from './routes'
 import Home from './pages/Home'
@@ -15,7 +18,11 @@ import YoutubePremium from './pages/YoutubePremium'
 import ReportHistory from './pages/ReportHistory'
 
 const App = () => {
-
+  const dispatch = useDispatch()
+  const UI = bindActionCreators(UIActions,dispatch)
+  useEffect(()=>{
+    UI.isMobile()
+  },[])
   return (
     <div className="App">
       <Routes>

@@ -152,8 +152,14 @@ const Sidebar:React.FC<SidebarProps> = ({fix,paddingTop}) => {
              <p>&copy; 2021 Google LLC</p>
            </div> 
            <div className="sidebar-thin">
-                <Link onClick={(e:any)=>{UI.handleActiveLinkThin(0)}} className="sidebar__link-thin" to={new Links().withSidebar.home}><MdHomeFilled />Home</Link>
-                <Link onClick={(e:any)=>{UI.handleActiveLinkThin(1)}} className="sidebar__link-thin" to={new Links().withSidebar.explore}><FaRegCompass />Explore</Link>
+                <Link onClick={(e:any)=>{
+                    UI.handleActiveLinkThin(0)
+                    youtubeActions.isSearching(false)
+                    }} className="sidebar__link-thin" to={new Links().withSidebar.home}><MdHomeFilled />Home</Link>
+                <Link onClick={(e:any)=>{
+                    UI.handleActiveLinkThin(1)
+                    youtubeActions.isSearching(true)
+                }} className="sidebar__link-thin" to={new Links().withSidebar.explore}><FaRegCompass />Explore</Link>
                 <Link onClick={(e:any)=>{UI.handleActiveLinkThin(2)}} className="sidebar__link-thin" to={new Links().withSidebar.subscriptions}><MdSubscriptions />Subscriptions</Link>
                 <Link onClick={(e:any)=>{UI.handleActiveLinkThin(3)}} className="sidebar__link-thin" to={new Links().withSidebar.library}><MdOutlineVideoLibrary />Library</Link>
                 <Link onClick={(e:any)=>{UI.handleActiveLinkThin(4)}} className="sidebar__link-thin" to={new Links().withSidebar.history}><VscHistory />History</Link>

@@ -56,4 +56,7 @@ body{
     @include breakpoint-down(medium){
       width: 100% !important;
     }
+    @include breakpoint-down(small){
+      min-width: 100%;
+    }
 }

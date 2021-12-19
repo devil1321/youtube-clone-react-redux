@@ -20,14 +20,17 @@ const Layout:React.FC = ({children}) => {
 
     const handleTypeOfSidebar = (path:any) =>{
             for(let route in new Links().withSidebar){
-                if(path === '/'){
+                if(path === '/' && !isMobile){
                     return <Sidebar />
                 }
                 else if(path === new Links().withSidebar[route] && !isMobile){
                     return <Sidebar fix={0} paddingTop={41}/>
-                }else if(path === new Links().withSidebar[route] && isMobile){
+                }else if(path === new Links().withSidebar[route] && path !== '/' &&  isMobile){
+                    return <SidebarFixed fix={72}/>
+                }else if(path == '/' && isMobile){
                     return <SidebarFixed />
-                }else if(path.slice(0,16) === '/channel-details'){
+                }
+                else if(path.slice(0,16) === '/channel-details'){
                     return <Sidebar paddingTop={41} fix={0}/>
                 }
             }

@@ -17,7 +17,6 @@ import { TiSocialYoutubeCircular } from 'react-icons/ti'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
-import { isSidebarThin } from '../APIController/actions-creators/uiActions'
 import { Links } from '../routes'
 
 const Search:React.FC = () => {
@@ -50,49 +49,37 @@ const Search:React.FC = () => {
     const handleThinAction = () =>{
         for(let route in new Links().withSidebar){
                 if(path === '/'){
-                    handleThin()
+                    handleThin(isSidebarThin)
                 }else if(path === new Links().withSidebar[route] && !isMobile){
-                    handleThin()
+                    handleThin(isSidebarThin)
                 }else if(path === new Links().withSidebar[route] && isMobile){
                     handleSidebarFixed()
                 }else if(path.slice(0,16) === '/channel-details'){
-                    handleThin()
+                    handleThin(isSidebarThin)
                 }
             }
         
            
     }
 
-    const handleSidebarType = () =>{
-        handleThinAction()
-        for(let route in new Links().withSidebarFixed){
-            if(path === new Links().withSidebarFixed[route] && !isMobile){
-                handleSidebarFixed()
-            }else if(path === new Links().withSidebarFixed[route] && isMobile){
-                handleSidebarFixed()
 
-            }else if(path.slice(0,8) === '/details'){
-                handleSidebarFixed()
-
-            }else if(path.slice(0,17) === '/playlist-details'){
-                handleSidebarFixed()
-
-            }
-        }
-    }
-
-    const handleThin = ():void =>{
+    const handleThin = (isThin:boolean):void =>{
         const sidebar = document.querySelector('.sidebar') as HTMLDivElement
         const sidebarExpand = document.querySelector('.sidebar-expand') as HTMLDivElement
         const sidebarThin = document.querySelector('.sidebar-thin') as HTMLDivElement
         const containerInner = document.querySelector('.container-inner') as HTMLDivElement
         const tags = document.querySelector('.search__tags-wrapper') as HTMLDivElement
-        if(isSidebarThin){
-            sidebar.style.width = 'calc(4% + 30px)'
-            containerInner.style.width= '94%'
+        if(isThin){
+            sidebar.style.width = 'calc(6% + 10px)'
+            containerInner.style.width= '92%'
             sidebarExpand.style.display = 'none'
-            sidebarThin.style.display = 'block'
-            tags.style.width = '93%'
+            if(isMobile){
+                sidebarExpand.style.display = 'block'
+            }
+            if(sidebarThin){
+                sidebarThin.style.display = 'block'
+            }
+            tags.style.width = '92%'
 
         }else{
             sidebar.style.width = '20%'
@@ -139,21 +126,24 @@ const Search:React.FC = () => {
     useEffect(()=>{
         if(!isMobile){
             handleThinAction()
+        }else{
+            handleThin(true)
         }
         if(!isLoad){  
-            if(isMobile){
-                handleSidebarFixed()
-            }  
+           
             youtubeActions.videoCategories({part:'snippet',regionCode:'US'})
             setIsLoad(true)
       }
-    },[isSidebarThin])
+    },[isSidebarThin,isMobile])
     return (
         <div className="search">
             <div className="search__header">
                 <button  onClick={()=>{
-                    handleSidebarActivePaths()
-                    handleSidebarType()
+                        if(!isMobile){
+                            handleSidebarActivePaths()
+                        }else{
+                            handleSidebarFixed()
+                        }
                     }}>
                     <GiHamburgerMenu />
                 </button>

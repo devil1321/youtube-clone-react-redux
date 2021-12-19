@@ -8,6 +8,9 @@
     @include breakpoint-down(medium-sm){
         @include createFlex(row,space-between,flex-start,wrap);
     }
+    @include breakpoint-down(small){
+        padding:0px 10px;
+    }
     &__left-content{
         min-width: 65%;
         max-width: 65%;
@@ -33,6 +36,16 @@
             width: 100%;
         }
     }
+    &__taskbar-right{
+        @include breakpoint-down(small){
+            svg{
+                display: none;
+            }
+            svg:last-of-type{
+                display: block;
+            }
+        }
+    }
     &__taskbar-imagination{
         position:absolute;
         bottom:0px;
@@ -53,10 +66,15 @@
         top:-7px;
         left:0px;
         color:white;
+        
         svg{
+            
             position: relative;
             top:8px;
             left:0px;
+            @include breakpoint-down(small){
+                display: none;
+            }
         }
 
     }
