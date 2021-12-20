@@ -1,11 +1,18 @@
 .popular-video{
     @include createFlex(row,flex-start,flex-start,null);
+    @include breakpoint-down(small){
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
     &__img{
         min-width: 250px;
         min-height:200px;
         max-width: 250px;
         max-height:200px;
         overflow:hidden;
+        @include breakpoint-down(small){
+            max-width: 100%;
+        }
         img{
             width: 100% !important;
         }

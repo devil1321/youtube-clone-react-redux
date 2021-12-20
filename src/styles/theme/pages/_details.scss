@@ -36,6 +36,11 @@
             width: 100%;
         }
     }
+    &__taskbar-left{
+        svg:last-of-type{
+            display:none;
+        }
+    }
     &__taskbar-right{
         @include breakpoint-down(small){
             svg{
@@ -103,6 +108,9 @@
         @include breakpoint-down(medium){
             margin:10px 0px;
         }
+        @include breakpoint-down(small){
+            @include createFlex(row,space-between,center,wrap);
+        }
         span{
             margin:0px 10px;
             @include createFlex(row,flex-start,center,null);
@@ -110,6 +118,11 @@
                 margin-right: 5px;
                 width: 30px;
                 height:30px;
+                @include breakpoint-down(small){
+                    margin:5px 5px 5px 0px;
+                    width: 20px;
+                    height:20px;
+                }
             }
         }
     }
@@ -117,19 +130,29 @@
         @include createFlex(row,space-between,center,null);
     }
     &__subs-btn{
-        @include subscribe-btn()
+        @include subscribe-btn();
+     
     }
     &__channel-info-inner{
         @include createFlex(row,flex-start,center,null);
+        @include breakpoint-down(small){
+            h3{
+                font-size: pxToRem(16);
+            }
+        }
     }
     &__channel-img{
         overflow: hidden;
         margin-right: 10px;
-        height:80px;
-        width: 80px;
+        min-height:80px;
+        min-width: 80px;
         border-radius: 100%;
         img{
             width: 100%;
+        }
+        @include breakpoint-down(small){
+            min-height:50px;
+            min-width: 50px;
         }
     }
     &__dot{

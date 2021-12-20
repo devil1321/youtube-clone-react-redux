@@ -24,19 +24,27 @@
         p,h2{
             margin:5px 0px;
         }
+        @include breakpoint-down(small){
+            h2{
+                font-size: pxToRem(16);
+            }
+            p{
+                font-size:pxToRem(12) ;
+            }
+        }
     }
     &__img{
         margin-right: 20px;
         border-radius: 100%;
         overflow: hidden;
-        height:80px;
-        width:80px;
+        min-height:80px;
+        min-width:80px;
         img{
             width: 100%;
         }
         @include breakpoint-down(small){
-            min-width: 80px;
-            min-height: 80px;
+            min-width: 50px;
+            min-height: 50px;
         }
     }
     &__btn-group{

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { useSelector,  useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -10,7 +10,6 @@ import Video from '../components/Video'
 
 
 const Home:React.FC = () => {
-    const [isSet,setIsSet] = useState<boolean>(false)
     const disptach = useDispatch()
     const { getVideos,globalSearch,isSearching } = useSelector((state:State) => state.youtubeAPI)
     const youtubeActions = bindActionCreators(YoutubeActions,disptach)

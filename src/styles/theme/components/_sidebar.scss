@@ -9,11 +9,9 @@
     transition:all 1s ease-in-out;
     &.close{
         visibility: hidden;
-        opacity:0;
     }
     &.open{
         visibility: visible;
-        opacity:1;
     }
 }
 .active{
@@ -36,6 +34,7 @@
         }
 
     }
+   
     @include breakpoint-down(medium-sm){
         width: 12%;
       

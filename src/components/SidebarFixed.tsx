@@ -23,11 +23,10 @@ interface SidebarFixedProps {
 }
 
 const SidebarFixed:React.FC<SidebarFixedProps> = ({fix}) => {
-    const { isMobile } = useSelector((state:State) => state.UI)
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
     const UI = bindActionCreators(UIActions,dispatch)
-    const { activeLink,activeLinkThin } = useSelector((state:State) => state.UI)
+    const { activeLink,activeLinkThin,isMobile } = useSelector((state:State) => state.UI)
     const location = useLocation()
     const path = location.pathname
 
@@ -65,10 +64,9 @@ const SidebarFixed:React.FC<SidebarFixedProps> = ({fix}) => {
         let links = new Links().withSidebar
         const linkskArr = Object.keys(links)
         return linkskArr.map((key:string) => {
-            console.log(links[key])
             if(isMobile && path === links[key]){
                 return(
-                    <div className="sidebar" style={{marginTop:fix}}>
+                    <div className="sidebar" style={isMobile && {minWidth:'calc(6% - 10px)',marginTop:fix}}>
                         <div className="sidebar-thin">
                             <Link onClick={(e:any)=>{
                                 UI.handleActiveLinkThin(0)

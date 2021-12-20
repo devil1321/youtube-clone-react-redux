@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,Suspense } from 'react'
+import React, { Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import { State } from '../APIController/reducers'
 import { useSelector, useDispatch } from 'react-redux'
@@ -22,20 +22,8 @@ interface VideoProps {
 
 const Video:React.FC<VideoProps> = ({profile,imgUrl,title,channelTitle,publishedAt,videoId,channelId,minWidth}) => {
     
-    // you can activate comments code if max requsets more than 500/month you can use channel picture
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
-    const { channelDetails } = useSelector((state:State) => state.youtubeAPI)
-    // const { thumbnails } = channelDetails.items[0]?.snippet
-    // const [profile,setProfile] = useState(null)
-
-    // useEffect(()=>{
-    //     youtubeActions.channelDetails({id:channelId,part="id,snippet"})
-    //     setProfile(thumbnails)
-    // },[])
-
-    
-
 
     return (
         <div className="video" style={{minWidth:minWidth}}>

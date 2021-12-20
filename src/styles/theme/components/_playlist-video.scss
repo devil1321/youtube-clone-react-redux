@@ -6,8 +6,13 @@
     @include breakpoint-down(medium){
         width:calc(100% / 3 - 20px);
     }
+    @include breakpoint-down-l(medium){
+        height:300px;
+        max-width: calc(100% / 2 - 20px);
+      
+    }
     @include breakpoint-down(small){
-        width: calc(50% - 20px);
+        width: 100%
     }
     h3{
         font-size: pxToRem(16);
@@ -22,6 +27,7 @@
         img{
             width: 100%;
         }
+     
         svg{
             margin-top: 10px;
             min-width: 20px;

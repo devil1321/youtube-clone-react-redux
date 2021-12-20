@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react'
+import React,{ useEffect } from 'react'
 import { Links } from '../routes'
 import Sidebar from '../components/Sidebar'
 import SidebarFixed from '../components/SidebarFixed'
@@ -30,8 +30,11 @@ const Layout:React.FC = ({children}) => {
                 }else if(path == '/' && isMobile){
                     return <SidebarFixed />
                 }
-                else if(path.slice(0,16) === '/channel-details'){
+                else if(path.slice(0,16) === '/channel-details' && !isMobile){
                     return <Sidebar paddingTop={41} fix={0}/>
+                }
+                else if(path.slice(0,16) === '/channel-details' && isMobile){
+                    return <SidebarFixed fix={72} />
                 }
             }
         

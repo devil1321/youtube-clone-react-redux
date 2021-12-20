@@ -83,4 +83,8 @@ $breakpoints-down:("small":"39.9375em", "sm-med":"33.75em", "medium-sm":"63em", 
             border:0px;
             outline:0px;
         }
+        @include breakpoint-down(small){
+            padding:10px 20px;
+            font-size: pxToRem(12);
+        }
 }

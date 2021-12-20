@@ -4,6 +4,9 @@
     left:0px;
     z-index: 100;
     @include createFlex(row,flex-start,center,wrap);
+    @include breakpoint-down(small){
+        justify-content: space-between;
+    }
     background-color: white;
     &__header{
         position: relative;
@@ -16,6 +19,9 @@
         @include createFlex(row,center,center,null);
         @include breakpoint-down(medium){
             padding-right: 20px;
+        }
+        @include breakpoint-down(small){
+            left:10px;
         }
         button{
             position: relative;
@@ -36,6 +42,9 @@
             top:-6px;
             left:0px;
             margin-left: 20px;
+            @include breakpoint-down(small){
+                margin-left:10px;
+            }
             img{
                 width: 80%;
             }
@@ -47,7 +56,9 @@
         }
     }
     &__main{
-    
+        position: relative;    
+        left:0px;
+        top:0px;
         padding:10px;
         width: 78%;
         @include createFlex(row,flex-start,center,null);
@@ -58,8 +69,11 @@
             top:0px;
         }
         @include breakpoint-down(medium-sm){
-            width: 65%;
+            width: 60%;
             position:static;
+        }
+        @include breakpoint-down-l(medium){
+            width: 60%;
         }
         @include breakpoint-down(small){
             width: 30%;
@@ -80,6 +94,9 @@
         @include breakpoint-down(medium){
             max-width: 70%;
         }
+        @include breakpoint-down-l(medium){
+            border:0px;
+        }
         @include breakpoint-down(small){
             border:0px;
         }
@@ -96,15 +113,60 @@
             @include breakpoint-down(medium){
                 width: 300px;
             }
-            @include breakpoint-down(small){
-                width: 150px;
-                height:100%;
-                border:0px;
+            @include breakpoint-down-l(medium){
                 border-bottom: 1px solid lightgray;
-                transform:translateX(-30px);
                 &:focus{
                     border-bottom: 1px solid red;
                 }
+            }
+            @include breakpoint-down(small){
+                width: 120px;
+                height:100%;
+                border:0px;
+                border-bottom: 1px solid lightgray;
+                transform:translateX(-60px);
+                &:focus{
+                    border-bottom: 1px solid red;
+                }
+            }
+        }
+    }
+    &__matches{
+        max-height: 400px;
+        width: 560px;
+        overflow-y: scroll;
+        padding:10px;
+        position: absolute;
+        top:60px;
+        left:10%.5;
+        background-color: white;
+        z-index: 120;
+        border:1px solid lightgray;
+        animation: comesIn 300ms ease-in-out forwards;
+        @include breakpoint-down(medium){
+            width: 48%;
+        }
+        @include breakpoint-down(medium-sm){
+            width: 37%;
+        }
+        @include breakpoint-down(small){
+            left:40%;
+            width: 43%;
+        }
+        @keyframes comesIn{
+            0%{
+                top:80px;
+            }
+            100%{
+                top:60px;
+            }
+        }
+        p{
+            margin:0px;
+            padding:10px 0px;
+            cursor:pointer;
+            &:hover{
+                background-color: #f1f1f1;
             }
         }
     }
@@ -119,11 +181,14 @@
             min-width: 40px;
          
         }
+        @include breakpoint-down-l(medium){
+            border:0px;
+        }
         @include breakpoint-down(small){
             border:0px;
             min-height: 20px;
             min-width: 20px;
-            transform:translateX(-40px);
+            transform:translateX(-70px);
 
         }
     }

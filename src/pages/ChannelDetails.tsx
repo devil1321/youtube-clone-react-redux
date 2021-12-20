@@ -45,7 +45,8 @@ const ChannelDetails = (props:any) => {
                     params: {
                        playlistId: id,
                        part: 'snippet,id',
-                       key:'AIzaSyB1a0mRxhsA3NdbdQCGHU33OJxPgBXv9oc',
+                       key:'AIzaSyAyi7mG1kw4kFoDaf7E-LlR0NzTT9CApxI'
+
                     },
                     headers: {
                         'Content-Type':'application/json'
@@ -172,7 +173,7 @@ const ChannelDetails = (props:any) => {
                             <Swiper
                                 // install Swiper modules
                                  spaceBetween={0}
-                                 slidesPerView={window.innerWidth < 1024 ?  window.innerWidth < 768 ? 2 : 4 : 7}
+                                 slidesPerView={window.innerWidth < 1024 ?  window.innerWidth < 568 ? 2 : 4 : 7}
                             >
                                 <SwiperSlide><h3 onClick={(e)=>{UI.handleTab(e,'channel-details__tab')}} data-tab="1" className="channel-details__tab-link active">Main</h3></SwiperSlide>
                                 <SwiperSlide><h3 onClick={(e)=>{UI.handleTab(e,'channel-details__tab')}} data-tab="2" className="channel-details__tab-link">Video</h3></SwiperSlide>

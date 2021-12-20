@@ -1,13 +1,13 @@
 import React,{useEffect} from 'react'
 import { State } from '../APIController/reducers'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as YoutubeActions from '../APIController/actions-creators/youtubeActions'
 import * as UIActions from '../APIController/actions-creators/uiActions'
 
 import { MdHomeFilled, MdSubscriptions, MdOutlineVideoLibrary, MdLocalMovies, MdVideocam, MdOutlineFeedback } from 'react-icons/md'
-import { FaLessThanEqual, FaRegCompass, FaSatellite } from 'react-icons/fa'
+import { FaRegCompass, FaSatellite } from 'react-icons/fa'
 import { VscHistory } from 'react-icons/vsc'
 import { SiYoutubemusic, SiYoutubegaming, SiYoutube } from 'react-icons/si'
 import { ImTrophy } from 'react-icons/im'
@@ -24,7 +24,6 @@ interface SidebarProps{
 }
 
 const Sidebar:React.FC<SidebarProps> = ({fix,paddingTop}) => {
-    const location = useLocation()
     const dispatch = useDispatch()
     const youtubeActions = bindActionCreators(YoutubeActions,dispatch)
     const UI = bindActionCreators(UIActions,dispatch)
@@ -158,7 +157,7 @@ const Sidebar:React.FC<SidebarProps> = ({fix,paddingTop}) => {
                     }} className="sidebar__link-thin" to={new Links().withSidebar.home}><MdHomeFilled />Home</Link>
                 <Link onClick={(e:any)=>{
                     UI.handleActiveLinkThin(1)
-                    youtubeActions.isSearching(true)
+                    youtubeActions.isSearching(false)
                 }} className="sidebar__link-thin" to={new Links().withSidebar.explore}><FaRegCompass />Explore</Link>
                 <Link onClick={(e:any)=>{UI.handleActiveLinkThin(2)}} className="sidebar__link-thin" to={new Links().withSidebar.subscriptions}><MdSubscriptions />Subscriptions</Link>
                 <Link onClick={(e:any)=>{UI.handleActiveLinkThin(3)}} className="sidebar__link-thin" to={new Links().withSidebar.library}><MdOutlineVideoLibrary />Library</Link>

@@ -1,6 +1,6 @@
 import React,{ useEffect } from 'react'
 import Layout from '../templates/layout'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as UIActions from '../APIController/actions-creators/uiActions'
 import { GrChannel } from 'react-icons/gr'

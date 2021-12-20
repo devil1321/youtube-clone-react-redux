@@ -1,6 +1,6 @@
 .yt-premium{
     overflow-y: scroll;
-    height:90vh;
+    height:100vh;
     width: 100%;
     background-color: white;
     a{
@@ -11,12 +11,27 @@
         height:90vh;
         @include createFlex(column,center,center,null);
         background-image: url('../../../images/youtube-premium-template/hero.jpeg');
+        background-repeat: no-repeat;
         background-size: cover;
+        @include breakpoint-down(medium){
+            background-position: 11% 0%;
+        }
+        @include breakpoint-down(medium-sm){
+            background-position: 12% 0%;
+        }
+        @include breakpoint-down(small){
+            img{
+                width: 70%;
+            }
+        }
         h2{
             width: 40%;
             text-align: center;
             font-weight: 400;
             font-size:pxToRem(30);
+            @include breakpoint-down(small){
+                font-size:pxToRem(20)
+            }
            
         }
         button{
@@ -26,13 +41,24 @@
             color:white;
             border:0px;
             border-radius: 3px;
+            @include breakpoint-down(small){
+                padding:10px 20px;
+            }
         }
-     
+        span,p{
+            font-weight: 300;
+        }
     }
     &__p{
         h2{
             min-width: fit-content;
             font-weight: 300;
+            @include breakpoint-down(small){
+                font-size: pxToRem(16);
+            }
+        }
+        span{
+            font-size: pxToRem(12);
         }
         @include createFlex(row,flex-start,center,null);
     }
@@ -47,11 +73,27 @@
         margin:100px 0px;
         padding:0px 150px;
         @include createFlex(row,center,center,null);
+        @include breakpoint-down(medium){
+            padding:0px 20px;
+            position: relative;
+            left:-20px;
+            top:0px;
+        }
+        @include breakpoint-down-l(medium){
+            margin-top:150px;
+        }
+        @include breakpoint-down(small){
+            @include createFlex(row,center,center,wrap);
+            left:0px;
+        }
     }
     &__card{
         text-align: center;
         height:300px;
         @include createFlex(column,flex-start,center,null);
+        @include breakpoint-down(small){
+            width: 100%;
+        }
         h2,p{
             margin:5px 0px;
         }
@@ -69,13 +111,36 @@
         width: 100vw;
         overflow:hidden;
         @include createFlex(font,flex-start,center,null);
+        background-repeat: no-repeat;
+        @include breakpoint-down(medium){
+            height:40vh;
+        }
+        @include breakpoint-down-l(medium){
+            height:60vh;
+        }
+        @include breakpoint-down(small){
+            height:30vh;
+        }
+
         h2{
             font-size: pxToRem(60);
             font-weight: 300;
+            @include breakpoint-down(medium-sm){
+                font-size:pxToRem(50)
+            }
+            @include breakpoint-down(small){
+                font-size:pxToRem(40);
+            }
         }
         p{
             font-size: pxToRem(26);
             font-weight: 300;
+            @include breakpoint-down(medium-sm){
+                font-size:pxToRem(18)
+            }
+            @include breakpoint-down(small){
+                font-size:pxToRem(16);
+            }
         }
         h2,p{
             color:white;
@@ -85,6 +150,11 @@
                 width: 50%;
                 margin-right: 100px;
                 margin-left: auto;
+                @include breakpoint-down(small){
+                    width: 80%;
+                    margin:0px auto;
+
+                }
             }
             
         }
@@ -93,6 +163,10 @@
                 width: 50%;
                 margin-right:auto;
                 margin-left: 100px;
+                @include breakpoint-down(small){
+                    width: 80%;
+                    margin:0px auto;
+                }
             }
         }
         &:nth-of-type(1){
@@ -116,6 +190,12 @@
     &__accordion-wrapper{
         width: 60%;
         margin:0px auto;
+        @include breakpoint-down(medium){
+            width: 80%;
+        }
+        @include breakpoint-down(small){
+            width: 90%;
+        }
         p{
             margin-top: 100px;
         }
